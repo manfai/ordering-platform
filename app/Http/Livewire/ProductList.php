@@ -2,40 +2,63 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Product\Menu;
 use App\Models\Product\Product;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ProductList extends Component
 {
-    public $products;
-    public $brand;
+    use WithPagination;
+
+    protected $products = [];
+    public $brand = 'ec_mart';
+    public $search = '';
 
     protected $listeners = [
         'brandUpdate' => 'changeBrand',
     ];
- 
-    public function changeBrand($brand)
+
+    public function updatingSearch()
     {
-        $this->brand = $brand;
-        $this->loadProduct();
-        $this->emitSelf('$refresh');
-    }
-    
-    public function loadProduct()
-    {
-        $this->products = Product::where('price','>=','50');
-        if($this->brand){
-            $this->products = $this->products->where('brand_id',$this->brand);
-        }
-        $this->products = $this->products->limit(6)->get();
+        $this->resetPage();
     }
 
-    public function mount(){
-        $this->loadProduct();
+    public function changeBrand(string $brand)
+    {
+        $this->brand = $brand;
+        $this->loadProduct($brand);
+        $this->emitSelf('$refresh');
+    }
+
+    public function loadProduct($brand)
+    {
+        $this->reset(['products']);
+        $period_id = 2;
+        if ($brand == 'ec_mart') {
+            $period_id = 8;
+        }
+        // dd($period_id);
+        $menu = Menu::with('products')->whereIn('menu_date', [date('Y-m-d'), '8888-12-31'])->where('period_id', $period_id)->active()
+            ->whereHas('locations', function ($query) {
+                $query->whereNotNull('stock')->where([
+                    'store_id' => 54
+                ]);
+            })->first();
+        $this->products = $menu->products()->paginate();
+        $this->emit('$refresh');
+    }
+
+    public function mount()
+    {
+        $this->loadProduct($this->brand);
     }
 
     public function render()
     {
-        return view('livewire.product-list');
+        $this->loadProduct($this->brand);
+        return view('livewire.product-list', [
+            'products' => $this->products
+        ]);
     }
 }
