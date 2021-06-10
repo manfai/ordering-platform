@@ -30,7 +30,7 @@
       <a href="{{route('orders')}}">
       @endguest
         <div class="avatar">
-          <div class="mx-4 w-10 h-10 mask mask-squircle">
+          <div class="mx-4 w-10 h-10 mt-2 mask mask-squircle">
             <img src="http://daisyui.com/tailwind-css-component-profile-1@94w.png">
           </div>
         </div> 
