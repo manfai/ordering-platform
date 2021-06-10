@@ -62,12 +62,12 @@ class ProductList extends Component
                 ]);
             })->first();
         if ($menu) {
-            $products = $menu->products();
+            $products = $menu->products()->get();
         } else {
             $products = [];
         }
         return view('livewire.product-list', [
-            'products' => count($products) ? $products->paginate(12) : []
+            'products' => count($products) ? $menu->products()->paginate(12) : []
         ]);
     }
 }
