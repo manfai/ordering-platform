@@ -120,29 +120,30 @@ class Product extends Model
     public function getImageFileAttribute($value)
     {
         if ($this->media) {
-            return $this->media->url;
+            $link = $this->media->url;
         } else {
             if (!$this->image) {
                 if (!$this->getTranslation('image', 'en')) {
-                    return $this->getTranslation('image', 'zh-hk');
+                    $link = $this->getTranslation('image', 'zh-hk');
                 }
-                return $this->getTranslation('image', 'en');
+                $link = $this->getTranslation('image', 'en');
             } else {
-                return $this->image;
+                $link = $this->image;
             }
         }
         // return $this->media->url;
         if ($value != null) {
             if (!$this->getTranslation('image', 'en')) {
-                return $this->getTranslation('image', 'zh-hk');
+                $link = $this->getTranslation('image', 'zh-hk');
             }
-            return $this->getTranslation('image', 'en');
+            $link = $this->getTranslation('image', 'en');
         } else {
             if (!$this->getTranslation('image', 'en')) {
-                return $this->getTranslation('image', 'zh-hk');
+                $link = $this->getTranslation('image', 'zh-hk');
             }
-            return $this->getTranslation('image', 'en');
+            $link = $this->getTranslation('image', 'en');
         }
+        return 'https://air.ecbento.com/' . $link;
     }
 
     public function getChineseNameAttribute()
