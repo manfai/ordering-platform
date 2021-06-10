@@ -12,13 +12,12 @@
                     <div class="md:flex pb-8 px-4">
                         <div class="card bordered shadow-lg w-full rounded-box bg-base-200">
                             <figure class="px-4 pt-4">
-                                <img src="{{$product->image? $product->image : 'https://image.freepik.com/free-psd/delivery-food-brown-box-mockup_181945-514.jpg'}}" class="h-40 object-cover object-center rounded-box">
+                                <img src="{{$product->image_file? $product->image_file : 'https://image.freepik.com/free-psd/delivery-food-brown-box-mockup_181945-514.jpg'}}" class="h-40 object-cover object-center rounded-box">
                             </figure> 
                             <div class="card-body h-30 px-5 pt-4 pb-0">
                             <span class="menu-title text-opacity-50 text-sm text-gray-800">{{$product->brand->name}}</span>
                             <h3 class="font-bold text-md">
                                 {{$product->title}}
-                                {{$product->image}}
                             </h3> 
                             <p class="text-sm mt-2">{{$product->description}}</p> 
                             </div>
