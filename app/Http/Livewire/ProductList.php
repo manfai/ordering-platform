@@ -61,8 +61,9 @@ class ProductList extends Component
                     'store_id' => 54
                 ]);
             })->first();
+        $products = $menu->products();
         return view('livewire.product-list', [
-            'products' => $menu->products()->paginate(12)
+            'products' => count($products) ? $products->paginate(12) : []
         ]);
     }
 }
