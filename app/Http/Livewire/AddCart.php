@@ -29,7 +29,7 @@ class AddCart extends Component
         $this->product = Product::find($id);
         $this->title = $this->product->title;
         $this->description = $this->product->description;
-        $this->image = $this->product->image ? $this->product->image : 'https://image.freepik.com/free-psd/delivery-food-brown-box-mockup_181945-514.jpg';
+        $this->image = $this->product->image_file ? $this->product->image_file : 'https://image.freepik.com/free-psd/delivery-food-brown-box-mockup_181945-514.jpg';
         $this->price = $this->product->price;
 
         $this->menu_product_id = $this->product->id;

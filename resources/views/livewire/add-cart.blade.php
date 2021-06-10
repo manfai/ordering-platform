@@ -47,7 +47,7 @@
     </x-slot>
     <x-slot name="content">
         @if($product)
-        <section class="text-gray-600 body-font overflow-hidden">
+        <section class="text-gray-600 bg-base-200 body-font overflow-hidden">
           <div class="container mx-auto">
             <div class="lg:w-5/5 mx-auto flex flex-wrap">
               <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="{{$image}}">
@@ -76,15 +76,15 @@
                 
                 </div>
                 <p class="leading-relaxed">{{$description}}</p>
-                <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
+                <div class="flex mt-6 items-center pb-5 border-b-2 border-base-300 mb-5">
                   <div class="flex items-center">
                     <span class="mr-3">{{__('Quantity')}}</span>
                     <x-input.quantity wire:model="quantity" />
                   </div>
                 </div>
                 <div class="flex">
-                  <span class="title-font font-medium text-2xl py-2 pr-6 text-gray-900">${{$price}}</span>
-                  <button wire:click="addToCart()" class="flex ml-auto text-white btn-primary btn border-0 py-2 px-6 focus:outline-none">{{__('Add to Cart')}}</button>  
+                  <span class="title-font font-bold text-2xl py-2 pr-6 text-gray-900">${{$price}}</span>
+                  <button wire:click="addToCart()" class="flex ml-auto text-white btn-primary btn border-0 py-2 px-6 focus:outline-none">{{__('Add To Cart')}}</button>  
                 </div>
               </div>
             </div>
