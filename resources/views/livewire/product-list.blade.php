@@ -31,9 +31,11 @@
                         </div> 
             @endforeach
             @livewire('add-cart')
+            @if ($products->hasPages())
             <div class="col-span-4 px-4 py-8">
                 {{ $products->links() }}
             </div>
+            @endif
         </div>
 
     </div>
