@@ -51,11 +51,11 @@ class ProductList extends Component
     public function render()
     {
         // $this->loadProduct($this->brand);
-        $period_id = 2;
+        $period_id = [2];
         if ($this->brand == 'ec_mart') {
-            $period_id = 8;
+            $period_id = [8, 15];
         }
-        $menu = Menu::with('products')->whereIn('menu_date', [date('Y-m-d'), '8888-12-31'])->where('period_id', $period_id)->active()
+        $menu = Menu::with('products')->whereIn('menu_date', [date('Y-m-d'), '8888-12-31'])->whereIn('period_id', $period_id)->active()
             ->whereHas('locations', function ($query) {
                 $query->whereNotNull('stock')->where([
                     'store_id' => 54
