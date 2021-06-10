@@ -117,11 +117,12 @@ class Product extends Model
         ]);
     }
 
-    public function getImageFileAttribute($value)
+    public function getImageFileAttribute()
     {
         if ($this->media) {
-            $link = $this->media->url;
+            return $this->media->url;
         } else {
+
             if (!$this->image) {
                 if (!$this->getTranslation('image', 'en')) {
                     $link = $this->getTranslation('image', 'zh-hk');
@@ -131,19 +132,21 @@ class Product extends Model
                 $link = $this->image;
             }
         }
+
         // return $this->media->url;
-        if ($value != null) {
-            if (!$this->getTranslation('image', 'en')) {
-                $link = $this->getTranslation('image', 'zh-hk');
-            }
-            $link = $this->getTranslation('image', 'en');
-        } else {
-            if (!$this->getTranslation('image', 'en')) {
-                $link = $this->getTranslation('image', 'zh-hk');
-            }
-            $link = $this->getTranslation('image', 'en');
-        }
-        return 'https://air.ecbento.com/' . $link;
+        // if ($value != null) {
+        //     if (!$this->getTranslation('image', 'en')) {
+        //         $link = $this->getTranslation('image', 'zh-hk');
+        //     }
+        //     $link = $this->getTranslation('image', 'en');
+        // } else {
+        //     if (!$this->getTranslation('image', 'en')) {
+        //         $link = $this->getTranslation('image', 'zh-hk');
+        //     }
+        //     $link = $this->getTranslation('image', 'en');
+        // }
+        return $link;
+        // return 'https://air.ecbento.com/' . $link;
     }
 
     public function getChineseNameAttribute()

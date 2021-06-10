@@ -26,7 +26,7 @@ class Media extends Model
 
     public function getUrlAttribute()
     {
-        return config('app.url') . Storage::url($this->path . $this->file_name);
+        return 'https://air.ecbento.com' . Storage::url($this->path . $this->file_name);
     }
 
     public function getWebpUrlAttribute()

@@ -14,6 +14,7 @@
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.0",
+        "optimistdigital/nova-media-field": "^1.4",
         "spatie/laravel-tags": "^4.0",
         "spatie/laravel-translatable": "^5.0"
     },
