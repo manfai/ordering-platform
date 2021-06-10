@@ -18,10 +18,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/checkout', function () {
-    return view('checkout');
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/orders', function () {
+        return view('orders');
+    })->name('orders');
+
+    Route::get('/checkout', function () {
+        return view('checkout');
+    })->name('checkout');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard');
