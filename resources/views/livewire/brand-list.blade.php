@@ -24,10 +24,16 @@
     </a>
   </div>
   <div class="flex-none">
-    <div class="avatar">
-      <div class="mx-4 w-10 h-10 mask mask-squircle">
-        <img src="http://daisyui.com/tailwind-css-component-profile-1@94w.png">
-      </div>
-    </div> 
+      @guest
+      <a href="{{route('login')}}">
+      @else
+      <a href="{{route('orders')}}">
+      @endguest
+        <div class="avatar">
+          <div class="mx-4 w-10 h-10 mask mask-squircle">
+            <img src="http://daisyui.com/tailwind-css-component-profile-1@94w.png">
+          </div>
+        </div> 
+      </a>
   </div>
 </div>
