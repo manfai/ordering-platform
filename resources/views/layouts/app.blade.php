@@ -408,7 +408,7 @@
 <body data-theme="cupcake" class="antialiased">
    
     <div class="relative flex justify-center min-h-screen bg-base-100 sm:items-center py-4 sm:pt-0 pb-6">
-        @if (Route::has('login'))
+        {{-- @if (Route::has('login'))
         <div class="hidden absolute top-0 right-0 px-8 py-4 sm:block">
             @auth
             <a href="{{ url('/checkout') }}" class="text-sm mr-4 text-base-400">Cart
@@ -423,7 +423,7 @@
             @endif
             @endauth
         </div>
-        @endif
+        @endif --}}
         <div class="w-full max-w-full mx-auto sm:px-6 lg:px-24">
             <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
                 <a href="/" class="py-8 px-4 bg-primary rounded-b-box">

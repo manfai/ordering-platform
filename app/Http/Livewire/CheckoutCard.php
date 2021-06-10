@@ -44,6 +44,34 @@ class CheckoutCard extends Component
         $this->coupons   = Coupon::where('active', 1)->where('value', '>', 0)->inRandomOrder()->limit(10)->get();
     }
 
+    public function submit()
+    {
+        $payment = Payment::where('code', $this->selected_payment)->first();
+        switch ($payment->provider) {
+            case 'paypal':
+                $client = new \GuzzleHttp\Client();
+                $res = $client->get('https://air.ecbneto.com/api/checkout/pay', [
+                    'payment_id'     =>  '',
+                    'coupon_id'      =>  '',
+                    'language'       =>  '',
+                    'card_id'        =>  '',
+                    'card_cvc'       =>  '',
+                    'remark'         =>  '',
+                    'full_address'   =>  '',
+                ]);
+                $result = $res->getBody();
+                break;
+
+            case 'mpgs':
+                dd('redirect to mpgs');
+                break;
+
+            case 'paydollar':
+                dd('redirect to asiapay');
+                break;
+        }
+    }
+
     public function render()
     {
         return view('livewire.checkout-card');

@@ -29,7 +29,7 @@ class AddCart extends Component
         $this->product = Product::find($id);
         $this->title = $this->product->title;
         $this->description = $this->product->description;
-        $this->image = $this->product->image ? $this->product->image : 'https://atlas-content-cdn.pixelsquid.com/assets_v2/140/1406081837838636780/jpeg-600/G03.jpg?modifiedAt=1';
+        $this->image = $this->product->image ? $this->product->image : 'https://image.freepik.com/free-psd/delivery-food-brown-box-mockup_181945-514.jpg';
         $this->price = $this->product->price;
 
         $this->menu_product_id = $this->product->id;
@@ -54,6 +54,8 @@ class AddCart extends Component
         ])->first();
         // dd($cart);
         $success = true;
+        $this->reset(['quantity']);
+        $this->emit('$refresh');
 
         if (!$cart) {
             $newCart = [

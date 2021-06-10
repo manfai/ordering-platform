@@ -16,7 +16,8 @@ class ProductCard extends Component
     public function mount()
     {
         $this->title = $this->product->title;
-        $this->image = $this->product->image ? $this->product->image : 'https://atlas-content-cdn.pixelsquid.com/assets_v2/140/1406081837838636780/jpeg-600/G03.jpg?modifiedAt=1';
+        $this->description = $this->product->description;
+        $this->image = $this->product->image ? $this->product->image : 'https://image.freepik.com/free-psd/delivery-food-brown-box-mockup_181945-514.jpg';
     }
 
     public function addToCart($productId)

@@ -9,7 +9,11 @@
 
             <div class="left-side col-span-1 hidden lg:block">
                 <div class="flex justify-center mt-6 md:mt-0 py-8">
+                    
                     <div class="py-4 artboard artboard-demo bg-base-200 shadow-lg rounded-box">
+                        <div class="px-4 pt-2">
+                            <img src="https://www.dagprostudio.com/images/bagallery/gallery-59/thumbnail/category-1/1-gustibus.jpg" class="w-full rounded-box">
+                        </div>
                         <ul class="w-full menu py-4 px-4">
                         <li class="menu-title">
                             <span>
