@@ -18,6 +18,7 @@
                             <span class="menu-title text-opacity-50 text-sm text-gray-800">{{$product->brand->name}}</span>
                             <h3 class="font-bold text-md">
                                 {{$product->title}}
+                                {{$product->image}}
                             </h3> 
                             <p class="text-sm mt-2">{{$product->description}}</p> 
                             </div>
