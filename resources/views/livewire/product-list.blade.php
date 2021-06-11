@@ -2,13 +2,14 @@
 <div>
     <!-- Remove py-8 -->
     <div class="mx-auto container">
-        <div class="pb-8 px-4 w-full">
-            <img src="https://www.zafranrestaurants.com/sites/default/files/field/image/Sizzling-Winter-Website%20banner.jpg" class="rounded-box shadow-lg w-full h-72 object-cover object-center">
-            {{-- <img src="{{asset('img/banner.jpg')}}" class="rounded-box shadow-lg w-full h-100 object-cover object-center"> --}}
-        </div>
+       
 
         <div class="grid auto-cols-max grid-cols-12">
         
+            <div class="col-span-12 pb-8 px-4 w-full">
+                <img src="https://www.zafranrestaurants.com/sites/default/files/field/image/Sizzling-Winter-Website%20banner.jpg" class="rounded-box shadow-lg w-full h-72 object-cover object-center">
+                {{-- <img src="{{asset('img/banner.jpg')}}" class="rounded-box shadow-lg w-full h-100 object-cover object-center"> --}}
+            </div>
             @foreach ($products as $product)
                 {{-- @livewire('product-card', ['product' => $product, 'brand' => $brand]) --}}
                     <div class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 md:flex pb-8 px-4 w-full ">
@@ -34,7 +35,7 @@
             @endforeach
             @livewire('add-cart')
             @if ($products)
-            <div class="col-span-4 px-4 py-8">
+            <div class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 px-4 py-8">
                 {{ $products->links() }}
             </div>
             @endif
