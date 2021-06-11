@@ -1,26 +1,26 @@
 <div class="pb-8 px-4 w-full">
   <div class="p-8 shadow-lg rounded-box w-full text-gray-800 bg-base-200">
-    <h3 class="text-2xl">Checkout Now</h3>
+    <h3 class="text-2xl">你的購物車</h3>
     <hr class="pb-6 mt-6">
     <table class="w-full text-sm lg:text-base" cellspacing="0">
       <thead>
         <tr class="h-12 uppercase">
-          <th class="hidden md:table-cell"></th>
-          <th class="text-left">Product</th>
+          <th class="hidden md:table-cell">圖片</th>
+          <th class="text-left">商品名稱</th>
           <th class="lg:text-right text-left pl-5 lg:pl-0">
-            <span class="lg:hidden" title="Quantity">Qtd</span>
-            <span class="hidden lg:inline">Quantity</span>
+            <span class="lg:hidden" title="Quantity">數量</span>
+            <span class="hidden lg:inline">數量</span>
           </th>
-          <th class="hidden text-right md:table-cell">Price</th>
-          <th class="text-right">Amount</th>
+          <th class="hidden text-right md:table-cell">價錢</th>
+          <th class="text-right">總額</th>
         </tr>
       </thead>
       <tbody>
         @foreach ($cartItems as $item)
             <tr>
-                <td class="hidden pb-4 md:table-cell">
+                <td class="hidden pb-4 md:table-cell text-center">
                     <a href="#">
-                    <img src="{{$item->product->image?$item->product->image:'https://image.freepik.com/free-psd/delivery-food-brown-box-mockup_181945-514.jpg'}}" class="w-20 rounded-box" alt="Thumbnail">
+                    <img src="{{$item->product->image_file?$item->product->image_file:'https://image.freepik.com/free-psd/delivery-food-brown-box-mockup_181945-514.jpg'}}" class="w-20 h-14 object-cover rounded-box" alt="Thumbnail">
                     </a>
                 </td>
                 <td>
