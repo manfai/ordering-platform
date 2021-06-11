@@ -15,7 +15,7 @@
             </div>
             @foreach ($products as $product)
                 {{-- @livewire('product-card', ['product' => $product, 'brand' => $brand]) --}}
-                    <div wire:loading.remove class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 md:flex pb-8 px-4 w-full ">
+                    <div wire:loading.remove wire:loading.target="changeBrand" class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 md:flex pb-8 px-4 w-full ">
                         <div class="card bordered shadow-lg w-full rounded-box bg-base-200">
                             <figure class="px-4 pt-4">
                                 <img src="{{$product->image_file? $product->image_file : 'https://image.freepik.com/free-psd/delivery-food-brown-box-mockup_181945-514.jpg'}}" class="h-40 object-cover object-center rounded-box">
