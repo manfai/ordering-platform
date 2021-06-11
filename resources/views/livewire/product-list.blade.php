@@ -35,7 +35,7 @@
             @endforeach
             @livewire('add-cart')
             @if ($products)
-            <div class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 px-4 py-8">
+            <div class="col-span-12 px-4 py-8">
                 {{ $products->links() }}
             </div>
             @endif
