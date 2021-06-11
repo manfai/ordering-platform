@@ -8,10 +8,10 @@
         
             <div class="col-span-12 pb-8 px-4 w-full">
                 <img src="https://www.zafranrestaurants.com/sites/default/files/field/image/Sizzling-Winter-Website%20banner.jpg" class="rounded-box shadow-lg w-full h-72 object-cover object-center">
+                {{-- <div wire:loading  wire:target="products">
+                    Loading Products......
+                </div> --}}
                 {{-- <img src="{{asset('img/banner.jpg')}}" class="rounded-box shadow-lg w-full h-100 object-cover object-center"> --}}
-            </div>
-            <div wire:loading>
-                Processing Payment...
             </div>
             @foreach ($products as $product)
                 {{-- @livewire('product-card', ['product' => $product, 'brand' => $brand]) --}}
