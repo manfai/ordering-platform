@@ -2,10 +2,10 @@
   <div class="flex-1 px-2 mx-2 mt-1">
     <div class="items-stretch hidden lg:flex">
       <a class="rounded-sm btn btn-ghost mr-4" wire:click="$emitTo('product-list','brandUpdate','ec_mart')">
-        <h3 class="font-bold text-xl">EC Mart</h3>
+        <h4 class="font-bold text-lg">EC Mart</h4>
       </a> 
       <a class="rounded-sm btn btn-ghost mr-4" wire:click="$emitTo('product-list','brandUpdate','ec_bento')">
-        <h3 class="font-bold text-xl">EC Bento</h3>
+        <h4 class="font-bold text-lg">EC Bento</h4>
       </a> 
     </div>
   </div> 
@@ -30,7 +30,7 @@
       <a href="{{route('orders')}}">
       @endguest
         <div class="avatar">
-          <div class="mx-4 w-10 h-10 mt-2 mask mask-squircle">
+          <div class="mx-4 w-8 h-8 mt-2 mask mask-squircle">
             <img src="{{asset('/img/profile.png')}}">
           </div>
         </div> 

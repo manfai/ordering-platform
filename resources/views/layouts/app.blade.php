@@ -405,9 +405,9 @@
     <script src="{{ mix('js/app.js') }}" defer></script>
 </head>
 
-<body data-theme="cupcake" class="antialiased">
+<body data-theme="cupcake" class="antialiased bg-base-100">
    
-    <div class="relative flex justify-center min-h-screen bg-base-100 sm:items-center py-4 sm:pt-0 pb-6">
+    <div class="relative flex justify-center min-h-screen sm:items-center py-4 sm:pt-0 pb-6">
         {{-- @if (Route::has('login'))
         <div class="hidden absolute top-0 right-0 px-8 py-4 sm:block">
             @auth

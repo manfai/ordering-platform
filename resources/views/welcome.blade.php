@@ -22,7 +22,7 @@
                         </li> 
 
                         @foreach (\Spatie\Tags\Tag::where('type','preferences')->get()->take(11) as $item)
-                        <li>
+                        <li class="text-sm">
                             <a>
                                 {{ ucfirst($item->name) }}
                             </a>
