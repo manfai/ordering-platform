@@ -42,7 +42,9 @@
 
         </div>
 
+        @auth
         @livewire('checkout-card')
+        @endauth
 
     </main>
     
