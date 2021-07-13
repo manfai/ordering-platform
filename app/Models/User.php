@@ -68,6 +68,10 @@ class User extends Authenticatable
         return $this->hasMany(User::class,'referrer');
     }
 
+    public function payments(){
+        return $this->hasMany(UserPayment::class);
+    }
+
     public function invite(){
         return $this->belongsTo(User::class, 'referrer');
     }
