@@ -16,7 +16,7 @@ use App\MenuLocationStock;
 
 class OrderItem extends Model
 {
-    use HasNotes, LogsActivity;
+    // use HasNotes, LogsActivity;
     public $guarded = [];
 
     //REMIND:status, refund_status

@@ -2,9 +2,13 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Resources\CartResource;
 use App\Models\CartItem;
 use App\Models\Coupon;
+use App\Models\Order\Order;
 use App\Models\Payment;
+use App\Models\Period;
+use App\Models\StoreMachine;
 use App\Models\UserPayment;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -69,6 +73,78 @@ class CheckoutCard extends Component
         $this->coupons   = Coupon::where('active', 1)->where('value', '>', 0)->inRandomOrder()->limit(10)->get();
     }
 
+    public function createOrder($payment){
+        $extraction_code = $this->genExctrationCode();
+        $total_amount = ($this->cartItems->sum('amount') - $this->selected_coupon_price) <=0 ? 0 : $this->cartItems->sum('amount') - $this->selected_coupon_price;
+        $order = Order::create([
+            'no' => date('YmdHis') . mt_rand(1000, 9999),
+            'platform' => 'app_v2',
+            'user_id' => auth()->user()->id,
+            'extraction_code' => $extraction_code,
+            'total_amount' => $total_amount,
+            'real_amount' => $total_amount,
+            'payment_method' => $payment->code,
+            'product_count' => $this->cartItems->count(),
+        ]);
+
+        if (isset($this->address)) {
+            if ($this->address !== '') {
+                $order->address = $this->address;
+                $order->save();
+            }
+        }
+        if (isset($this->remark)) {
+            if ($this->remark !== '') {
+                $order->remark = $this->remark;
+                $order->save();
+            }
+        }
+        
+        foreach ($this->cartItems as $key => $cartItem) {
+            $giveback = 0;
+            $period = $cartItem->period_id;
+            $store = $cartItem->store_id;
+            $machine = StoreMachine::where(['store_id' => $store, 'period_id' => $period])->first();
+            $period = Period::find($period);
+            if (!$period) {
+                $period = Period::find(2);
+            }
+            $itemStore = $cartItem->store_id;
+            $itemMachine = $machine ? $machine->machine_id : 1;
+            $orderItem = $order->items()->create([
+                'product_sku_id' => $cartItem->product_sku_id,
+                'product_id' => $cartItem->product_id,
+                'store_id' => $cartItem->store_id,
+                'quantity' => $cartItem->quantity,
+                'extraction_code' => $extraction_code,
+                'extraction_start' => date('Y-m-d', strtotime($cartItem->menu_date)) . ' ' . $period->start,
+                'extraction_expired' => date('Y-m-d', strtotime($cartItem->menu_date)) . ' ' . $period->end,
+                'price' => $cartItem->price,
+                'extend_time' => 0, //REMARK: this is second!!!!!
+                'user_id' => auth()->user()->id,
+                'menu_date' => $cartItem->menu_date,
+                'period' => $period->code,
+                'machine_id' => $machine ? $machine->machine_id : 1,
+                'type' => (date('H:i:s') <= $period->preorder_end) ? 'preorder' : 'normal',
+                'giveback' => $giveback
+            ]);
+            $orderItem->save();
+
+            $orderCharges = $order->charges()->create([
+                'value' => $cartItem->amount,
+                'remark' => 'Product:' . $cartItem->product_id,
+            ]);
+            $orderCharges->save();
+        }
+
+        $order->update([
+            'store_id' => $itemStore,
+            'machine_id' => $itemMachine,
+        ]);
+        
+        return $order;
+    }
+
     public function submit()
     {
         $customerReference = null;
@@ -114,6 +190,8 @@ class CheckoutCard extends Component
                 $payment = Payment::where('code', $this->selected_payment)->first();
             }
 
+            $order = $this->createOrder($payment);
+
             switch ($payment->provider) {
                 case 'paypal':
                     $client = new \GuzzleHttp\Client();
@@ -149,22 +227,15 @@ class CheckoutCard extends Component
                     $gateway->setApiKey('sk_test_51JABlsBmpGYTwMtr7MtjIMpNFXXSkkbjjbfMuWECJ6IOHWOaSvXnptSQepBv38rJRxfrUaz03n8GUe7YqRpN5eK000vpVQghH0');
                     $gateway->setTestMode(true);
                   
-                  
-
-                    // $gateway->createSource(
-                    //     [
-                    //         $customer['id'],
-                    //         ['source' => 'tok_visa']
-                    //     ]
-                    // );
-                    // dd($customers);
-    
                     $amount = ($this->cartItems->sum('amount') - $this->selected_coupon_price) <=0 ? 0 : $this->cartItems->sum('amount') - $this->selected_coupon_price;
                     $response = $gateway->purchase(array(
                         'amount' => $amount, 'currency' => 'HKD',
                         'customerReference' => $customerReference,
                         'receipt_email' => auth()->user()->email,
-                    
+                        'description' => $order->no,
+                        'metadata' => auth()->user()->cartItem->map(function($product){
+                            return $product->title;
+                        })
                     ))->send();
     
                     if ($response->isRedirect()) {
@@ -173,6 +244,11 @@ class CheckoutCard extends Component
                     } elseif ($response->isSuccessful()) {
                         // payment was successful: update database
                         // dd($response);
+                        $order->payment_status = 'paid';
+                        $order->paid_at = now();
+                        $order->closed = 1;
+                        $order->save();
+                        auth()->user()->cartItem()->delete();
                         $this->checkingOut = false;
                         session()->flash('message', 'Order successfully created.');
                     } else {
@@ -196,6 +272,13 @@ class CheckoutCard extends Component
             session()->flash('message', $th->getMessage());
             $this->emit('$refresh');  
         }
+    }
+
+
+    public function genExctrationCode()
+    {
+        $vertifyCode = mt_rand(100000, 999999);
+        return $vertifyCode;
     }
 
     public function render()
