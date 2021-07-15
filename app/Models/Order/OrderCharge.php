@@ -25,27 +25,27 @@ class OrderCharge extends Model
     public function getRemarkAttribute($value)
     {
         //STEP1: explode
-        $class = explode(':', $value);
-        switch ($class[0]) {
-            case 'Discount':
-                $value = Discount::find($class[1]);
-                $value = $value->name;
-                break;
+        // $class = explode(':', $value);
+        // switch ($class[0]) {
+        //     case 'Discount':
+        //         $value = Discount::find($class[1]);
+        //         $value = $value->name;
+        //         break;
 
-            case 'Product':
-                $value = Product::find($class[1]);
-                $value = $value->title;
-                break;
+        //     case 'Product':
+        //         $value = Product::find($class[1]);
+        //         $value = $value->title;
+        //         break;
 
-            case 'UserCoupon':
-                $value = UserCoupon::find($class[1]);
-                $value = $value->coupon->name;
-                break;
+        //     case 'UserCoupon':
+        //         $value = UserCoupon::find($class[1]);
+        //         $value = $value->coupon->name;
+        //         break;
 
-            default:
-                $value = $value;
-                break;
-        }
+        //     default:
+        //         $value = $value;
+        //         break;
+        // }
         return $value;
     }
 }

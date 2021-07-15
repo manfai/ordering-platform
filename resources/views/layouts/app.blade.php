@@ -437,6 +437,8 @@
     <x-footer />
     @stack('modals')
     @livewireScripts
+    <script src="https://kit.fontawesome.com/eb7b3c2427.js" crossorigin="anonymous"></script>
+
 </body>
 
 </html>

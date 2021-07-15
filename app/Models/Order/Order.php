@@ -118,7 +118,17 @@ class Order extends Model
 
     public function getExtractionCodeAttribute()
     {
-        return $this->items->first()->extraction_code;
+        try {
+            if(!$this->extraction_code){
+                return $this->items->first()->extraction_code;
+            } else {
+                return $this->extraction_code;
+            }
+        } catch (\Throwable $th) {
+            // dd($this->items->first());
+            return $this->items->first()->extraction_code;
+
+        }
     }
 
     public function setClosedAttribute($value)

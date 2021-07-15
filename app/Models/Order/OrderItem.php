@@ -47,21 +47,21 @@ class OrderItem extends Model
 
     public function store()
     {
-        return $this->belongsTo(\App\Http\Api\V1\Model\Store::class);
+        return $this->belongsTo(\App\Models\Store::class);
     }
     public function machine()
     {
-        return $this->belongsTo(\App\Http\Api\V1\Model\Store::class);
+        return $this->belongsTo(\App\Models\Store::class);
     }
 
     public function productSku()
     {
-        return $this->belongsTo(\App\Http\Api\V1\Model\Product\ProductSku::class);
+        return $this->belongsTo(\App\Models\Product\ProductSku::class);
     }
 
     public function product()
     {
-        return $this->belongsTo(\App\Http\Api\V1\Model\Product\Product::class);
+        return $this->belongsTo(\App\Models\Product\Product::class);
     }
 
     public function supplier()
