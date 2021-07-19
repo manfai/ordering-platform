@@ -125,8 +125,12 @@ class Order extends Model
                 return $this->extraction_code;
             }
         } catch (\Throwable $th) {
+            if($this->items->first()){
+                return $this->items->first()->extraction_code;
+            } else {
+                return '';
+            }
             // dd($this->items->first());
-            return $this->items->first()->extraction_code;
 
         }
     }

@@ -17,7 +17,7 @@ class HitProduct extends Component
                 ]);
             })->first();
         if ($menu) {
-            $products = $menu->products()->get()->take(3);
+            $products = $menu->products()->inRandomOrder()->get()->take(3);
         } else {
             $products = [];
         }
