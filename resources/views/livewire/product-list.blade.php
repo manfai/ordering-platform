@@ -13,8 +13,10 @@
                 {{-- <img src="{{asset('img/banner.jpg')}}" class="rounded-box shadow-lg w-full h-100 object-cover object-center"> --}}
             </div>
 
+            @if($filter)
             <h3 class="col-span-12 pb-8 px-4 text-lg text-bold text-gray-500">{{\Spatie\Tags\Tag::find($filter)->name}}</h3>
-
+            @endif
+            
             @foreach ($products as $product)
                 {{-- @livewire('product-card', ['product' => $product, 'brand' => $brand]) --}}
                     <div wire:loading.remove wire:loading.target="changeBrand" class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-4 md:flex pb-8 px-4 w-full ">
