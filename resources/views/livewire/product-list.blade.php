@@ -2,17 +2,19 @@
 <div>
     <!-- Remove py-8 -->
     <div class="mx-auto container">
-       
-
+        
         <div class="grid auto-cols-max grid-cols-12">
         
             <div class="col-span-12 pb-8 px-4 w-full">
-                <img src="https://www.zafranrestaurants.com/sites/default/files/field/image/Sizzling-Winter-Website%20banner.jpg" class="rounded-box shadow-lg w-full h-72 object-cover object-center">
+                <img src="/img/banner.jpg" class="rounded-box shadow-lg w-full h-84 object-cover object-center">
                 {{-- <div wire:loading  wire:target="products">
                     Loading Products......
                 </div> --}}
                 {{-- <img src="{{asset('img/banner.jpg')}}" class="rounded-box shadow-lg w-full h-100 object-cover object-center"> --}}
             </div>
+
+            <h3 class="col-span-12 pb-8 px-4 text-lg text-bold text-gray-500">{{\Spatie\Tags\Tag::find($filter)->name}}</h3>
+
             @foreach ($products as $product)
                 {{-- @livewire('product-card', ['product' => $product, 'brand' => $brand]) --}}
                     <div wire:loading.remove wire:loading.target="changeBrand" class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-4 md:flex pb-8 px-4 w-full ">

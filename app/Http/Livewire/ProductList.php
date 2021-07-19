@@ -14,6 +14,8 @@ class ProductList extends Component
     protected $products = [];
     public $brand = 'ec_mart';
     public $search = '';
+    public $filter = null;
+    public $tags = null;
 
     protected $listeners = [
         'brandUpdate' => 'changeBrand',
@@ -38,8 +40,18 @@ class ProductList extends Component
         // $this->emit('$refresh');
     }
 
-    public function mount()
+    public function mount($filter = null)
     {
+        // dd($filter);
+        if($filter!==null){
+            $filter = base64_decode($filter);
+            $filter = unserialize($filter);
+            if(isset($filter['tag'])){
+                $filter = $filter['tag'];
+            }
+        }
+        $this->filter = $filter;
+        $this->tags = \DB::table('taggables')->get();
         $this->loadProduct($this->brand);
     }
 
@@ -50,6 +62,11 @@ class ProductList extends Component
 
     public function render()
     {
+        if($this->filter !== null){
+            $perferences = [$this->filter];
+        } else {
+            $perferences = [];
+        }
         // $this->loadProduct($this->brand);
         $period_id = [2];
         if ($this->brand == 'ec_mart') {
@@ -62,12 +79,18 @@ class ProductList extends Component
                 ]);
             })->first();
         if ($menu) {
-            $products = $menu->products()->get();
+            
+            // dd($perferences);
+            // dd($menu->products()->get()->pluck('id'));
+            $filter = \DB::table('taggables')->whereIn('tag_id',$perferences)->get()->pluck('taggable_id');
+            $products = $menu->products()->whereIn("product_id",$filter);
+            // dd($products);
         } else {
             $products = [];
         }
         return view('livewire.product-list', [
-            'products' => count($products) ? $menu->products()->paginate(12) : []
+            'products' => count($products->get()) ? $products->paginate(12) : [],
+            'tag' => $filter
         ]);
     }
 }
