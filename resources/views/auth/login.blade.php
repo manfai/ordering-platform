@@ -79,8 +79,7 @@
               </div>
             </button>
    -->
-        <p class="mt-8">Need an account? <a href="#" class="text-primary-500 hover:text-primary-700 font-semibold">Create an
-                account</a></p>
+        <p class="mt-8">Need an account? <a href="{{route('register')}}" class="text-primary-500 hover:text-primary-700 font-semibold">Create an account</a></p>
   
     </x-jet-authentication-card>
 </x-guest-layout>
