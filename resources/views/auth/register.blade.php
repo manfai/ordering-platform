@@ -6,6 +6,42 @@
 
         <x-jet-validation-errors class="mb-4" />
 
+
+        <form method="POST" action="{{ route('register') }}" class="mt-6">
+            @csrf
+            <div>
+            <label class="block text-gray-700">Email Address</label>
+            <input type="email" name="email" id="" placeholder="Enter Email Address" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primary-500 focus:bg-white focus:outline-none" autofocus autocomplete required>
+          </div>
+  
+          <div class="mt-4">
+            <label class="block text-gray-700">Password</label>
+            <input type="password" name="password" id="" placeholder="Enter Password" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primary-500
+                  focus:bg-white focus:outline-none" required>
+          </div>
+  
+          <div class="mt-4">
+            <label class="block text-gray-700">Gender</label>
+            <input type="password" name="password" id="" placeholder="Enter Password" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primary-500
+                  focus:bg-white focus:outline-none" required>
+          </div>
+
+          <div class="mt-4">
+            <label class="block text-gray-700">Phone</label>
+            <input type="password" name="password" id="" placeholder="Enter Password" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primary-500
+                  focus:bg-white focus:outline-none" required>
+          </div>
+  
+          
+          <div class="text-right mt-2">
+            <a href="#" class="text-sm font-semibold text-gray-700 hover:text-primary focus:text-primary-focus">Forgot Password?</a>
+          </div>
+  
+          <button type="submit" class="w-full block bg-primary hover:bg-primary-focus focus:bg-primary-focus text-white font-semibold rounded-lg
+                px-4 py-3 mt-6">Register</button>
+        </form>
+  
+
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
