@@ -83,7 +83,11 @@ class ProductList extends Component
             // dd($perferences);
             // dd($menu->products()->get()->pluck('id'));
             $filter = \DB::table('taggables')->whereIn('tag_id',$perferences)->get()->pluck('taggable_id');
-            $products = $menu->products()->whereIn("product_id",$filter);
+            
+            $products = $menu->products();
+            if($perferences){
+                $products = $products->whereIn("product_id",$filter);
+            }
             // dd($products);
         } else {
             $products = [];

@@ -5,7 +5,7 @@
     <ul class="w-full menu py-4 px-4">
     <li class="menu-title">
         <span>
-            {{__('Menu Title')}}
+            {{__('Product Catalogue')}}
             </span>
     </li> 
 

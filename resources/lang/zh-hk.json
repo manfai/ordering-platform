@@ -2,5 +2,11 @@
     "Add To Cart": "加入購物車",
     "Quantity": "數量",
     "Checkout": "結帳",
-    "Sold Out": "售磬"
+    "Sold Out": "售磬",
+    "Product Catalogue": "商品類別",
+
+    "Showing": "目前顯示",
+    "to": "至",
+    "of": "項目，共",
+    "results": "結果"
 }
