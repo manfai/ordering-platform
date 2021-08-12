@@ -16,6 +16,8 @@ class OrderList extends Component
     public function render()
     {
         $orders = auth()->user()->orders()->orderBy('created_at','desc')->paginate(12);
+        $coupons = auth()->user()->orders()->orderBy('created_at','desc')->paginate(12);
+        $gifts = auth()->user()->orders()->orderBy('created_at','desc')->paginate(12);
         // dd($orders);
         return view('livewire.order-list',['orders'=>$orders]);
     }

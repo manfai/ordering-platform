@@ -10,10 +10,7 @@
       </div>
       
       @if($order)
-
-
-      <div>
-      
+        <div>
             <div class="card bg-base-100">
                 
                 <div class="invoice p-5 grid grid-cols-3">
@@ -130,9 +127,11 @@
                             </table>
                     </div>
                     <div class="col-span-3 mt-6">
-                      <p>We will be sending shipping confirmation email when the item shipped successfully!</p>
-                      <p class="font-weight-bold mb-0">Thanks for shopping with us!</p> <span>Nike Team</span>
-                      <div class=" justify-content-between footer"> <span>Need Help? visit our <a href="#"> help center</a></span> <span>{{$order->created_at}}</span> </div>
+                      <p>{{__('We will be sending shipping confirmation email when the item shipped successfully!')}}</p>
+                      <p class="font-weight-bold mb-0">{{__('Thanks for shopping with us!')}}</p>
+                      <br>
+                      <span>{{__('ECBento')}}</span>
+                      <div class=" justify-content-between footer"> <span>{{__('Need Help?')}}' {!! 'visit our <a href="#"> help center</a>' !!}</span> <span>{{$order->created_at}}</span> </div>
                     </div>
                 </div>
             </div>

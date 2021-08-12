@@ -1,21 +1,21 @@
 <footer class="text-gray-600 body-font bg-food-pattern bg-repeat bg-bottom">
-    <div class="container px-5 pt-24 pb-12 mx-auto">
+    {{-- <div class="container px-5 pt-24 pb-12 mx-auto">
       <div class="flex flex-wrap md:text-left text-center order-first">
     
         <div class="lg:w-2/4 md:w-1/2 w-full px-4">
           <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">其他資訊</h2>
           <nav class="list-none mb-10">
             <li>
-              <a class="text-gray-600 hover:text-gray-800">聯絡我們</a>
+              <a href="{{route('contact-us')}}" class="text-gray-600 hover:text-gray-800">{{__('Contact Us')}}</a>
             </li>
             <li>
-              <a class="text-gray-600 hover:text-gray-800">法律條款</a>
+              <a href="{{route('contact-us')}}" class="text-gray-600 hover:text-gray-800">{{__('contact-us')}}</a>
             </li>
             <li>
-              <a class="text-gray-600 hover:text-gray-800">使用條款</a>
+              <a href="{{route('contact-us')}}" class="text-gray-600 hover:text-gray-800">{{__('contact-us')}}</a>
             </li>
             <li>
-              <a class="text-gray-600 hover:text-gray-800">常見問題</a>
+              <a href="{{route('contact-us')}}" class="text-gray-600 hover:text-gray-800">{{__('contact-us')}}</a>
             </li>
           </nav>
         </div>
@@ -34,7 +34,7 @@
           </p> -->
         </div>
       </div>
-    </div>
+    </div> --}}
     <div class="bg-gray-100">
       <div class="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
         <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">

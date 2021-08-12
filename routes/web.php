@@ -20,6 +20,26 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+
+
+Route::get('/faqs', function () {
+    return view('pages.faqs');
+})->name('faqs');
+
+Route::get('/tnc', function () {
+    return view('pages.tnc');
+})->name('tnc');
+
+Route::get('/contact-us', function () {
+    return view('pages.contact');
+})->name('contact-us');
+
+Route::get('/marketing', function () {
+    return view('pages.marketing');
+})->name('marketing');
+
+
+
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/orders', function () {
         return view('orders');

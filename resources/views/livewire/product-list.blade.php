@@ -17,6 +17,7 @@
             <h3 class="col-span-12 pb-8 px-4 text-lg text-bold text-gray-500">{{\Spatie\Tags\Tag::find($filter)->name}}</h3>
             @endif
             
+            @if(count($products)>0)
             @foreach ($products as $product)
                 {{-- @livewire('product-card', ['product' => $product, 'brand' => $brand]) --}}
                     <div wire:loading.remove wire:loading.target="changeBrand" class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-4 md:flex pb-8 px-4 w-full ">
@@ -40,6 +41,7 @@
                         </div> 
                         </div> 
             @endforeach
+            @endif
             @livewire('add-cart')
             @if ($products)
             <div class="col-span-12 px-4 py-8">

@@ -14,30 +14,30 @@
                     <table class="table w-full">
                         <thead>
                             <tr>
-                                <th>
+                                <!-- <th>
                                     <label>
                                         <input type="checkbox" class="checkbox">
                                         <span class="checkbox-mark"></span>
                                     </label>
-                                </th>
+                                </th> -->
                                 <th>Order</th>
                                 <th>Payment</th>
                                 <th>Bento / Product</th>
                                 <th>Code</th>
                                 <th>Amount</th>
                                 <th>Discount</th>
-                                <th></th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($orders as $order)
                             <tr>
-                                <th>
+                                <!-- <th>
                                     <label>
                                         <input type="checkbox" class="checkbox">
                                         <span class="checkbox-mark"></span>
                                     </label>
-                                </th>
+                                </th> -->
                                 <td>
                                     <span class="text-sm">{{$order->no}}</span><br>
                                     <span class="badge badge-outline badge-sm uppercase">{{$order->payment_status}}</span>
@@ -101,14 +101,14 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th></th>
+                                <!-- <th></th> -->
                                 <th>Order</th>
                                 <th>Payment</th>
                                 <th>Bento / Product</th>
                                 <th>Code</th>
                                 <th>Amount</th>
                                 <th>Discount</th>
-                                <th></th>
+                                <th>Action</th>
                             </tr>
                         </tfoot>
                     </table>

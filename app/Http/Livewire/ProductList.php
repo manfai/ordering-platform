@@ -88,12 +88,14 @@ class ProductList extends Component
             if($perferences){
                 $products = $products->whereIn("product_id",$filter);
             }
-            // dd($products);
+            $products = $products->paginate(12);
+            // dd();
         } else {
             $products = [];
+            $filter = [];
         }
         return view('livewire.product-list', [
-            'products' => count($products->get()) ? $products->paginate(12) : [],
+            'products' => $products,
             'tag' => $filter
         ]);
     }
