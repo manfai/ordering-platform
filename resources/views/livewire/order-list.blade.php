@@ -11,8 +11,8 @@
                         Order List
                     </h3>
 
-                    <table class="table w-full">
-                        <thead>
+                    <table class="lg:table w-full">
+                        <thead class="hidden lg:block">
                             <tr>
                                 <!-- <th>
                                     <label>
@@ -31,16 +31,16 @@
                         </thead>
                         <tbody>
                             @foreach($orders as $order)
-                            <tr>
+                            <tr class="p-4 lg:p-0 flex flex-col flex-no wrap border-2 shadow-sm mb-6 rounded-2xl lg:table-row">
                                 <!-- <th>
                                     <label>
                                         <input type="checkbox" class="checkbox">
                                         <span class="checkbox-mark"></span>
                                     </label>
                                 </th> -->
-                                <td>
-                                    <span class="text-sm">{{$order->no}}</span><br>
-                                    <span class="badge badge-outline badge-sm uppercase">{{$order->payment_status}}</span>
+                                <td class="lg:w-full">
+                                    <span class="lg:float-left text-sm">{{$order->no}}</span><br>
+                                    <span class="lg:float-right badge badge-outline badge-sm uppercase">{{$order->payment_status}}</span>
                                 </td>
                                 <td class="text-gray-500">
                                 @switch($order->payment_method)
@@ -93,13 +93,13 @@
                                     $order->charges()->where('value','<=',0)->get()->sum('value')
                                 }}</td>
                                 <th>
-                                    <button wire:click="viewDetail({{$order->id}})" class="btn btn-primary btn-xs">details</button>
+                                    <button wire:click="viewDetail({{$order->id}})" class="btn btn-primary btn-sm btn-block">details</button>
                                     <!-- <button wire:click="viewDetail({{$order->id}})" class="btn btn-primary btn-xs">receipt</button> -->
                                 </th>
                             </tr>
                             @endforeach
                         </tbody>
-                        <tfoot>
+                        <tfoot class="hidden lg:block">
                             <tr>
                                 <!-- <th></th> -->
                                 <th>Order</th>

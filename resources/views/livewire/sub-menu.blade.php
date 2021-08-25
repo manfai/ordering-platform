@@ -1,4 +1,6 @@
-<div class="py-4 artboard artboard-demo bg-base-200 shadow-lg rounded-box">
+<div class=" pr-4">
+    <div class="bg-base-200 card shadow-lg rounded-box">
+        
     <div class="px-4 pt-2">
         <img src="/img/adv.jpeg" class="w-full rounded-box">
     </div>
@@ -21,4 +23,6 @@
     @endforeach
 
     </ul>
+</div>
+
 </div>

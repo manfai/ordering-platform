@@ -1,4 +1,4 @@
-<footer class="text-gray-600 body-font bg-food-pattern bg-repeat bg-bottom">
+<footer class="text-gray-600 body-font hidden lg:block  bg-food-pattern bg-repeat bg-bottom">
     {{-- <div class="container px-5 pt-24 pb-12 mx-auto">
       <div class="flex flex-wrap md:text-left text-center order-first">
     

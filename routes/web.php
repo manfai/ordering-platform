@@ -20,6 +20,14 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+Route::get('/bentos', function () {
+    return view('bentos');
+})->name('bentos');
+
+Route::get('/profile', function () {
+    return view('orders');
+})->name('profile');
+
 
 
 Route::get('/faqs', function () {
@@ -34,9 +42,9 @@ Route::get('/contact-us', function () {
     return view('pages.contact');
 })->name('contact-us');
 
-Route::get('/marketing', function () {
-    return view('pages.marketing');
-})->name('marketing');
+Route::get('/carts', function () {
+    return view('carts');
+})->name('carts');
 
 
 

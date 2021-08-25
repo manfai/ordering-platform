@@ -1,19 +1,14 @@
 <x-app-layout> 
-    <div class="flex mt-8">
-       @livewire('brand-list')
-    </div>
- 
-    
-    <main class="w-full">
-        <div class="grid grid-cols-6 gap-3">
 
-            <div class="left-side col-span-1 hidden lg:block">
+    <main class="w-full mb-10">
+        <div class="grid grid-cols-12">
+
+            <div class="left-side col-span-2 hidden lg:block">
                 <div class="flex justify-center mt-6 md:mt-0 py-8">
-                    
                    @livewire('sub-menu')
                 </div>
             </div>
-            <div class="right-side lg:col-span-5 col-span-6">
+            <div class="right-side lg:col-span-10 col-span-12">
                 <div class="flex justify-center mt-6 md:mt-0 py-8">
                     @livewire('product-list',['filter'=>isset($_GET['menu'])?$_GET['menu']:null])
                 </div>

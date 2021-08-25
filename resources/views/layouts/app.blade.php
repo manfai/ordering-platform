@@ -407,9 +407,9 @@
 
 <body data-theme="cupcake" class="antialiased bg-base-100">
    
-    <div class="relative flex justify-center min-h-screen sm:items-center py-4 sm:pt-0 pb-6">
-        {{-- @if (Route::has('login'))
-        <div class="hidden absolute top-0 right-0 px-8 py-4 sm:block">
+    <div class="relative flex justify-center min-h-screen sm:items-center pb-4 sm:pt-0 pb-6 px-4 lg:px-0">
+       @if (Route::has('login'))
+        <div class="hidden lg:block absolute top-0 right-0 px-8 py-4">
             @auth
             <a href="{{ url('/checkout') }}" class="text-sm mr-4 text-base-400">Cart
                 <span class="inline-block px-4 py-1 text-center py-1 leading-none text-xs font-semibold text-gray-700 bg-base-300 rounded-full">{{Auth::user()->cartItem()->sum('quantity')}}</span>
@@ -423,7 +423,7 @@
             @endif
             @endauth
         </div>
-        @endif --}}
+        @endif
         <div class=" w-full max-w-screen-2xl mx-auto sm:px-6 lg:px-12">
             <div class="hidden lg:flex justify-center pt-8 sm:justify-start sm:pt-0">
                 <a href="/" class="py-8 px-4 bg-primary rounded-b-box">
@@ -431,7 +431,41 @@
                 </a>
             </div>
             {{$slot}}
+        
         </div>
+        <nav id="mobile-menu" id="bottom-navigation" class="block lg:hidden fixed inset-x-0 bottom-0 z-10 bg-white shadow">
+            <div id="tabs" class="flex justify-between">
+                <a href="{{route('welcome')}}" class="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 inline-block mb-1 mt-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" stroke-width="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                    <span class="tab tab-products block text-xs">{{__('Products')}}</span>
+                </a>
+                <a wire:click="checkoutNow()"  class="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 inline-block mb-1 mt-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <span class="tab tab-bentos block text-xs">{{__('Carts')}}</span>
+                </a>
+                <a href="{{route('orders')}}" class="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 inline-block mb-1 mt-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                    <span class="tab tab-orders block text-xs">{{__('Orders')}}</span>
+                </a>
+                <a href="{{route('profile')}}" class="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 inline-block mb-1 mt-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />                   
+                    </svg>
+                    @auth
+                    <span class="tab tab-me block text-xs">{{__('Profile')}}</span>
+                    @else
+                    <span class="tab tab-me block text-xs">{{__('Login')}}</span>
+                    @endauth
+                </a>
+            </div>
+        </nav>
+        
     </div>
     
     <x-footer />
