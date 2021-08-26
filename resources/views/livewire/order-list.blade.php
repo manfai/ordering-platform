@@ -11,8 +11,8 @@
                         Order List
                     </h3>
 
-                    <table class="lg:table w-full">
-                        <thead class="hidden lg:block">
+                    <table class="table w-full">
+                        <thead>
                             <tr>
                                 <!-- <th>
                                     <label>
@@ -31,16 +31,16 @@
                         </thead>
                         <tbody>
                             @foreach($orders as $order)
-                            <tr class="p-4 lg:p-0 flex flex-col flex-no wrap border-2 shadow-sm mb-6 rounded-2xl lg:table-row">
+                            <tr class="p-4 lg:p-0 border-2 shadow-sm mb-6 rounded-2xl">
                                 <!-- <th>
                                     <label>
                                         <input type="checkbox" class="checkbox">
                                         <span class="checkbox-mark"></span>
                                     </label>
                                 </th> -->
-                                <td class="lg:w-full">
-                                    <span class="lg:float-left text-sm">{{$order->no}}</span><br>
-                                    <span class="lg:float-right badge badge-outline badge-sm uppercase">{{$order->payment_status}}</span>
+                                <td class="">
+                                    <span class="text-sm">{{$order->no}}</span><br>
+                                    <span class="badge badge-outline badge-sm uppercase">{{$order->payment_status}}</span>
                                 </td>
                                 <td class="text-gray-500">
                                 @switch($order->payment_method)
@@ -71,7 +71,7 @@
                                     @foreach($order->items as $key => $item)
                                         @if($key<=3)
                                         <div class="avatar">
-                                        <div class="w-10 h-10">
+                                        <div class="w-10 h-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                                             <img src="{{$item->product->image_file}}">
                                         </div>
                                         </div> 
@@ -99,9 +99,8 @@
                             </tr>
                             @endforeach
                         </tbody>
-                        <tfoot class="hidden lg:block">
+                        <tfoot>
                             <tr>
-                                <!-- <th></th> -->
                                 <th>Order</th>
                                 <th>Payment</th>
                                 <th>Bento / Product</th>

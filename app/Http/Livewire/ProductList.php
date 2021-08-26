@@ -12,7 +12,7 @@ class ProductList extends Component
     use WithPagination;
 
     protected $products = [];
-    public $brand = 'ec_mart';
+    public $brand = 'ecbento';
     public $search = '';
     public $filter = null;
     public $tags = null;
@@ -49,8 +49,12 @@ class ProductList extends Component
             if(isset($filter['tag'])){
                 $filter = $filter['tag'];
             }
+            if(isset($filter['menu_date'])){
+                $filter = $filter['menu_date'];
+            }
         }
         $this->filter = $filter;
+        // dd($filter);
         $this->tags = \DB::table('taggables')->get();
         $this->loadProduct($this->brand);
     }
@@ -62,8 +66,10 @@ class ProductList extends Component
 
     public function render()
     {
+        $menu_date = date('Y-m-d');
         if($this->filter !== null){
             $perferences = [$this->filter];
+            $menu_date = $this->filter;
         } else {
             $perferences = [];
         }
@@ -72,7 +78,7 @@ class ProductList extends Component
         if ($this->brand == 'ec_mart') {
             $period_id = [8, 15];
         }
-        $menu = Menu::with('products')->whereIn('menu_date', [date('Y-m-d'), '8888-12-31'])->whereIn('period_id', $period_id)->active()
+        $menu = Menu::with('products')->whereIn('menu_date', [$menu_date, '8888-12-31'])->whereIn('period_id', $period_id)->active()
             ->whereHas('locations', function ($query) {
                 $query->whereNotNull('stock')->where([
                     'store_id' => 54
@@ -82,13 +88,14 @@ class ProductList extends Component
             
             // dd($perferences);
             // dd($menu->products()->get()->pluck('id'));
-            $filter = \DB::table('taggables')->whereIn('tag_id',$perferences)->get()->pluck('taggable_id');
+            // $filter = \DB::table('taggables')->whereIn('tag_id',$perferences)->get()->pluck('taggable_id');
             
             $products = $menu->products();
-            if($perferences){
-                $products = $products->whereIn("product_id",$filter);
-            }
+            // if($perferences){
+            //     $products = $products->whereIn("product_id",$filter);
+            // }
             $products = $products->paginate(12);
+            $filter = $this->filter;
             // dd();
         } else {
             $products = [];
@@ -96,7 +103,8 @@ class ProductList extends Component
         }
         return view('livewire.product-list', [
             'products' => $products,
-            'tag' => $filter
+            'tag' => $filter,
+            'menu_date' => $filter
         ]);
     }
 }

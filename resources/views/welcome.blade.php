@@ -3,12 +3,12 @@
     <main class="w-full mb-10">
         <div class="grid grid-cols-12">
 
-            <div class="left-side col-span-2 hidden lg:block">
+            <div class="left-side col-span-12 lg:col-span-3 hidden lg:block">
                 <div class="flex justify-center mt-6 md:mt-0 py-8">
                    @livewire('sub-menu')
                 </div>
             </div>
-            <div class="right-side lg:col-span-10 col-span-12">
+            <div class="right-side lg:col-span-9 col-span-12">
                 <div class="flex justify-center mt-6 md:mt-0 py-8">
                     @livewire('product-list',['filter'=>isset($_GET['menu'])?$_GET['menu']:null])
                 </div>

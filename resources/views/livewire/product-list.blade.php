@@ -1,17 +1,14 @@
 
-<div>
+<div class="w-full">
     <!-- Remove py-8 -->
-    <div class="mx-auto container">
+    <div class="">
         
         <div class="grid grid-cols-12">
             <div class="col-span-12 pb-8 px-4 w-full">
-                <img src="/img/banner.jpg" class="rounded-box shadow-lg w-full h-84 object-cover object-center">
+                <img src="https://via.placeholder.com/1920x500" class="rounded-box shadow-lg w-full h-84 object-cover object-center">
             </div>
 
-            @if($filter)
-            <h3 class="col-span-12 pb-8 px-4 text-lg text-bold text-gray-500">{{\Spatie\Tags\Tag::find($filter)->name}}</h3>
-            @endif
-            
+          
             @if(count($products)>0)
             @foreach ($products as $product)
                     <div wire:loading.remove wire:loading.target="changeBrand" class="col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-3 md:flex pb-8 px-4 w-full">

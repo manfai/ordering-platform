@@ -1,24 +1,20 @@
 <x-app-layout>
     <main class="bg-base-100">
-        <div class="flex mt-8">
-            @livewire('brand-list')
-        </div>
 
-        <div class="grid grid-cols-12 gap-4">
+        <div class=" px-2 mx-2 grid grid-cols-12 gap-4">
 
             <div class="left-side col-span-12 lg:col-span-3">
                 <div class="flex bg-base-200 rounded-2xl mb-6 justify-center mt-6 md:mt-0">
-                    <!-- @livewire('sub-menu') -->
 
                     <div class="card text-center pt-8">
-                        <div class="avatar m-auto">
+                        <div class="avatar online m-auto">
                             <div class="w-24 h-24 mask mask-squircle">
                                 <img src="http://daisyui.com/tailwind-css-component-profile-1@94w.png">
                             </div>
                         </div> 
                         <div class="card-body">
                             <h2 class="card-title">{{auth()->user()->name}}</h2>
-                            <p>EC Point: {{auth()->user()->balance}}</p>
+                            <!-- <p>EC Point: {{auth()->user()}}</p> -->
                             <div class="justify-center card-actions p-0">
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
@@ -39,7 +35,7 @@
                 </h3>
                 <div class="grid grid-cols-1 gap-6">
                     
-                        @foreach(auth()->user()->coupons()->where('expired_at','>=',date('Y-m-d H:i:s'))->where('status','available')->get() as $coupon)
+                        @foreach(auth()->user()->coupons()->where('expired_at','>=',date('Y-m-d H:i:s'))->where('status','available')->get()->take(3) as $coupon)
                         <div class="card card-side bordered">
                             <figure style="max-width:100px">
                                 <img src="https://ecbento.com/2.0/wp-content/uploads/2020/08/logo-2.png">

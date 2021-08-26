@@ -28,6 +28,7 @@
                   <option>9</option>
                 </select>
                 
+                
               </div>        
           </div>
       </div>
@@ -82,10 +83,30 @@
                     <x-input.quantity wire:model="quantity" />
                   </div>
                 </div>
+                <div class="flex mt-6 items-center pb-5 border-b-2 border-base-300 mb-5">
+                  <div class="flex items-center">
+                    <span class="mr-3">{{__('Student')}}</span>
+                    <div class="relative">
+                    <select class="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10">
+                      <option>2A 13 Peter</option>
+                   
+                    </select>
+                    <span class="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
+                      <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4" viewBox="0 0 24 24">
+                        <path d="M6 9l6 6 6-6"></path>
+                      </svg>
+                    </span>
+                  </div>
+                  </div>
+                </div>
+                
                 <div class="flex">
                   <span class="title-font font-bold text-2xl py-2 pr-6 text-gray-900">${{$price}}</span>
                   <button wire:click="addToCart()" class="flex ml-auto text-white btn-primary btn border-0 py-2 px-6 focus:outline-none">{{__('Add To Cart')}}</button>  
                 </div>
+
+             
+                
               </div>
             </div>
           </div>
