@@ -16,9 +16,9 @@
 
         </div>
 
-        @auth
+	{{--@auth
         @livewire('checkout-card')
-        @endauth
+        @endauth--}}
 
     </main>
     

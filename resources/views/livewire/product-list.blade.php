@@ -5,13 +5,18 @@
         
         <div class="grid grid-cols-12">
             <div class="col-span-12 pb-8 px-4 w-full">
-                <img src="https://via.placeholder.com/1920x500" class="rounded-box shadow-lg w-full h-84 object-cover object-center">
-            </div>
 
-          
-            @if(count($products)>0)
+	    @if($filter)
+		Menu Date: {{$filter}}
+	    @else
+	    	Menu Date: {{date('Y-m-d')}}	    
+	    @endif	 
+
+	    </div>
+
+	    @if(count($products)>0)
             @foreach ($products as $product)
-                    <div wire:loading.remove wire:loading.target="changeBrand" class="col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-3 md:flex pb-8 px-4 w-full">
+                    <div wire:loading.remove wire:loading.target="changeBrand" class="col-span-6 md:col-span-4 lg:col-span-4 xl:col-span-3 md:flex pb-8 px-4 w-full">
                         <div class="card bordered shadow-lg w-full rounded-box bg-base-200">
                             <figure class="px-4 pt-4">
                                 <img src="{{$product->image_file? $product->image_file : 'https://image.freepik.com/free-psd/delivery-food-brown-box-mockup_181945-514.jpg'}}" class="h-40 object-cover object-center rounded-box bg-default-parttern bg-cover bg-center">

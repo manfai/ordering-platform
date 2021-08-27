@@ -30,7 +30,7 @@
                   focus:bg-white focus:outline-none" required autocomplete="new-password">
             </div>
 
-            <div class="mt-4 form-control w-full">
+            <div class="hidden mt-4 form-control w-full">
                 <label class="block text-gray-700">Gender</label>
                 <select class="select select-bordered rounded-lg bg-gray-200 mt-2 w-full">
                     <option disabled="disabled" selected="selected">---</option>
