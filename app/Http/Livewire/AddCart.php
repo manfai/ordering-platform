@@ -26,7 +26,11 @@ class AddCart extends Component
     public function mount()
     {
         $this->product = Product::find(1);
-        $this->students = Auth::user()->merchant->students;
+	if(Auth::user()){
+		$this->students = Auth::user()->merchant->students;
+	} else {
+		$this->students = [];
+	}
         // dd($this->students);
     }
 
