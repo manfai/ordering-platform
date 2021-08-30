@@ -299,7 +299,7 @@ class CheckoutCard extends Component
 
             }
         } catch (\Throwable $th) {
-            dd($th);
+            // dd($th);
             session()->flash('message', $th->getMessage());
             $this->emit('$refresh');  
         }
