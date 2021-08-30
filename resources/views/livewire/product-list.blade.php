@@ -15,7 +15,7 @@
                     <div wire:loading.remove wire:loading.target="changeBrand" class="col-span-6 md:col-span-4 lg:col-span-4 xl:col-span-3 md:flex pb-8 px-4 w-full">
                         <div class="card bordered shadow-lg w-full rounded-box bg-base-200">
                             <figure class="px-4 pt-4">
-                                <img src="{{$product->image_file? $product->image_file : ''}}" class="h-40 object-cover object-center rounded-box bg-default-parttern bg-cover bg-center">
+                                <img src="{{$product->image_file? $product->image_file : ''}}" class="h-40 object-cover object-center rounded-box bg-cover bg-center">
                             </figure> 
                             <div class="card-body h-30 px-5 pt-4 pb-0">
                             <span class="menu-title text-opacity-50 text-xs text-gray-800">

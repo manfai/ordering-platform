@@ -17,7 +17,7 @@ module.exports = {
             },
             backgroundImage: (theme) => ({
                 "food-pattern": "url('/img/food-pattern.png')",
-                "default-parttern": "url('/img/box-pattern.jpeg')",
+                "default-parttern": "url('')",
             }),
             backgroundSize: {
                 auto: "auto",
