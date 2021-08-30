@@ -78,7 +78,7 @@ class ProductList extends Component
             $perferences = [];
         }
         // $this->loadProduct($this->brand);
-        $period_id = [2];
+        $period_id = [18];
         if ($this->brand == 'ec_mart') {
             $period_id = [8, 15];
         }
