@@ -13,22 +13,20 @@ class SubMenu extends Component
     
     public function render()
     {
-        $menu = Menu::with('products')->whereIn('menu_date', [date('Y-m-d'), '8888-12-31'])->whereIn('period_id', [2,8,15])->active()
+        $menu = Menu::with('products')->where('menu_date', '>=', date('Y-m-d'))->whereIn('period_id', [18])->active()
         ->whereHas('locations', function ($query) {
             $query->whereNotNull('stock')->where([
-                'store_id' => 54
+                'store_id' => 57
             ]);
-        })->first();
-     
-        $taggable = \DB::table('taggables')->whereIn('taggable_id',$menu->products()->pluck('product_id'))->get()->pluck('tag_id');
-        // $items = \Spatie\Tags\Tag::whereIn('id',$taggable)->get();
+        })->get();
+        $period = $menu->pluck('menu_date');
+        $this->emitTo('product-list','startDate',$period[0]);
+        // $startDate = new \DateTime('NOW');
+        // $endDate = (new \DateTime('NOW'))->modify('+7 day');
+        // $interval = \DateInterval::createFromDateString('1 day');
+        // $period = new \DatePeriod($startDate, $interval, $endDate);
+        // dd($period);
 
-        $startDate = new \DateTime('NOW');
-        // $endDate = (new \DateTime('NOW'))->modify('last day of this month');
-        $endDate = (new \DateTime('NOW'))->modify('+30 day');
-
-        $interval = \DateInterval::createFromDateString('1 day');
-        $period = new \DatePeriod($startDate, $interval, $endDate);
         return view('livewire.sub-menu',['items'=>$period]);
     }
 }

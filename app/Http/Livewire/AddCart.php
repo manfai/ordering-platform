@@ -41,7 +41,7 @@ class AddCart extends Component
         $this->product = Product::find($productId);
         $this->title = $this->product->title;
         $this->description = $this->product->description;
-        $this->image = $this->product->image_file ? $this->product->image_file : 'https://image.freepik.com/free-psd/delivery-food-brown-box-mockup_181945-514.jpg';
+        $this->image = $this->product->image_file ? $this->product->image_file : 'https://www.kenyons.com/wp-content/uploads/2017/04/default-image-620x600.jpg';
         $this->price = $this->product->price;
 
         $this->menu_product_id = $this->product->id;
@@ -61,7 +61,9 @@ class AddCart extends Component
             $this->disabledButton = false;
         } else if($value!=='---'&&$value!==null){
             $this->disabledButton = false;
+            $this->disabledRemark = true;
         } else  {
+            $this->disabledRemark = true;
             $this->disabledButton = true;
         }
     }
@@ -117,6 +119,7 @@ class AddCart extends Component
             $this->addingToCart = false;
         }
         $this->emitTo('cart-count', 'refreshCart');
+        return redirect()->route('welcome');
     }
 
     public function render()

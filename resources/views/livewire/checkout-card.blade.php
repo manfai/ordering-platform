@@ -238,11 +238,11 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($cartItems as $item)
+        @foreach ($cartItems->sortBy('menu_date') as $item)
         <tr>
           <td class="hidden pb-4 md:table-cell text-center">
             <a href="#">
-              <img src="{{$item->product->image_file?$item->product->image_file:'https://image.freepik.com/free-psd/delivery-food-brown-box-mockup_181945-514.jpg'}}" class="w-20 h-14 object-cover rounded-box" alt="Thumbnail">
+              <img src="{{$item->product->image_file?$item->product->image_file:'https://www.kenyons.com/wp-content/uploads/2017/04/default-image-620x600.jpg'}}" class="w-20 h-14 object-cover rounded-box" alt="Thumbnail">
             </a>
           </td>
           <td>

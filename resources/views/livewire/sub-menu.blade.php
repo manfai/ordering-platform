@@ -14,8 +14,9 @@
             @foreach ($items as $item)
 
             @php
-                $payload = serialize(['menu_date'=>$item->format("Y-m-d")]);
-                $menuDate = $item->format("Y-m-d");
+                $menuDate = $item;
+                //$menuDate = $item->format("Y-m-d");
+                $payload = serialize(['menu_date'=>$menuDate]);
                 if(Auth::user()){
                     $quantity = Auth::user()->cartItem()->where('menu_date',$menuDate)->sum('quantity');
                 } else {
@@ -35,13 +36,7 @@
                         {{$quantity}}
                     </div>
                 </a>
-                <!-- <a href="{{route('welcome')}}?menu={{base64_encode($payload)}}">
-                {{ $item->format("Y-m-d") }}
-            </a>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg> -->
+              
             </li>
             @endforeach
 

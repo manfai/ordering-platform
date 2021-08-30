@@ -20,11 +20,12 @@ class ProductList extends Component
 
     protected $listeners = [
         'brandUpdate' => 'changeBrand',
+        'startDate' => 'setStartDate'
     ];
 
-    public function updatingSearch()
-    {
-        // $this->resetPage();
+    public function setStartDate($date)
+    {   
+        $this->menu_date = $date;
     }
 
     public function changeBrand(string $brand)
@@ -70,7 +71,7 @@ class ProductList extends Component
 
     public function render()
     {
-        $menu_date = date('Y-m-d');
+        
         if($this->filter !== null){
             $perferences = [$this->filter];
             $menu_date = $this->filter;
@@ -82,13 +83,14 @@ class ProductList extends Component
         if ($this->brand == 'ec_mart') {
             $period_id = [8, 15];
         }
-        $menu = Menu::with('products')->whereIn('menu_date', [$menu_date, '8888-12-31'])->whereIn('period_id', $period_id)->active()
+        $menu = Menu::with('products')->where('menu_date', '>=', $this->menu_date)->whereIn('period_id', $period_id)->active()
             ->whereHas('locations', function ($query) {
                 $query->whereNotNull('stock')->where([
                     'store_id' => 57
                 ]);
-            })->first();
+            })->orderBy('menu_date')->first();
         // dd($menu);
+        $this->menu_date = $menu->menu_date;
         if ($menu) {
             
             // dd($perferences);
