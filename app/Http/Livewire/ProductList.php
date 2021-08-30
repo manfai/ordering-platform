@@ -85,7 +85,7 @@ class ProductList extends Component
         $menu = Menu::with('products')->whereIn('menu_date', [$menu_date, '8888-12-31'])->whereIn('period_id', $period_id)->active()
             ->whereHas('locations', function ($query) {
                 $query->whereNotNull('stock')->where([
-                    'store_id' => 54
+                    'store_id' => 57
                 ]);
             })->first();
         // dd($menu);
