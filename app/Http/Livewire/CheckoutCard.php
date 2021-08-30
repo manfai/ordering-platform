@@ -18,6 +18,7 @@ class CheckoutCard extends Component
 {
     public $cartItems;
     public $checkingOut = false;
+    public $done = false;
     public $payments, $coupons, $selected_coupon_price = 0;
     public $selected_payment, $selected_coupon, $selected_shipping = null, $selected_card = null;
     public $number,$exp_month,$exp_year,$cvc;
@@ -27,6 +28,13 @@ class CheckoutCard extends Component
         'coupon_choosed' => 'couponChoosed',
         'shipping_choosed' => 'shippingChoosed',
         'checkout' => 'checkoutNow',
+    ];
+
+    protected $rules = [
+        'number' => 'required',
+        'exp_month' => 'required',
+        'exp_year' => 'required',
+        'cvc' => 'required',
     ];
 
     public function checkoutNow()
@@ -39,11 +47,25 @@ class CheckoutCard extends Component
     public function updateCardPayment($id)
     {
         $this->selected_card = $id;
+        if($this->selected_card){
+            $this->done = true;
+        } else {
+            $this->done = false;
+        }
         $this->emit('$refresh');
     }
 
     public function paymentMethod($payment)
     {
+        if($payment == 'new'){
+            $this->done = true;
+        } else {
+            if($this->selected_card){
+                $this->done = true;
+            } else {
+                $this->done = false;
+            }
+        }
         $this->selected_payment = $payment;
     }
 
@@ -151,6 +173,8 @@ class CheckoutCard extends Component
             if($this->cartItems->count()>0){
 
             if($this->selected_payment=='new'){
+                $this->validate();
+
                 $payment = Payment::find(5);
     
                 $gateway = \Omnipay\Omnipay::create('Stripe');

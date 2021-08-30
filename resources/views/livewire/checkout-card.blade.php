@@ -341,11 +341,11 @@
             @endphp
             <div class="grid grid-cols-3 grid-rows-3 gap-4">
               @if(count($userCards)>0)
-              @foreach ($payments as $payment)
-              <div wire:click="$emit('payment_method','{{$payment->code}}')" class="{{ ($selected_payment==$payment->code)?'bg-primary text-white':'bg-gray-300 text-gray-400' }} text-center text-md cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
-                {{$payment->title}}
-              </div>
-              @endforeach
+                @foreach ($payments as $payment)
+                  <div wire:click="$emit('payment_method','{{$payment->code}}')" class="{{ ($selected_payment==$payment->code)?'bg-primary text-white':'bg-gray-300 text-gray-400' }} text-center text-md cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
+                    {{$payment->title}}
+                  </div>
+                @endforeach
               @endif
 
               <div wire:click="$emit('payment_method','new')" class="{{ ($selected_payment=='new')?'bg-primary text-white':'bg-gray-300 text-gray-400' }} text-center text-md cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
@@ -358,10 +358,10 @@
               <h1 class="ml-2 font-bold uppercase">New Credit Card</h1>
             </div>
             <div class="p-4 grid grid-cols-3 gap-4">
-              <input type="text" class="col-span-3" wire:model.defer="number">
-              <input type="text" wire:model.defer="exp_month">
-              <input type="text" wire:model.defer="exp_year">
-              <input type="text" wire:model.defer="cvc">
+              <input type="text" class="col-span-3" wire:model.defer="number" placeholder="number">
+              <input type="text" wire:model.defer="exp_month" placeholder="exp_month">
+              <input type="text" wire:model.defer="exp_year" placeholder="exp_year">
+              <input type="text" wire:model.defer="cvc" placeholder="cvc">
             </div>
             @endif
 
@@ -436,7 +436,9 @@
               @if(session()->has('message'))
               <span class="mt-6 text-red-500"><code>*** </code>{{ session('message') }}</span>
               @endif
-              <button type="submit" class="flex justify-center w-full px-10 py-3 mt-6 font-medium text-white uppercase bg-gray-800 rounded-lg shadow item-center hover:bg-gray-700 focus:shadow-outline focus:outline-none">
+              <button  {{
+                $done==true ?'type="submit"':'disabled'
+              }} class="flex justify-center w-full px-10 py-3 mt-6 font-medium uppercase btn btn-primary rounded-lg shadow item-center focus:shadow-outline focus:outline-none">
                 <span class="ml-2 mt-5px text-xl">Procceed to checkout</span>
               </button>
 
