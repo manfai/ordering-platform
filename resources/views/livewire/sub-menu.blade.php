@@ -16,7 +16,11 @@
             @php
                 $payload = serialize(['menu_date'=>$item->format("Y-m-d")]);
                 $menuDate = $item->format("Y-m-d");
-                $quantity = Auth::user()->cartItem()->where('menu_date',$menuDate)->sum('quantity');
+                if(Auth::user()){
+                    $quantity = Auth::user()->cartItem()->where('menu_date',$menuDate)->sum('quantity');
+                } else {
+                    $quantity = 0;
+                }
             @endphp
 
             <li class="flex justify-between text-sm @if($quantity>0) text-red-500 @endif">

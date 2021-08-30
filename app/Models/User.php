@@ -112,6 +112,10 @@ class User extends Authenticatable implements Wallet
     public function invite(){
         return $this->belongsTo(User::class, 'referrer');
     }
+
+    public function merchant(){
+        return $this->hasOne(UserMerchant::class);
+    }
    
     public function cartItem(){
         return $this->hasMany(CartItem::class);

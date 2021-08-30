@@ -44,7 +44,7 @@
                 <input type="phone" name="phone" id="" placeholder="Enter Your Phone" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primary-500
                   focus:bg-white focus:outline-none" required>
             </div>
-
+            <input type="hidden" name="merchant_id" value="34">
             @if(Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">
                     <x-jet-label for="terms">

@@ -4,6 +4,7 @@ namespace App\Actions\Fortify;
 
 use App\Models\Team;
 use App\Models\User;
+use App\Models\UserMerchant;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -34,9 +35,10 @@ class CreateNewUser implements CreatesNewUsers
                 'email' => $input['email'],
                 'phone_no' => $input['phone'],
                 'password' => Hash::make($input['password']),
-            ]), function (User $user) {
+            ]), function (User $user) use ($input){
                 //ECMart dun need teams
-                // $this->createTeam($user);
+                $this->createMerchant($user,$input);
+                //$this->createTeam($user);
             });
         });
     }
@@ -47,6 +49,15 @@ class CreateNewUser implements CreatesNewUsers
      * @param  \App\Models\User  $user
      * @return void
      */
+    protected function createMerchant(User $user, $input)
+    {
+        UserMerchant::create([
+            'user_id'       =>  $user->id,  
+            'merchant_id'   =>  $input['merchant_id'],  
+            'type'          => 'website',
+        ]);
+    }
+
     protected function createTeam(User $user)
     {
         $user->ownedTeams()->save(Team::forceCreate([

@@ -18,12 +18,16 @@ class AddCart extends Component
     public $menu_product_id;
     public $menu_product_date;
     public $students = [];
+    public $new_student = '';
+    public $disabledButton = true;
+    public $disabledRemark = true;
     protected $listeners = ['addToCart' => 'addingProduct'];
 
     public function mount()
     {
         $this->product = Product::find(1);
-        $this->students = ['2A 13 Peter','1A 23 Tim'];
+        $this->students = Auth::user()->merchant->students;
+        // dd($this->students);
     }
 
     public function addingProduct($productId,$menuDate = null)
@@ -41,6 +45,20 @@ class AddCart extends Component
             $this->menu_product_date = $menuDate;
         } else {
             $this->menu_product_date = date('Y-m-d');
+        }
+    }
+
+    // the updated* method follows your variable name and is camel-cased, in this sample, 'foo'
+    public function updatedRemark($value)
+    {
+        if($value == "New Student"){
+            // dd($value);
+            $this->disabledRemark = false;
+            $this->disabledButton = false;
+        } else if($value!=='---'&&$value!==null){
+            $this->disabledButton = false;
+        } else  {
+            $this->disabledButton = true;
         }
     }
 
@@ -64,7 +82,11 @@ class AddCart extends Component
         $success = true;
         $this->reset(['quantity']);
         $this->emit('$refresh');
-
+        if($this->new_student){
+            $this->remark = $this->new_student;
+            $user->merchant->remark = [$this->remark];
+            $user->merchant->save();
+        }
         if (!$cart) {
             $newCart = [
                 'store_id' => $location_id,

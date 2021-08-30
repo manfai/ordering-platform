@@ -99,7 +99,6 @@ class CheckoutCard extends Component
                 $order->save();
             }
         }
-        
         foreach ($this->cartItems as $key => $cartItem) {
             $giveback = 0;
             $period = $cartItem->period_id;
@@ -149,6 +148,8 @@ class CheckoutCard extends Component
     {
         $customerReference = null;
         try {
+            if($this->cartItems->count()>0){
+
             if($this->selected_payment=='new'){
                 $payment = Payment::find(5);
     
@@ -174,6 +175,7 @@ class CheckoutCard extends Component
                     'metadata' => auth()->user()->toArray()
                 ])->send();
                 $customer = $customers->getData();
+                // dd($customer);
 
                 auth()->user()->payments()->create([
                     'payment_id' => '5',
@@ -251,6 +253,8 @@ class CheckoutCard extends Component
                         auth()->user()->cartItem()->delete();
                         $this->checkingOut = false;
                         session()->flash('message', 'Order successfully created.');
+                        // $this->emit('$refresh');
+                        return redirect('orders');
                     } else {
                         // payment failed: display message to customer
                         session()->flash('message', $response->getMessage());
@@ -268,7 +272,10 @@ class CheckoutCard extends Component
                     dd('redirect to asiapay');
                     break;
             }
+
+            }
         } catch (\Throwable $th) {
+            dd($th);
             session()->flash('message', $th->getMessage());
             $this->emit('$refresh');  
         }
