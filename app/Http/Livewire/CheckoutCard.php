@@ -173,8 +173,14 @@ class CheckoutCard extends Component
             if($this->cartItems->count()>0){
 
             if($this->selected_payment=='new'){
+                $t = [
+                    str_replace(' ','',$this->number),
+                    $this->exp_month,
+                    $this->exp_year,
+                    $this->cvc
+                ];
+                dd($t);
                 $this->validate();
-
                 $payment = Payment::find(5);
     
                 $gateway = \Omnipay\Omnipay::create('Stripe');
@@ -183,7 +189,7 @@ class CheckoutCard extends Component
                 
                 $token = $gateway->createToken([
                     'card' => [
-                        'number' => $this->number,
+                        'number' => str_replace(' ','',$this->number),
                         'expiryMonth' => $this->exp_month,
                         'expiryYear' => $this->exp_year,
                         'cvc' => $this->cvc,
@@ -299,7 +305,7 @@ class CheckoutCard extends Component
 
             }
         } catch (\Throwable $th) {
-            // dd($th);
+            dd($th);
             session()->flash('message', $th->getMessage());
             $this->emit('$refresh');  
         }

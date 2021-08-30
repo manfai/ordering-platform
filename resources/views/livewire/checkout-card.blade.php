@@ -341,11 +341,11 @@
             @endphp
             <div class="grid grid-cols-3 grid-rows-3 gap-4">
               @if(count($userCards)>0)
-                @foreach ($payments as $payment)
-                  <div wire:click="$emit('payment_method','{{$payment->code}}')" class="{{ ($selected_payment==$payment->code)?'bg-primary text-white':'bg-gray-300 text-gray-400' }} text-center text-md cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
-                    {{$payment->title}}
-                  </div>
-                @endforeach
+              @foreach ($payments as $payment)
+              <div wire:click="$emit('payment_method','{{$payment->code}}')" class="{{ ($selected_payment==$payment->code)?'bg-primary text-white':'bg-gray-300 text-gray-400' }} text-center text-md cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
+                {{$payment->title}}
+              </div>
+              @endforeach
               @endif
 
               <div wire:click="$emit('payment_method','new')" class="{{ ($selected_payment=='new')?'bg-primary text-white':'bg-gray-300 text-gray-400' }} text-center text-md cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
@@ -355,14 +355,58 @@
             </div>
             @if($selected_payment == 'new')
             <div class="p-4 mt-6 bg-base-300 rounded-lg">
-              <h1 class="ml-2 font-bold uppercase">New Credit Card</h1>
+              <h1 class="ml-2 font-bold uppercase">New Credit Card : {{ $number }}</h1>
             </div>
             <div class="p-4 grid grid-cols-3 gap-4">
-              <input type="text" class="col-span-3" wire:model.defer="number" placeholder="number">
-              <input type="text" wire:model.defer="exp_month" placeholder="exp_month">
-              <input type="text" wire:model.defer="exp_year" placeholder="exp_year">
-              <input type="text" wire:model.defer="cvc" placeholder="cvc">
+              <input id="cc" type="text" class="col-span-3" wire:model.defer="number" placeholder="Card Number">
+              <select wire:model.defer="exp_month" placeholder="exp_month">
+                <option value="MM">MM</option>
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+              </select>
+              <select wire:model.defer="exp_year" placeholder="exp_year">
+                <option value="YYYY">YYYY</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+              </select>
+              <input type="text" id="cvc" wire:model.defer="cvc" placeholder="cvc">
             </div>
+            <script>
+      $("#cc").on("input", function() {
+        if ($('#cc').attr('data-currentmask') != '9999 9999 9999 9999') {
+          $('#cc').attr('data-currentmask', '9999 9999 9999 9999');
+          $('#cc').inputmask('9999 9999 9999 9999', {
+            placeholder: ''
+          });
+        }
+      });
+
+    $("#cvc").on("input", function() {
+    if ($('#cvc').attr('data-currentmask') != '999') {
+        $('#cvc').attr('data-currentmask', '999');
+        $('#cvc').inputmask('999', {
+          placeholder: ''
+        });
+      }
+    });
+
+  </script>
             @endif
 
             @if($selected_payment == 'stripe')
@@ -376,76 +420,78 @@
               </div>
               @endforeach
             </div>
+  
             @endif
 
           </div>
         </div>
 
-          <div class="lg:px-2 lg:w-1/2">
+        <div class="lg:px-2 lg:w-1/2">
 
 
-            <div class="p-4 bg-base-300 rounded-lg">
-              <h1 class="ml-2 font-bold uppercase">Order Details</h1>
+          <div class="p-4 bg-base-300 rounded-lg">
+            <h1 class="ml-2 font-bold uppercase">Order Details</h1>
+          </div>
+          <div class="p-4">
+            <p class="mb-6 italic">Shipping and additionnal costs are calculated based on values you have entered</p>
+            <div class="flex justify-between border-b">
+              <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-800">
+                Subtotal
+              </div>
+              <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-900">
+                ${{$cartItems->sum('amount')}}
+              </div>
             </div>
-            <div class="p-4">
-              <p class="mb-6 italic">Shipping and additionnal costs are calculated based on values you have entered</p>
-              <div class="flex justify-between border-b">
-                <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-800">
-                  Subtotal
-                </div>
-                <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-900">
-                  ${{$cartItems->sum('amount')}}
-                </div>
+            <div class="flex justify-between border-b">
+              <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-800">
+                Discount
               </div>
-              <div class="flex justify-between border-b">
-                <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-800">
-                  Discount
-                </div>
-                <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-900">
-                  ${{0}}
-                </div>
+              <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-900">
+                ${{0}}
               </div>
-              <div class="flex justify-between border-b">
-                <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-800">
-                  Coupon
-                </div>
-                <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-900">
-                  ${{$selected_coupon_price}}
-                </div>
+            </div>
+            <div class="flex justify-between border-b">
+              <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-800">
+                Coupon
               </div>
-              <div class="flex justify-between border-b">
-                <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-800">
-                  Shipping
-                </div>
-                <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-900">
-                  ${{0}}
-                </div>
+              <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-900">
+                ${{$selected_coupon_price}}
               </div>
+            </div>
+            <div class="flex justify-between border-b">
+              <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-800">
+                Shipping
+              </div>
+              <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-900">
+                ${{0}}
+              </div>
+            </div>
 
 
-              <div class="flex justify-between pt-4 border-b">
-                <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-800">
-                  Total
-                </div>
-                <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-900">
-                  ${{ ($cartItems->sum('amount') - $selected_coupon_price) <=0 ? 0 : $cartItems->sum('amount') - $selected_coupon_price }}
-                </div>
+            <div class="flex justify-between pt-4 border-b">
+              <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-800">
+                Total
               </div>
+              <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-900">
+                ${{ ($cartItems->sum('amount') - $selected_coupon_price) <=0 ? 0 : $cartItems->sum('amount') - $selected_coupon_price }}
+              </div>
+            </div>
 
 
-              @if(session()->has('message'))
-              <span class="mt-6 text-red-500"><code>*** </code>{{ session('message') }}</span>
-              @endif
-              <button  {{
+            @if(session()->has('message'))
+            <span class="mt-6 text-red-500"><code>*** </code>{{ session('message') }}</span>
+            @endif
+            <button {{
                 $done==true ?'type="submit"':'disabled'
               }} class="flex justify-center w-full px-10 py-3 mt-6 font-medium uppercase btn btn-primary rounded-lg shadow item-center focus:shadow-outline focus:outline-none">
-                <span class="ml-2 mt-5px text-xl">Procceed to checkout</span>
-              </button>
+              <span class="ml-2 mt-5px text-xl">Procceed to checkout</span>
+            </button>
 
-            </div>
           </div>
-
         </div>
+
+      </div>
     </form>
     @endif
   </div>
+

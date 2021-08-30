@@ -403,6 +403,9 @@
     </style>
 
     <script src="{{ mix('js/app.js') }}" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
+ 
 </head>
 
 <body data-theme="cupcake" class="antialiased bg-base-100"> 
@@ -537,6 +540,7 @@ class="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-bloc
     @stack('modals')
     @livewireScripts
     <script src="https://kit.fontawesome.com/eb7b3c2427.js" crossorigin="anonymous"></script>
+    @stack('scripts')
 
 </body>
 
