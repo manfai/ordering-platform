@@ -248,9 +248,10 @@
             <td>
               <a href="#">
                 <p class="mb-2">{{$item->product->title}}</p>
-                <p class="mb-2">{{date('Y-m-d',strtotime($item->menu_date))}}</p>
-                <button wire:click="removeItem({{$item->id}})" type="submit" class="text-gray-700">
-                  <small class="text-red-500"><u>{{__('Remove item')}}</u></small>
+                <p class="mb-2">Menu Date: <code>{{date('Y-m-d',strtotime($item->menu_date))}}</code></p>
+                <p class="mb-2">Remark: {{$item->remark}}</p>
+                <button wire:click="removeItem({{$item->id}})" type="submit" class="text-gray-700 mb-5">
+                  <small class="text-red-500 text-xs"><u>{{__('Remove item')}}</u></small>
                 </button>
               </a>
             </td>

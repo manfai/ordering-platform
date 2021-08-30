@@ -14,18 +14,22 @@
             @foreach ($items as $item)
 
             @php
-            $payload = serialize(['menu_date'=>$item->format("Y-m-d")]);
+                $payload = serialize(['menu_date'=>$item->format("Y-m-d")]);
+                $menuDate = $item->format("Y-m-d");
+                $quantity = Auth::user()->cartItem()->where('menu_date',$menuDate)->sum('quantity');
             @endphp
 
-            <li class="flex justify-between text-sm">
+            <li class="flex justify-between text-sm @if($quantity>0) text-red-500 @endif">
                 <a href="{{route('welcome')}}?menu={{base64_encode($payload)}}" class="flex justify-between">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 mr-2 stroke-current">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
-                        {{ $item->format("Y-m-d") }}
+                        {{ $menuDate }}
                     </span>
-                    <div class="text-xs badge ml-2 badge-neutral">0</div>
+                    <div class="text-xs badge ml-2 badge-neutral">
+                        {{$quantity}}
+                    </div>
                 </a>
                 <!-- <a href="{{route('welcome')}}?menu={{base64_encode($payload)}}">
                 {{ $item->format("Y-m-d") }}

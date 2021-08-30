@@ -13,6 +13,7 @@ class ProductList extends Component
 
     protected $products = [];
     public $brand = 'ecbento';
+    public $menu_date;
     public $search = '';
     public $filter = null;
     public $tags = null;
@@ -43,6 +44,7 @@ class ProductList extends Component
     public function mount($filter = null)
     {
         // dd($filter);
+        $this->menu_date = date('Y-m-d');
         if($filter!==null){
             $filter = base64_decode($filter);
             $filter = unserialize($filter);
@@ -51,17 +53,19 @@ class ProductList extends Component
             }
             if(isset($filter['menu_date'])){
                 $filter = $filter['menu_date'];
+                $this->menu_date = $filter;
             }
         }
         $this->filter = $filter;
-        // dd($filter);
+        // dd($this->menu_date);
         $this->tags = \DB::table('taggables')->get();
         $this->loadProduct($this->brand);
     }
 
-    public function addToCart($productId)
+    public function addToCart($productId,$menuDate)
     {
-        $this->emitTo('add-cart', 'addToCart', $productId);
+        // dd($menuDate);
+        $this->emitTo('add-cart', 'addToCart', $productId, $menuDate);
     }
 
     public function render()
@@ -84,6 +88,7 @@ class ProductList extends Component
                     'store_id' => 54
                 ]);
             })->first();
+        // dd($menu);
         if ($menu) {
             
             // dd($perferences);

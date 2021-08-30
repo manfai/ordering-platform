@@ -15,11 +15,6 @@
             </div>
 
         </div>
-
-	{{--@auth
-        @livewire('checkout-card')
-        @endauth--}}
-
     </main>
     
     @if(session()->has('message'))  

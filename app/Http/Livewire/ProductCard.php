@@ -20,10 +20,10 @@ class ProductCard extends Component
         $this->image = $this->product->image ? $this->product->image : 'https://image.freepik.com/free-psd/delivery-food-brown-box-mockup_181945-514.jpg';
     }
 
-    public function addToCart($productId)
+    public function addToCart($productId,$menuDate = null)
     {
         // dd($this->product);
-        $this->emitTo('add-cart', 'addToCart', $productId);
+        $this->emitTo('add-cart', 'addToCart', [$productId,$menuDate]);
     }
 
     public function render()

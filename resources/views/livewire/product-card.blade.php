@@ -17,7 +17,7 @@
             ${{$product->price}}
         </h3>
         @if($product->real_stock>0)
-        <button wire:click="addToCart({{$product->id}})" class="btn btn-primary m-0 rounded-lg">{{__('Add')}}</button>
+        <button wire:click="addToCart({{$product->id}},{{$filter}})" class="btn btn-primary m-0 rounded-lg">{{__('Add')}}</button>
         @else
         {{__('Sold Out')}}
         @endif
