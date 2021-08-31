@@ -9,7 +9,7 @@
                     <div class="card text-center pt-8">
                         <div class="avatar online m-auto">
                             <div class="w-24 h-24 mask mask-squircle">
-                                <img src="http://daisyui.com/tailwind-css-component-profile-1@94w.png">
+                                <img src="/img/profile.png">
                             </div>
                         </div> 
                         <div class="card-body">
