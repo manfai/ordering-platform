@@ -53,6 +53,11 @@ class AddCart extends Component
     }
 
     // the updated* method follows your variable name and is camel-cased, in this sample, 'foo'
+    public function updatedNewStudent($value)
+    {
+        // dd($value);
+    }
+    
     public function updatedRemark($value)
     {
         if($value == "New Student"){
@@ -84,15 +89,17 @@ class AddCart extends Component
             'product_sku_id' => $this->product->skus()->first()->id,
             'store_id' => $location_id,
         ])->first();
-        // dd($cart);
         $success = true;
         $this->reset(['quantity']);
         $this->emit('$refresh');
         if($this->new_student){
-            $this->remark = $this->new_student;
-            $user->merchant->remark = [$this->remark];
+            $this->remark = str_replace('_','',$this->new_student);
+            $newRemark = $user->merchant->remark;
+            $newRemark[] = $this->remark;
+            $user->merchant->remark = $newRemark;
             $user->merchant->save();
         }
+        // dd($this->new_student);
         if (!$cart) {
             $newCart = [
                 'store_id' => $location_id,

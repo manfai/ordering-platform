@@ -10,6 +10,7 @@ use App\Models\Payment;
 use App\Models\Period;
 use App\Models\StoreMachine;
 use App\Models\UserPayment;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Omnipay\Common\CreditCard;
@@ -19,6 +20,7 @@ class CheckoutCard extends Component
     public $cartItems;
     public $checkingOut = false;
     public $done = false;
+    public $procced = 'Proceed to checkout';
     public $payments, $coupons, $selected_coupon_price = 0;
     public $selected_payment, $selected_coupon, $selected_shipping = null, $selected_card = null;
     public $number,$exp_month,$exp_year,$cvc;
@@ -147,7 +149,8 @@ class CheckoutCard extends Component
                 'period' => $period->code,
                 'machine_id' => $machine ? $machine->machine_id : 1,
                 'type' => (date('H:i:s') <= $period->preorder_end) ? 'preorder' : 'normal',
-                'giveback' => $giveback
+                'giveback' => $giveback,
+                'remark' => $cartItem->remark
             ]);
             $orderItem->save();
 
@@ -166,9 +169,11 @@ class CheckoutCard extends Component
         return $order;
     }
 
-    public function submit()
+    public function submit(Request $request)
     {
         $customerReference = null;
+        $this->procced = 'Pending';
+        $this->done = false;
         try {
             if($this->cartItems->count()>0){
 
@@ -179,17 +184,18 @@ class CheckoutCard extends Component
                     $this->exp_year,
                     $this->cvc
                 ];
-                dd($t);
+                // dd($t);
                 $this->validate();
                 $payment = Payment::find(5);
     
                 $gateway = \Omnipay\Omnipay::create('Stripe');
-                $gateway->setApiKey('sk_test_51JABlsBmpGYTwMtr7MtjIMpNFXXSkkbjjbfMuWECJ6IOHWOaSvXnptSQepBv38rJRxfrUaz03n8GUe7YqRpN5eK000vpVQghH0');
+                // $gateway->setApiKey('sk_test_51JABlsBmpGYTwMtr7MtjIMpNFXXSkkbjjbfMuWECJ6IOHWOaSvXnptSQepBv38rJRxfrUaz03n8GUe7YqRpN5eK000vpVQghH0');
+                $gateway->setApiKey('sk_test_UE3xmTh2owaSc94Adn91xJOx00ES1c7uqG');
                 $gateway->setTestMode(true);
                 
                 $token = $gateway->createToken([
                     'card' => [
-                        'number' => str_replace(' ','',$this->number),
+                        'number' => str_replace('-','',$this->number),
                         'expiryMonth' => $this->exp_month,
                         'expiryYear' => $this->exp_year,
                         'cvc' => $this->cvc,
@@ -256,7 +262,8 @@ class CheckoutCard extends Component
                     }
                     
                     $gateway = \Omnipay\Omnipay::create('Stripe');
-                    $gateway->setApiKey('sk_test_51JABlsBmpGYTwMtr7MtjIMpNFXXSkkbjjbfMuWECJ6IOHWOaSvXnptSQepBv38rJRxfrUaz03n8GUe7YqRpN5eK000vpVQghH0');
+                    // $gateway->setApiKey('sk_test_51JABlsBmpGYTwMtr7MtjIMpNFXXSkkbjjbfMuWECJ6IOHWOaSvXnptSQepBv38rJRxfrUaz03n8GUe7YqRpN5eK000vpVQghH0');
+                    $gateway->setApiKey('sk_test_UE3xmTh2owaSc94Adn91xJOx00ES1c7uqG');
                     $gateway->setTestMode(true);
                   
                     $amount = ($this->cartItems->sum('amount') - $this->selected_coupon_price) <=0 ? 0 : $this->cartItems->sum('amount') - $this->selected_coupon_price;
@@ -264,7 +271,7 @@ class CheckoutCard extends Component
                         'amount' => $amount, 'currency' => 'HKD',
                         'customerReference' => $customerReference,
                         'receipt_email' => auth()->user()->email,
-                        'description' => $order->no,
+                        'description' => 'SCH-DSC-'.$order->no,
                         'metadata' => auth()->user()->cartItem->map(function($product){
                             return $product->title;
                         })
@@ -309,6 +316,8 @@ class CheckoutCard extends Component
             session()->flash('message', $th->getMessage());
             $this->emit('$refresh');  
         }
+        $this->procced = 'Proceed to checkout';
+        $this->done = true;
     }
 
 

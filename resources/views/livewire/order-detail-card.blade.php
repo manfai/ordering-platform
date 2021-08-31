@@ -82,9 +82,10 @@
                                     <td width="10%"> <img class="mask mask-squircle" src="{{$item->product->image_file}}" width="100%"> </td>
                                     <td width="70%"> <span class="font-weight-bold">{{$item->product->title}}</span>
                                         <div class="product-qty"> <span class="d-block">Quantity:{{$item->quantity}}</span></div>
+                                        @if($item->remark)<div class="product-remark"> <span class="d-block">Student:{{$item->remark}}</span></div>@endif
                                     </td>
                                     <td width="20%">
-                                        <div class="text-right"> <span class="font-weight-bold">$67.50</span> </div>
+                                        <div class="text-right"> <span class="font-weight-bold">${{$item->price}}</span> </div>
                                     </td>
                                 </tr>
                                @endforeach

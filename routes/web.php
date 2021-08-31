@@ -74,7 +74,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         // dd($token->id);
         
         $gateway = \Omnipay\Omnipay::create('Stripe');
-        $gateway->setApiKey('sk_test_51JABlsBmpGYTwMtr7MtjIMpNFXXSkkbjjbfMuWECJ6IOHWOaSvXnptSQepBv38rJRxfrUaz03n8GUe7YqRpN5eK000vpVQghH0');
+        // $gateway->setApiKey('sk_test_51JABlsBmpGYTwMtr7MtjIMpNFXXSkkbjjbfMuWECJ6IOHWOaSvXnptSQepBv38rJRxfrUaz03n8GUe7YqRpN5eK000vpVQghH0');
+        $gateway->setApiKey('sk_test_UE3xmTh2owaSc94Adn91xJOx00ES1c7uqG');
 
         $response = $gateway->purchase(array('amount' => '10.00', 'currency' => 'USD', 'token' => $token->id))->send();
 
