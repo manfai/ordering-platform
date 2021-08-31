@@ -10,7 +10,26 @@ use DateTime;
 class SubMenu extends Component
 {
     public $menu_quantity = 0;
+    public $menu_date = 0;
     
+    public function mount($filter = null)
+    {
+        // dd($filter);
+        $this->menu_date = date('Y-m-d');
+        if($filter!==null){
+            $filter = base64_decode($filter);
+            $filter = unserialize($filter);
+            if(isset($filter['tag'])){
+                $filter = $filter['tag'];
+            }
+            if(isset($filter['menu_date'])){
+                $filter = $filter['menu_date'];
+                $this->menu_date = $filter;
+            }
+        }
+       
+    }
+
     public function render()
     {
         $menu = Menu::with('products')->where('menu_date', '>=', date('Y-m-d'))->whereIn('period_id', [18])->active()

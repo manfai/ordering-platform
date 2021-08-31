@@ -540,7 +540,7 @@ class="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-bloc
     @stack('modals')
     @livewireScripts
     <script src="https://kit.fontawesome.com/eb7b3c2427.js" crossorigin="anonymous"></script>
-    @stack('scripts')
+    {{-- @stack('scripts') --}}
 
 </body>
 

@@ -24,7 +24,7 @@
                 }
             @endphp
 
-            <li class="flex justify-between text-sm @if($quantity>0) text-red-500 @endif">
+            <li class="flex justify-between @if($menu_date==$menuDate) bg-gray-300 @endif text-sm @if($quantity>0) text-red-500 @endif">
                 <a href="{{route('welcome')}}?menu={{base64_encode($payload)}}" class="flex justify-between">
                     <span>
                         @php
