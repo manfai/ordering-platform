@@ -60,10 +60,10 @@
                     </x-jet-label>
                 </div>
             @endif
-
+{{-- 
             <div class="text-right mt-2">
                 <a href="#" class="text-sm font-semibold text-gray-700 hover:text-primary focus:text-primary-focus">Forgot Password?</a>
-            </div>
+            </div> --}}
 
             <button type="submit" class="w-full block bg-primary hover:bg-primary-focus focus:bg-primary-focus text-white font-semibold rounded-lg
                 px-4 py-3 mt-6">Register</button>
