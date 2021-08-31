@@ -85,8 +85,8 @@
               </div>
             </div>
             <div class="{{ $disabledRemark ? 'hidden' : '' }}">
-            <div class=" w-full text-center text-gray-600 pointer-events-none flex ">
-              Class - Name,  eg: 4A-Chan Tai Man
+            <div class="text-red-400 w-full text-center text-gray-600 pointer-events-none flex ">
+              Class - Name <br> eg: 4A-Chan Tai Man
             </div>
             <div class="w-full flex mt-6 items-center pb-5 border-b-2 border-base-300 mb-5">
           
