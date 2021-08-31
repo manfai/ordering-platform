@@ -86,7 +86,7 @@
             </div>
             <div class="{{ $disabledRemark ? 'hidden' : '' }}">
             <div class=" w-full text-center text-gray-600 pointer-events-none flex ">
-              Class - Class Number - Name
+              Class - Name,  eg: 4A-Chan Tai Man
             </div>
             <div class="w-full flex mt-6 items-center pb-5 border-b-2 border-base-300 mb-5">
           
@@ -94,8 +94,8 @@
               {{-- <x-input.student wire:model="new_student" /> --}}
              <div class="flex items-center justify-start">  
               <span class="mr-3">{{__('Student Info')}}</span>
-              <div class="relative" x-data="$('#new_student').inputmask('9A-99-[*{1,20} *{1,20} *{1,20} *{1,20} *{1,20}]');">
-                  <input type="text" id="new_student" wire:model.defer="new_student" placeholder="Class - Number - Name">
+              <div class="relative" x-data="$('#new_student').inputmask('9A-[*{1,20} *{1,20} *{1,20} *{1,20} *{1,20}]');">
+                  <input type="text" id="new_student" wire:model.defer="new_student" placeholder="Class - Name">
                  
               </div>
             </div>
