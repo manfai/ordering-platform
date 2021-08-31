@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Order\Order;
+use App\Models\Order\OrderItem;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -99,6 +100,10 @@ class User extends Authenticatable implements Wallet
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+    public function bentos()
+    {
+        return $this->hasMany(OrderItem::class);
     }
 
     public function referral(){

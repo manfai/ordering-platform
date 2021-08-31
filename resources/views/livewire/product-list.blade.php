@@ -7,7 +7,18 @@
             <div class="col-span-12 pb-8 px-4 w-full">
 
         Menu Date: <code>{{$menu_date}}</code>
-
+        <div class="block rounded-lg shadow-lg overflow-hidden bg-white text-center w-40">
+            <div class="text-xl bg-red-500 text-white py-1">
+                {{date('M',strtotime($menu_date))}}
+            </div>
+            <div class="pt-5 pb-5 border-l border-r">
+                <h2 class="text-3xl font-bold">{{date('d',strtotime($menu_date))}}</h2>
+            </div>
+            <div class="pb-2 px-2 border-l border-r border-b rounded-lg bottom-0 flex justify-between">
+                  <h3 class="text-xl font-bold">{{date('D',strtotime($menu_date))}}</h3>
+                  <h3 class="text-xl font-bold">{{date('Y',strtotime($menu_date))}}</h3>
+            </div>
+        </div>
 	    </div>
 
 	    @if(count($products)>0)

@@ -29,6 +29,20 @@
 
                 </div>
 
+                <div class="block rounded-lg shadow-lg overflow-hidden bg-white text-center w-full">
+                    <div class="text-xl bg-red-500 text-white py-1">
+                        {{date('M')}}
+                    </div>
+                    <div class="pt-5 pb-5 border-l border-r">
+                        <h2 class="text-3xl font-bold">{{date('d')}}</h2>
+                    </div>
+                    <div class="pb-2 px-2 border-l border-r border-b rounded-lg bottom-0 flex justify-between">
+                          <h3 class="text-xl font-bold">{{date('D')}}</h3>
+                          <h3 class="text-xl font-bold">{{date('Y')}}</h3>
+                    </div>
+                </div>
+
+{{-- 
                 <h3 class="mb-5 text-xl font-bold text-gray-400">
                         {{__('Your Coupons')}}
                         <span class="float-right"><a href="" class="link"><small>{{__('History')}}</small></a></span>
@@ -46,7 +60,7 @@
                             </div>
                         </div> 
                        @endforeach
-                </div>
+                </div> --}}
 
                 <!-- @php $coupons = auth()->user()->coupons()->where('expired_at','>=',date('Y-m-d H:i:s'))->where('status','available')->get() @endphp
                 @if(count($coupons))
