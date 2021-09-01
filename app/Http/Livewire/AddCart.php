@@ -18,10 +18,22 @@ class AddCart extends Component
     public $menu_product_id;
     public $menu_product_date;
     public $students = [];
+    public $student = [
+        'class'=>'',
+        'name' =>''
+    ];
     public $new_student = '';
     public $disabledButton = true;
     public $disabledRemark = true;
     protected $listeners = ['addToCart' => 'addingProduct'];
+
+    protected $rules = [
+        'remark'        => 'required',
+        'student.class' => 'required|string',
+        'student.name'  => 'required|string',
+    ];
+
+ 
 
     public function mount()
     {
@@ -51,12 +63,6 @@ class AddCart extends Component
             $this->menu_product_date = date('Y-m-d');
         }
     }
-
-    // the updated* method follows your variable name and is camel-cased, in this sample, 'foo'
-    public function updatedNewStudent($value)
-    {
-        // dd($value);
-    }
     
     public function updatedRemark($value)
     {
@@ -75,9 +81,16 @@ class AddCart extends Component
 
     public function addToCart()
     {
+        // dd(empty($this->student));
+        try {
+            
+        $this->validate();
+        
         if (!Auth::check()) {
             return redirect()->route('login');
         }
+
+
         $user = User::find(Auth::id());
         $menu_product_id = $this->menu_product_id;
         $menu_product_date = $this->menu_product_date;
@@ -90,14 +103,22 @@ class AddCart extends Component
             'store_id' => $location_id,
         ])->first();
         $success = true;
-        $this->reset(['quantity']);
+        $this->reset(['quantity','remark','student']);
+        $this->disabledButton = true;
+        $this->disabledRemark = true;
         $this->emit('$refresh');
-        if($this->new_student){
-            $this->remark = str_replace('_','',$this->new_student);
-            $newRemark = $user->merchant->remark;
-            $newRemark[] = $this->remark;
-            $user->merchant->remark = $newRemark;
-            $user->merchant->save();
+        if($student = $this->student){
+            $class = $student['class'];
+            $name  = $student['name'];
+            if($class && $name){
+                $this->new_student = $class.'-'.$name;
+                $this->remark = str_replace('_','',$this->new_student);
+                $newRemark = $user->merchant->remark;
+                $newRemark[] = $this->remark;
+                $user->merchant->remark = $newRemark;
+                $user->merchant->save();
+            }
+           
         }
         // dd($this->new_student);
         if (!$cart) {
@@ -125,8 +146,18 @@ class AddCart extends Component
             $message = 'Cart is updated';
             $this->addingToCart = false;
         }
+        
         $this->emitTo('cart-count', 'refreshCart');
-        return redirect()->route('welcome');
+        $this->emitTo('sub-menu', 'refreshCart');
+        $this->emit('$refresh');
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            session()->flash('message', $th->getMessage());
+            $this->emit('$refresh');  
+        }
+        // return redirect('?menu='.request('menu') );
+        // return redirect()->back();
     }
 
     public function render()

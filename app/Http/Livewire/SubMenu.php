@@ -11,6 +11,7 @@ class SubMenu extends Component
 {
     public $menu_quantity = 0;
     public $menu_date = 0;
+    public $period = [];
     
     public function mount($filter = null)
     {
@@ -27,18 +28,22 @@ class SubMenu extends Component
                 $this->menu_date = $filter;
             }
         }
-       
-    }
 
-    public function render()
-    {
+
         $menu = Menu::with('products')->where('menu_date', '>=', date('Y-m-d'))->whereIn('period_id', [18])->active()
         ->whereHas('locations', function ($query) {
             $query->whereNotNull('stock')->where([
                 'store_id' => 57
             ]);
         })->get();
-        $period = $menu->pluck('menu_date');
+        $this->period = $menu->pluck('menu_date');
+       
+    }
+
+
+    public function render()
+    {
+        $period = $this->period;
         $this->emitTo('product-list','startDate',$period[0]);
         // $startDate = new \DateTime('NOW');
         // $endDate = (new \DateTime('NOW'))->modify('+7 day');

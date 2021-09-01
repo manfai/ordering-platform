@@ -91,11 +91,11 @@
             <div class="w-full flex mt-6 items-center pb-5 border-b-2 border-base-300 mb-5">
           
             
-              {{-- <x-input.student wire:model="new_student" /> --}}
              <div class="flex items-center justify-start">  
               <span class="mr-3">{{__('Student Info')}}</span>
-              <div class="relative" x-data="$('#new_student').inputmask('9A-[*{1,20} *{1,20} *{1,20} *{1,20} *{1,20}]');">
-                  <input type="text" id="new_student" wire:model.defer="new_student" placeholder="Class - Name">
+              <div class="relative">
+                  <input type="text" id="new_student_class" wire:model.defer="student.class" placeholder="Class">
+                  <input type="text" id="new_student_name"  wire:model.defer="student.name" placeholder="Name">
                  
               </div>
             </div>
@@ -108,6 +108,21 @@
             </script>
             </div>
   
+
+          @if(session()->has('message'))
+          <div class="alert alert-error mt-6">
+            <div class="flex-1">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-6 h-6 mx-2 stroke-current">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+              </svg>
+              <label>{{ session('message') }}</label>
+            </div>
+          </div>
+
+          @endif
+
+
+          
             <div class="flex">
               <span class="title-font font-bold text-2xl py-2 pr-6 text-gray-900">${{$price}}</span>
               <button {{ $disabledButton ? 'disabled' : '' }} wire:click="addToCart()" class="flex ml-auto text-white btn-primary btn border-0 py-2 px-6 focus:outline-none">{{__('Add To Cart')}}</button>
