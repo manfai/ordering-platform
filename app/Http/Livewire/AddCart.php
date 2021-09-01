@@ -81,6 +81,7 @@ class AddCart extends Component
 
     public function addToCart()
     {
+        // dd($this->remark);
         // dd(empty($this->student));
         try {
             
@@ -103,11 +104,10 @@ class AddCart extends Component
             'store_id' => $location_id,
         ])->first();
         $success = true;
-        $this->reset(['quantity','remark','student']);
-        $this->disabledButton = true;
-        $this->disabledRemark = true;
+
         $this->emit('$refresh');
-        if($student = $this->student){
+        if($this->remark=='New Student'){
+            $student = $this->student;
             $class = $student['class'];
             $name  = $student['name'];
             if($class && $name){
@@ -118,9 +118,8 @@ class AddCart extends Component
                 $user->merchant->remark = $newRemark;
                 $user->merchant->save();
             }
-           
         }
-        // dd($this->new_student);
+       
         if (!$cart) {
             $newCart = [
                 'store_id' => $location_id,
@@ -146,6 +145,10 @@ class AddCart extends Component
             $message = 'Cart is updated';
             $this->addingToCart = false;
         }
+        
+        $this->reset(['quantity','remark','student']);
+        $this->disabledButton = true;
+        $this->disabledRemark = true; 
         
         $this->emitTo('cart-count', 'refreshCart');
         $this->emitTo('sub-menu', 'refreshCart');

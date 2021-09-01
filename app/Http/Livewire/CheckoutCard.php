@@ -33,7 +33,6 @@ class CheckoutCard extends Component
     ];
 
     protected $rules = [
-        'selected_payment' => 'required_if:payment_type,new',
         'number' => 'required',
         'exp_month' => 'required',
         'exp_year' => 'required',

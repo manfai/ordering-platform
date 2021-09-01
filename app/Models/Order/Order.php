@@ -66,10 +66,11 @@ class Order extends Model
         });
         static::updated(function ($model) {
             try {
-                if ($model->payment_status == 'paid') {
+                if($model->getOriginal('payment_status')!=='paid' && $model->payment_status == 'paid'){
                     $user = User::find($model->user_id);
                     Mail::to($user)->send(new OrderCreated($model));
-                    
+                }
+                if ($model->payment_status == 'paid') {
                     $sms_data['phone_no'] = $model->user->phone_no;
                     $sms_data['user_define_no'] = $model->user->phone_no;
                     $content = Message::find(1)->content;
