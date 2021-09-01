@@ -20,10 +20,10 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/terms-and-conditions', function () {
-    // abort(404);
-    return view('terms_and_conditions');
-})->name('t&c');
+// Route::get('/terms-and-conditions', function () {
+//     // abort(404);
+//     return view('terms_and_conditions');
+// })->name('t&c');
 
 Route::get('/bentos', function () {
     return view('bentos');
@@ -39,9 +39,13 @@ Route::get('/faqs', function () {
     return view('pages.faqs');
 })->name('faqs');
 
-Route::get('/tnc', function () {
-    return view('pages.tnc');
-})->name('tnc');
+Route::get('/terms-and-conditions', function () {
+    return view('pages.terms_and_conditions');
+})->name('t&c');
+
+Route::get('/privacy-policy', function () {
+    return view('pages.policy');
+})->name('privacy-policy');
 
 Route::get('/contact-us', function () {
     return view('pages.contact');

@@ -20,7 +20,8 @@
       <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
 
         <!-- <a class="link mr-3 link-hover">Branding</a>  -->
-        <a href="{{route('t&c')}}" class="link mr-3 link-hover">T&C</a> 
+        <a href="{{route('t&c')}}" class="link mr-3 link-hover">Terms And Conditions</a> 
+        <a href="{{route('privacy-policy')}}" class="link mr-3 link-hover">Privacy Policy</a> 
         <!-- <a class="link mr-3 link-hover">Marketing</a> 
         <a class="link mr-3 link-hover">Advertisement</a> -->
   
