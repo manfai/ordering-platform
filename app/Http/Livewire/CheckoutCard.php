@@ -87,6 +87,7 @@ class CheckoutCard extends Component
         $cartItem->delete();
         $this->emit('system_message', 'Item Deleted');
         $this->emit('$refresh');
+        return redirect('checkout'); 
     }
 
     public function mount()

@@ -6,7 +6,7 @@
         <div class="grid grid-cols-12">
             <div class="col-span-12 pb-8 px-4 w-full">
 
-            <h3>Menu Date: <code>{{$menu_date}}</code></h3>
+            <!-- <h3>Menu Date: <code>{{$menu_date}}</code></h3> -->
             <div class="grid grid-flow-col grid-cols-3 gap-4 py-4">
                 <div class="block rounded-lg shadow-lg overflow-hidden bg-white text-center w-full">
                     <div class="text-2xl bg-red-500 text-white py-1">

@@ -1,10 +1,10 @@
 <div class="px-4 w-full">
-    <div class="bg-base-200 w-full card shadow-lg rounded-box">
+    <div class="py-4 bg-base-200 w-full card shadow-lg rounded-box">
 
         <!-- <div class="px-4 pt-2">
             <img src="/img/adv.jpeg" class="w-full rounded-box">
         </div> -->
-        <ul class="w-full menu py-4 px-4">
+        <ul class="w-full menu">
             <li class="menu-title">
                 <span>
                     {{__('Menu Date')}}
@@ -48,7 +48,7 @@
                         </svg>
                         @endif
 
-                        {{ $menuDate }} ({{date('D',strtotime($menuDate))}})
+                        <code class="text-xs">{{ $menuDate }} ({{date('D',strtotime($menuDate))}})</code>
                     </span>
                     <div class="text-xs badge ml-2 badge-neutral">
                         {{$quantity}}

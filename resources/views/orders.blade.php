@@ -4,7 +4,7 @@
         <div class=" px-2 mx-2 grid grid-cols-12 gap-4">
 
             <div class="left-side col-span-12 lg:col-span-3">
-                <div class="flex bg-base-200 rounded-2xl mb-6 justify-center mt-6 md:mt-0">
+                <div class="flex shadow-lg bg-base-200 rounded-2xl mb-6 justify-center mt-6 md:mt-0">
 
                     <div class="card text-center pt-8">
                         <div class="avatar online m-auto">
@@ -20,7 +20,7 @@
                                     @csrf
                                     <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
-                                                    this.closest('form').submit();" class="btn btn-sm btn-outline btn-accent">{{__('Log Out')}}</a>
+                                                    this.closest('form').submit();" class="btn btn-sm btn-accent">{{__('Log Out')}}</a>
                                 </form>
                             </div>
                         </div>
@@ -85,7 +85,7 @@
 
             </div>
             <div class="right-side lg:col-span-9 col-span-12">
-                <div class="flex justify-center mt-6 md:mt-0 py-8">
+                <div class="flex justify-center mt-6 md:mt-0 pb-8">
                     <div class="mx-auto container">
                         @livewire('order-list')
                     </div>

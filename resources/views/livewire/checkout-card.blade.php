@@ -55,10 +55,12 @@
         @endforeach
         @if(count($cartItems)<=0) <tr>
           <td colspan="5" class="text-center p-6">
-            <h3>No Data.</h3>
-            <button class="mt-3 btn btn-primary rounded-lg">
+           <div class="p-6 h-screen">
+           <h3>No Data.</h3>
+            <a href="{{route('welcome')}}" class="mt-3 btn btn-primary rounded-lg">
               Shopping Now
-            </button>
+</a>
+           </div>
           </td>
           </tr>
           @endif

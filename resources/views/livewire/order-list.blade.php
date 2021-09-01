@@ -7,7 +7,7 @@
 
                 <div class="overflow-x-auto">
 
-                    <h3 class="mb-5 text-xl font-bold text-gray-400">
+                    <h3 class="font-bold uppercase mb-5 text-xl font-bold text-gray-400">
                         Order List
                     </h3>
 
