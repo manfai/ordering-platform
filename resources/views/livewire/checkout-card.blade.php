@@ -123,7 +123,8 @@
             @if(count($userCards)>0)
             @foreach ($payments as $payment)
             <div wire:click="$emit('payment_method','{{$payment->code}}')" class="{{ ($selected_payment==$payment->code)?'bg-primary text-white':'bg-gray-100 text-gray-400' }} text-center text-md cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
-              {{$payment->title}}
+              <!-- {{$payment->title}} -->
+              Credit Card
             </div>
             @endforeach
             @endif

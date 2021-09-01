@@ -11,9 +11,13 @@
             <!-- <div class="grid grid-flow-col grid-cols-12 gap-4 py-4"> -->
             
             @foreach($period as $date)
-                <div id="{{$date}}" class="flex w-40 mr-4">
-                    <a href="{{route('welcome')}}?menu={{base64_encode( serialize(['menu_date'=>$date]) )}}">
-                    <div class="{{$menu_date===$date?'bg-red-500':'hover:bg-red-500 bg-red-200'}} cursor-pointer hover:shadow-lg w-40 block rounded-lg shadow-md col-span-2 overflow-hidden bg-white text-center">
+                <div id="{{$date}}" class="{{$date==$menu_date?'flex':'lg:hidden flex'}}  w-40 mr-4">
+                    <a 
+                    @if($date!==$menu_date)
+                    href="{{route('welcome')}}?menu={{base64_encode( serialize(['menu_date'=>$date]) )}}"
+                    @endif
+                    >
+                    <div class="{{$menu_date===$date?'bg-red-500':'hover:bg-red-500 bg-red-200 cursor-pointer'}} hover:shadow-lg w-40 block rounded-lg shadow-md col-span-2 overflow-hidden bg-white text-center">
                     <div class="text-2xl text-white py-1">
                         {{date('M',strtotime($date))}}
                     </div>
