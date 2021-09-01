@@ -3,7 +3,7 @@
 
         <div class=" px-2 mx-2 grid grid-cols-12 gap-4">
 
-            <div class="hidden w-full col-span-12">
+            <div class="w-full col-span-12">
                 <h1 class="page-header">EC BENTO T&amp;C for website and mobile application </h1>
                 <div>
                     <strong>EC BENTO website Terms of Use</strong>
