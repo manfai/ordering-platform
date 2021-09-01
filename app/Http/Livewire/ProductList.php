@@ -14,6 +14,7 @@ class ProductList extends Component
     protected $products = [];
     public $brand = 'ecbento';
     public $menu_date;
+    public $period = [];
     public $search = '';
     public $filter = null;
     public $tags = null;
@@ -76,21 +77,25 @@ class ProductList extends Component
             $perferences = [$this->filter];
             $menu_date = $this->filter;
         } else {
+            $menu_date = date('Y-m-d');
             $perferences = [];
         }
         // $this->loadProduct($this->brand);
         $period_id = [18];
-        if ($this->brand == 'ec_mart') {
-            $period_id = [8, 15];
-        }
-        $menu = Menu::with('products')->where('menu_date', '>=', $this->menu_date)->whereIn('period_id', $period_id)->active()
-            ->whereHas('locations', function ($query) {
-                $query->whereNotNull('stock')->where([
-                    'store_id' => 57
-                ]);
-            })->orderBy('menu_date')->first();
+        // if ($this->brand == 'ec_mart') {
+        //     $period_id = [8, 15];
+        // }
+        $menu = Menu::with('products')->where('menu_date', '>=', date('Y-m-d'))->whereIn('period_id', [18])->active()
+        ->whereHas('locations', function ($query) {
+            $query->whereNotNull('stock')->where([
+                'store_id' => 57
+            ]);
+        })->get();
+        $this->period = $menu->pluck('menu_date');
+        $menu = $menu->where('menu_date','>=',$menu_date)->first();
         // dd($menu);
         $this->menu_date = $menu->menu_date;
+
         if ($menu) {
             
             // dd($perferences);

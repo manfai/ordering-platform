@@ -6,22 +6,38 @@
         <div class="grid grid-cols-12">
             <div class="col-span-12 pb-8 px-4 w-full">
 
-            <!-- <h3>Menu Date: <code>{{$menu_date}}</code></h3> -->
-            <div class="grid grid-flow-col grid-cols-3 gap-4 py-4">
-                <div class="block rounded-lg shadow-lg overflow-hidden bg-white text-center w-full">
-                    <div class="text-2xl bg-red-500 text-white py-1">
-                        {{date('M',strtotime($menu_date))}}
+            <h3 class="mb-6">Menu Date: <code>{{$menu_date}}</code></h3>
+            <div id="menu-date" class="w-full flex overflow-scroll pb-6">
+            <!-- <div class="grid grid-flow-col grid-cols-12 gap-4 py-4"> -->
+            
+            @foreach($period as $date)
+                <div id="{{$date}}" class="flex w-40 mr-4">
+                    <a href="{{route('welcome')}}?menu={{base64_encode( serialize(['menu_date'=>$date]) )}}">
+                    <div class="{{$menu_date===$date?'bg-red-500':'hover:bg-red-500 bg-red-200'}} cursor-pointer hover:shadow-lg w-40 block rounded-lg shadow-md col-span-2 overflow-hidden bg-white text-center">
+                    <div class="text-2xl text-white py-1">
+                        {{date('M',strtotime($date))}}
                     </div>
-                    <div class="py-2 border-l border-r">
-                        <h2 class="text-3xl font-bold">{{date('d',strtotime($menu_date))}}</h2>
+                    <div class="py-2 bg-white border-l border-r">
+                        <h2 class="text-3xl font-bold">{{date('d',strtotime($date))}}</h2>
                     </div>
-                    <div class="pb-2 px-3 border-l border-r border-b rounded-lg bottom-0 flex justify-between">
-                        <h3 class="text-lg font-bold">{{date('D',strtotime($menu_date))}}</h3>
-                        <h3 class="text-lg font-bold">{{date('Y',strtotime($menu_date))}}</h3>
+                    <div class="pb-2 bg-white px-3 border-l border-r border-b rounded-b-lg bottom-0 flex justify-between">
+                        <h3 class="text-lg font-bold">{{date('D',strtotime($date))}}</h3>
+                        <h3 class="text-lg font-bold">{{date('Y',strtotime($date))}}</h3>
                     </div>
+                    </div>
+                    </a>
                 </div>
+            @endforeach
+            @push('scripts')
+            <script>
+                $('#menu-date').scrollTo('#{{$menu_date}}')
+            </script>
+            @endpush
             </div>
+
 	    </div>
+
+
         @auth
         
        

@@ -96,7 +96,7 @@ class AddCart extends Component
         $menu_product_id = $this->menu_product_id;
         $menu_product_date = $this->menu_product_date;
         $product_id = $this->product->id;
-        $location_id = 2;
+        $location_id = 57;
 
         $cart = $user->cartItem()->where([
             'menu_product_id' => $menu_product_id,
