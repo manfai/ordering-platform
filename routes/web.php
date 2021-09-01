@@ -20,6 +20,11 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+Route::get('/terms-and-conditions', function () {
+    // abort(404);
+    return view('terms_and_conditions');
+})->name('t&c');
+
 Route::get('/bentos', function () {
     return view('bentos');
 })->name('bentos');

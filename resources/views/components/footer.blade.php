@@ -18,7 +18,12 @@
         <a href="https://ecbento.com" rel="noopener noreferrer" class="text-gray-600 ml-1" target="_blank">@ecbento</a>
       </p>
       <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
-       
+
+        <!-- <a class="link mr-3 link-hover">Branding</a>  -->
+        <a href="{{route('t&c')}}" class="link mr-3 link-hover">T&C</a> 
+        <!-- <a class="link mr-3 link-hover">Marketing</a> 
+        <a class="link mr-3 link-hover">Advertisement</a> -->
+  
       </span>
     </div>
   </div>
