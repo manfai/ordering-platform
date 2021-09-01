@@ -23,7 +23,7 @@
                     <div class="col-span-3">
                       <div class="px-4 mt-6">
                       <h5>Your order Confirmed!</h5> 
-                      <span class="font-weight-bold mt-4 mb-8">Hello, Chris</span> <span>You order has been confirmed and will be shipped in next two days!</span>
+                      <span class="font-weight-bold mt-4 mb-8">Hello, {{auth()->user()->name}}</span> <span>Your order has been confirmed.</span>
                       </div>
                       <div class="payment border-top mt-3 mb-3 border-bottom table-responsive ">
                           <table class="table table-borderless w-full">
@@ -146,6 +146,6 @@
   </x-slot>
 
   <x-slot name="footer">
-
+  <button wire:click="$set('viewingDetail',false)" class="px-3 py-2 btn btn-outline btn-secondary font-bold uppercase rounded-lg">{{__('Close')}}</button>
   </x-slot>
 </x-jet-dialog-modal>

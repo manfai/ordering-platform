@@ -85,9 +85,9 @@
               </div>
             </div>
             <div class="{{ $disabledRemark ? 'hidden' : '' }}">
-            <div class="text-red-400 w-full text-left text-gray-600 pointer-events-none flex ">
-              Class - Name <br> eg: 4A-Chan Tai Man
-            </div>
+            <!-- <div class="text-red-400 w-full text-left text-gray-600 pointer-events-none flex ">
+              Class - Name
+            </div> -->
             <div class="w-full flex mt-6 items-center pb-5 border-b-2 border-base-300 mb-5">
           
             
@@ -125,7 +125,8 @@
           
             <div class="flex">
               <span class="title-font font-bold text-2xl py-2 pr-6 text-gray-900">${{$price}}</span>
-              <button {{ $disabledButton ? 'disabled' : '' }} wire:click="addToCart()" class="flex ml-auto text-white btn-primary btn border-0 py-2 px-6 focus:outline-none">{{__('Add To Cart')}}</button>
+              <button {{ $disabledButton ? 'disabled' : '' }} wire:click="addToCart()" class="flex ml-auto text-white btn-primary btn border-0 py-2 px-6 mr-3 focus:outline-none">{{__('Add To Cart')}}</button>
+              <button wire:click="$set('addingToCart',false)" class="px-3 py-2 btn btn-outline btn-secondary font-bold uppercase rounded-lg">{{__('Close')}}</button>
             </div>
 
 
@@ -137,9 +138,8 @@
     @endif
   </x-slot>
   <x-slot name="footer">
-    {{-- <div class="w-full flex item-center justify-between">
+    <!-- <div class="w-full flex item-center justify-between">
           <h1 class="text-gray-700 font-bold text-3xl pt-2">${{$price}}</h1>
-    <button wire:click="addToCart()" class="px-3 py-2 btn btn-primary font-bold uppercase rounded-lg">{{__('Add to Cart')}}</button>
-    </div> --}}
+    </div>  -->
   </x-slot>
 </x-jet-dialog-modal>

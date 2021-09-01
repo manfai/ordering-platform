@@ -2,7 +2,7 @@
 # Order
 
 ## Your order Confirmed!
-## Hello, {{$order->user->name}} You order has been confirmed. 
+## Hello, {{$order->user->name}} Your order has been confirmed. 
 ##
 ### Order Detail:
 ### Order No: SCH-DSC-{{$order->no}}
