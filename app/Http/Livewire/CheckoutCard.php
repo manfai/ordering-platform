@@ -33,6 +33,7 @@ class CheckoutCard extends Component
     ];
 
     protected $rules = [
+        'selected_payment' => 'required_if:payment_type,new',
         'number' => 'required',
         'exp_month' => 'required',
         'exp_year' => 'required',
@@ -46,6 +47,29 @@ class CheckoutCard extends Component
         $this->mount();
     }
    
+    public function checkCardDate(){
+        if($this->exp_year == date('Y')){
+            if($this->exp_month < date('m')){
+                return false;
+            }
+        }
+        return true;
+    }
+  
+    
+    // public function updateExpMonth(){
+    //     $this->checkCardDate();
+    // }
+
+    public function updateExpYear(){
+        if($this->exp_year == date('Y')){
+            if($this->exp_month < date('m')){
+                $this->exp_month = null;
+            }
+        }
+    }
+
+    
     public function updateCardPayment($id)
     {
         $this->selected_card = $id;
@@ -313,7 +337,7 @@ class CheckoutCard extends Component
 
             }
         } catch (\Throwable $th) {
-            dd($th);
+            // dd($th);
             session()->flash('message', $th->getMessage());
             $this->emit('$refresh');  
         }

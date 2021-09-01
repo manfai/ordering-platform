@@ -14,12 +14,6 @@
                     <table class="table w-full">
                         <thead>
                             <tr>
-                                <!-- <th>
-                                    <label>
-                                        <input type="checkbox" class="checkbox">
-                                        <span class="checkbox-mark"></span>
-                                    </label>
-                                </th> -->
                                 <th>Order</th>
                                 <th>Payment</th>
                                 <th>Bento / Product</th>
@@ -32,12 +26,6 @@
                         <tbody>
                             @foreach($orders as $order)
                             <tr class="p-4 lg:p-0 border-2 shadow-sm mb-6 rounded-2xl">
-                                <!-- <th>
-                                    <label>
-                                        <input type="checkbox" class="checkbox">
-                                        <span class="checkbox-mark"></span>
-                                    </label>
-                                </th> -->
                                 <td class="">
                                     <span class="text-sm">{{$order->no}}</span><br>
                                     <span class="badge badge-outline badge-sm uppercase">{{$order->payment_status}}</span>
@@ -61,7 +49,7 @@
                                 <i class="fab fa-alipay fa-lg"></i>
                                 @break
                                 @case('POS')
-                                <!-- <i class="fas fa-mobile-alt fa-lg"></i> --><i class="fas fa-wallet fa-lg"></i>
+                                <i class="fas fa-wallet fa-lg"></i>
                                 @break
                                 
                                 @endswitch
@@ -99,7 +87,7 @@
                             </tr>
                             @endforeach
                         </tbody>
-                        <tfoot>
+                        <tfoot class="hidden">
                             <tr>
                                 <th>Order</th>
                                 <th>Payment</th>
