@@ -29,8 +29,8 @@ class AddCart extends Component
 
     protected $rules = [
         'remark'        => 'required',
-        'student.class' => 'required|string',
-        'student.name'  => 'required|string',
+        'student.class' => 'required_if:remark,"New Student"|string',
+        'student.name'  => 'required_if:remark,"New Student"|string',
     ];
 
  

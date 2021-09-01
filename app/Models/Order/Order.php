@@ -3,7 +3,11 @@
 namespace App\Models\Order;
 
 use App\Classes\Offer;
+use App\Mail\OrderCreated;
+use App\Models\Message;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 
 class Order extends Model
 {
@@ -55,15 +59,23 @@ class Order extends Model
     {
         parent::boot();
         // 監聽模型創建事件，在寫入數據庫之前觸發
+        static::created(function ($model) {
+            // 'sending email to user'
+            // $user = User::find($model->user_id);
+            // Mail::to($user)->send(new OrderCreated($model));
+        });
         static::updated(function ($model) {
             try {
                 if ($model->payment_status == 'paid') {
+                    $user = User::find($model->user_id);
+                    Mail::to($user)->send(new OrderCreated($model));
+                    
                     $sms_data['phone_no'] = $model->user->phone_no;
                     $sms_data['user_define_no'] = $model->user->phone_no;
                     $content = Message::find(1)->content;
                     $content = str_replace('[code]', $model->extraction_code, $content);
                     $sms_data['message'] = $content;
-                    send_sms($sms_data);
+                    // send_sms($sms_data);
                 }
             } catch (\Throwable $th) {
                 \Log::debug('send sms error');
