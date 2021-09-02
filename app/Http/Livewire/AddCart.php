@@ -80,7 +80,11 @@ class AddCart extends Component
         } else {
             
         
-            if($value!=='---'&&$value!==null){
+            if($value == "New Student"){
+                // dd($value);
+                $this->disabledRemark = false;
+                $this->disabledButton = false;
+            } else if($value!=='---'&&$value!==null){
                 $this->disabledButton = false;
                 $this->disabledRemark = true;
             } else  {
