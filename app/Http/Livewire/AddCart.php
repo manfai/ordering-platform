@@ -67,18 +67,20 @@ class AddCart extends Component
     public function updatedRemark($value)
     {
         if(!in_array($value,$this->students)){
-            
-            $this->disabledRemark = true;
-            $this->disabledButton = true;
 
-        } else {
-            
-        
             if($value == "New Student"){
                 // dd($value);
                 $this->disabledRemark = false;
                 $this->disabledButton = false;
-            } else if($value!=='---'&&$value!==null){
+            } else {
+                $this->disabledRemark = true;
+                $this->disabledButton = true;
+            }
+
+        } else {
+            
+        
+            if($value!=='---'&&$value!==null){
                 $this->disabledButton = false;
                 $this->disabledRemark = true;
             } else  {
