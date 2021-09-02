@@ -10,8 +10,8 @@
 
 <section class="flex flex-col md:flex-row h-screen items-center">
 
-    <div class="bg-primary-600 hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen">
-      <img src="https://ecbento.com/2.0/wp-content/uploads/2020/08/EC_bg-1.jpg" alt="" class="w-full h-full object-cover">
+    <div class="bg-primary hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen">
+      <!-- <img src="https://ecbento.com/2.0/wp-content/uploads/2020/08/EC_bg-1.jpg" alt="" class="w-full h-full object-cover"> -->
       <div class="hero-overlay bg-opacity-60"></div>
     </div>
   
