@@ -111,7 +111,7 @@ class AddCart extends Component
             $class = $student['class'];
             $name  = $student['name'];
             if($class && $name){
-                $this->new_student = $class.'-'.$name;
+                $this->new_student = $class.'--'.$name;
                 $this->remark = str_replace('_','',$this->new_student);
                 $newRemark = $user->merchant->remark;
                 $newRemark[] = $this->remark;
