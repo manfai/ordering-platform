@@ -75,7 +75,14 @@
                   <select wire:model="remark" required class="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10">
                     <option>---</option>
                     @foreach($students as $student)
-                    <option>{{$student}}</option>
+
+                    @php 
+                    $ordered = \App\Models\CartItem::where([
+                      'user_id'=> auth()->user()->id,
+                      'menu_date' => $menu_product_date,
+                      ])->where('remark','like','%'.$student.'%')->exists();
+                    @endphp
+                    <option {{$ordered?'disabled':''}}>{{$student. ($ordered?'  ***Added to Cart':'') }}</del></option>
                     @endforeach
                     <option>New Student</option>
                   </select>
