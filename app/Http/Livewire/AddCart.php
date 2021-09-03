@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Product\Product;
 use App\Models\User;
+use App\Models\UserMerchant;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -42,6 +43,15 @@ class AddCart extends Component
         if(Auth::user()->merchant){
             $this->students = Auth::user()->merchant->students;
         } else {
+            try {
+                UserMerchant::create([
+                    'user_id'       =>  Auth::user()->id,  
+                    'merchant_id'   =>  34,  
+                    'type'          => 'website',
+                ]);
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
 		    $this->students = [];
         }
 	} else {
