@@ -82,7 +82,7 @@
                       'menu_date' => $menu_product_date,
                       ])->where('remark','like','%'.$student.'%')->exists();
                     @endphp
-                    <option {{$ordered?'disabled':''}}>{{$student. ($ordered?'  ***Added to Cart':'') }}</del></option>
+                    <option {{$ordered?'disabled':''}}>{{$student. ($ordered?'  ***Added':'') }}</del></option>
                     @endforeach
                     <option>New Student</option>
                   </select>
