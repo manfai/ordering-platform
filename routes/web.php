@@ -29,10 +29,6 @@ Route::get('/bentos', function () {
     return view('bentos');
 })->name('bentos');
 
-Route::get('/profile', function () {
-    return view('orders');
-})->name('profile');
-
 
 
 Route::get('/faqs', function () {
@@ -58,6 +54,13 @@ Route::get('/carts', function () {
 
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+
+
+    Route::get('/profile', function () {
+        return view('orders');
+    })->name('profile');
+
+
     Route::get('/orders', function () {
         return view('orders');
     })->name('orders');

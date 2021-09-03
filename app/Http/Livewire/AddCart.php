@@ -39,7 +39,11 @@ class AddCart extends Component
     {
         $this->product = Product::find(1);
 	if(Auth::user()){
-		$this->students = Auth::user()->merchant->students;
+        if(Auth::user()->merchant){
+            $this->students = Auth::user()->merchant->students;
+        } else {
+		    $this->students = [];
+        }
 	} else {
 		$this->students = [];
 	}
@@ -127,12 +131,19 @@ class AddCart extends Component
             $class = $student['class'];
             $name  = $student['name'];
             if($class && $name){
-                $this->new_student = $class.'--'.$name;
-                $this->remark = str_replace('_','',$this->new_student);
-                $newRemark = $user->merchant->remark;
-                $newRemark[] = $this->remark;
-                $user->merchant->remark = $newRemark;
-                $user->merchant->save();
+                try {
+                    $this->new_student = $class.'--'.$name;
+                    $this->remark = str_replace('_','',$this->new_student);
+                    $newRemark = $user->merchant->remark;
+                    $newRemark[] = $this->remark;
+                    $user->merchant->remark = $newRemark;
+                    $user->merchant->save();
+                } catch (\Throwable $th) {
+                    \Log::debug('start of create student error');
+                    \Log::debug($user);
+                    \Log::debug($th);
+                    \Log::debug('end of create student error');
+                }
             }
         }
        
