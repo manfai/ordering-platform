@@ -59,9 +59,9 @@
                   focus:bg-white focus:outline-none" required>
           </div>
   
-          {{-- <div class="text-right mt-2">
-            <a href="#" class="text-sm font-semibold text-gray-700 hover:text-primary focus:text-primary-focus">Forgot Password?</a>
-          </div> --}}
+          <div class="text-right mt-2">
+            <a href="{{route('password.email')}}" class="text-sm font-semibold text-gray-700 hover:text-primary focus:text-primary-focus">Forgot Password?</a>
+          </div>
   
           <button type="submit" class="w-full block bg-primary hover:bg-primary-focus focus:bg-primary-focus text-white font-semibold rounded-lg
                 px-4 py-3 mt-6">Log In</button>
