@@ -16,6 +16,7 @@ class ProductList extends Component
     public $menu_date;
     public $period = [];
     public $search = '';
+    public $type;
     public $filter = null;
     public $tags = null;
 
@@ -43,7 +44,7 @@ class ProductList extends Component
         // $this->emit('$refresh');
     }
 
-    public function mount($filter = null)
+    public function mount($type = 'normal', $filter = null)
     {
         // dd($filter);
         $this->menu_date = date('Y-m-d');
@@ -60,6 +61,7 @@ class ProductList extends Component
         }
         $this->filter = $filter;
         // dd($this->menu_date);
+        $this->type = $type;
         $this->tags = \DB::table('taggables')->get();
         $this->loadProduct($this->brand);
     }
@@ -85,12 +87,25 @@ class ProductList extends Component
         // if ($this->brand == 'ec_mart') {
         //     $period_id = [8, 15];
         // }
-        $menu = Menu::with('products')->where('menu_date', '>=', date('Y-m-d'))->whereIn('period_id', [18])->active()
-        ->whereHas('locations', function ($query) {
-            $query->whereNotNull('stock')->where([
-                'store_id' => 57
-            ]);
-        })->get();
+        if($this->type == 'normal'){
+           
+            $menu = Menu::with('products')->where('menu_date', '>=', date('Y-m-d'))->whereIn('period_id', [18])->active()
+            ->whereHas('locations', function ($query) {
+                $query->whereNotNull('stock')->where([
+                    'store_id' => 57
+                ]);
+            })->get();
+        } else {
+            $menu = Menu::with('products')->where('menu_date', '>=', date('Y-m-d'))->where('menu_date', '<=', date('Y-m-d',strtotime('last day of this month')))->whereIn('period_id', [18])
+            ->whereHas('locations', function ($query) {
+                $query->whereNotNull('stock')->where([
+                    'store_id' => 57
+                ]);
+            })->get();
+        }
+       
+
+
         $this->period = $menu->pluck('menu_date');
         $menu = $menu->where('menu_date','>=',$menu_date)->first();
         // dd($menu);

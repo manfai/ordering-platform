@@ -1,4 +1,4 @@
-<div class="px-4 w-full">
+<div class="w-full">
     <div class="py-4 bg-base-200 w-full card shadow-lg rounded-box">
 
         <!-- <div class="px-4 pt-2">
@@ -14,6 +14,9 @@
             @foreach ($items as $item)
 
             @php
+                if($item<=date('Y-m-d')){
+                    continue;
+                }
                 $menuDate = $item;
                 //$menuDate = $item->format("Y-m-d");
                 $payload = serialize(['menu_date'=>$menuDate]);
@@ -25,7 +28,7 @@
             @endphp
 
             <li class="flex justify-between @if($menu_date==$menuDate) bg-gray-300 @endif text-sm @if($quantity>0) text-red-500 @endif">
-                <a href="{{route('welcome')}}?menu={{base64_encode($payload)}}" class="flex justify-between">
+                <a href="?menu={{base64_encode($payload)}}" class="flex justify-between">
                     <span>
                         @php
                             if(Auth::user()){

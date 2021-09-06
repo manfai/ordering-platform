@@ -57,6 +57,14 @@ Route::get('/carts', function () {
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
+    Route::get('/buffur', function () {
+        // abort(404);
+        if(date('Y-m-d H:i')>=date('Y-m-d H:i',strtotime('2021-09-06 12:00'))){
+            return redirect()->route('welcome')->withErrors(['reminder'=>'Sorry, the pre-order time has passed. If you have any questions, please call our customer service hotline 96689069 for help.']);
+        }
+        return view('buffur');
+    })->name('buffur');
+    
 
     Route::get('/profile', function () {
         return view('orders');
