@@ -36,11 +36,11 @@ class OrderItem extends Resource
      *
      * @var array
      */
-    public static $searchRelations = [
-        'user' => ['name', 'email', 'phone_no'],
-        'product' => ['title','code','slug'],
-        'store' => ['code','name']
-    ];
+    // public static $searchRelations = [
+    //     'user' => ['name', 'email', 'phone_no'],
+    //     'product' => ['title','code','slug'],
+    //     'store' => ['code','name']
+    // ];
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -61,7 +61,8 @@ class OrderItem extends Resource
          'user_id','extraction_code',
     ];
 
-    public static $polling = true;
+    public static $priority = 3;
+    public static $polling = false;
     public static $showPollingToggle = true;
     
     /**
@@ -74,18 +75,18 @@ class OrderItem extends Resource
     {
         return [
 
-            BelongsTo::make('Order','Order','App\Nova\Order')->onlyOnIndex(),
-            BelongsTo::make('User','User','App\Nova\User'),
+            BelongsTo::make('Order','Order')->onlyOnIndex(),
+            BelongsTo::make('User','User'),
            
-            BelongsTo::make('Product','Product','App\Nova\Product')->searchable(),
+            BelongsTo::make('Product','Product')->searchable(),
 
             Text::make('Code', 'extraction_code')
             ->rules('required', 'max:255')->hideFromIndex(),
 
-            Text::make('Payment')->displayUsing(function() {
-                $payment = $this->order?$this->order->payment_method:"---";
-                return '<span class="whitespace-no-wrap px-2 py-1 mb-5 rounded-full uppercase text-xs font-bold bg-warning-light text-warning-dark"><small>'. $payment.'</small></span>';
-            })->onlyOnIndex()->asHtml(),
+            // Text::make('Payment')->displayUsing(function() {
+            //     $payment = $this->order?$this->order->payment_method:"---";
+            //     return '<span class="whitespace-no-wrap px-2 py-1 mb-5 rounded-full uppercase text-xs font-bold bg-warning-light text-warning-dark"><small>'. $payment.'</small></span>';
+            // })->onlyOnIndex()->asHtml(),
             
             Text::make('Detail', function () {
                 $period = "";
@@ -110,7 +111,7 @@ class OrderItem extends Resource
             Number::make('Quantity')->onlyOnIndex(),
 
             // Text::make('Period', 'period'),
-            BelongsTo::make('Store','Store','App\Nova\Store'),
+            // BelongsTo::make('Store','Store','App\Nova\Store'),
 
             Date::make('Date', 'menu_date')->sortable(),
 
@@ -150,9 +151,7 @@ class OrderItem extends Resource
             // Button::make('Remind User','take_bento')->loadingText('Sending..')->successText('Sent!'),
             Text::make('remark'),
 
-            NotesField::make('Notes')
-            ->placeholder('Add note') // Optional
-            ->fullWidth(), // Optional
+           
             Select::make('Ship Status', 'ship_status')->options([
                 'no_request' => '---',
                 'ready' => 'Ready',

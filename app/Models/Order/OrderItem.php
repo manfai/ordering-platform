@@ -13,6 +13,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 use App\Menu;
 use App\MenuProduct;
 use App\MenuLocationStock;
+use App\Models\User;
 
 class OrderItem extends Model
 {

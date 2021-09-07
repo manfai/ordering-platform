@@ -75,7 +75,7 @@ class MenuLocation extends Resource
             Boolean::make('Active')->sortable(),
             // Button::make('Remind', 'remind_buffer')->loadingText('Sending..')->successText('Sent!'),
             Text::make('Preorder')->displayUsing(function() {
-                $order = OrderItem::whereIn('period',['lunch','lunch_gm','lunch-gm','addorder'])
+                $order = \App\Models\Order\OrderItem::whereIn('period',['lunch','lunch_gm','lunch-gm','addorder'])
                 ->where('status','paid')
                 ->where('menu_date',$this->menu->menu_date)
                 ->where('created_at','<=',date('Y-m-d',strtotime($this->menu->menu_date)).' 10:00:59') //only get preorder num.
@@ -90,8 +90,8 @@ class MenuLocation extends Resource
             // Button::make('- Buffer','minus_buffer')->reload(),
             // Button::make('+ Buffer','add_buffer')->reload(),
             Text::make('Machine')->displayUsing(function(){
-                $machineList = StoreMachine::where('store_id',$this->store_id)->get()->pluck('machine_id');
-                $machine = MachineProduct::where('product_type','like','%MenuLocationStock%')
+                $machineList = \App\Models\StoreMachine::where('store_id',$this->store_id)->get()->pluck('machine_id');
+                $machine = \App\Models\VM\MachineProduct::where('product_type','like','%MenuLocationStock%')
                 ->whereIn('machine_id',$machineList)
                 ->whereDate('created_at', date('Y-m-d'))
                 ->where([
@@ -101,7 +101,7 @@ class MenuLocation extends Resource
                     $machines = $machine->pluck('machine_id');
                     $result = "已上架：";
                     foreach ($machines as $key => $value) {
-                        $result .= Machine::find($value)->name;
+                        $result .= \App\Models\Machine::find($value)->name;
                         if($key!=count($machines))$result .= ', ';
                     }
                     return $result;
@@ -131,8 +131,6 @@ class MenuLocation extends Resource
     public function filters(Request $request)
     {
         return [
-            new MenuBento,
-            new MenuStore
         ];
     }
 
@@ -158,12 +156,6 @@ class MenuLocation extends Resource
     public function actions(Request $request)
     {
         return [
-            (new Actions\StoreStatus)
-            ->confirmText('Are you sure you want to update this location?')
-            ->confirmButtonText('Yes')
-            ->cancelButtonText("No"),
-            (new Actions\BufferControl)->showOnTableRow(),
-            (new Actions\RemindUser),
             // (new Actions\StockControl)
         ];
     }

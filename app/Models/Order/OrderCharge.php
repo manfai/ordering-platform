@@ -10,7 +10,6 @@ use App\Order;
 use App\OrderItem;
 use App\UserPayment;
 use App\Discount;
-use App\Http\Api\V1\Model\Product\Product;
 
 class OrderCharge extends Model
 {

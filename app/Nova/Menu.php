@@ -30,7 +30,7 @@ class Menu extends Resource
      */
     public static $title = 'id';
 
-    public static $group = '1. Admin';
+    // public static $group = '1. Admin';
     public static $priority = 1;
     public static function label()
     {

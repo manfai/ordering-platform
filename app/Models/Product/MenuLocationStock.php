@@ -4,8 +4,10 @@ namespace App\Models\Product;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Pivot;
-use App\Http\Api\V1\Model\Product\Product;
-use App\Http\Api\V1\Model\Store;
+// use App\Http\Api\V1\Model\Product\Product;
+use App\Models\Product\Product;
+use App\Models\Store;
+// use App\Http\Api\V1\Model\Store;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class MenuLocationStock extends Model

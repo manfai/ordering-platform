@@ -34,15 +34,16 @@ class Order extends Resource
      *
      * @var string
      */
-    public static $group = '1. Admin';
-    public static $priority = 3;
+    // public static $group = '1. Admin';
+    public static $priority = 2;
 
 
     public static $tableStyle = 'tight';
     public static $showColumnBorders = true;
     
-    public static $polling = true;
+    public static $polling = false;
     public static $showPollingToggle = true;
+    
     
     
     /**
@@ -89,7 +90,7 @@ class Order extends Resource
             //     ->sortable()
             //     ->rules('required', 'max:255'),
                 
-            Text::make('Method', 'real_payment'),
+            // Text::make('Method', 'real_payment'),
 
             // Text::make('Code', 'extraction_code')
             //     ->rules('required', 'max:255'),
@@ -100,6 +101,9 @@ class Order extends Resource
                 ->sortable()
                 ->rules('required', 'max:255'),
 
+            Text::make('Items', function () {
+                return count($this->items);
+            }),
             Select::make('Status', 'payment_status')->options([
                 'pending' => 'Pending',
                 'paid' => 'Paid',
@@ -159,16 +163,16 @@ class Order extends Resource
                 'Items' => [
                     HasMany::make('Items', 'items', 'App\Nova\OrderItem'),
                 ],
-                'Charges' => [
-                    HasMany::make('Charges', 'charges', 'App\Nova\OrderCharge'),
-                ],
-                'Payments' => [
-                    HasMany::make('Payments', 'payments', 'App\Nova\OrderPayment'),
-                    HasMany::make('Refund', 'refunds', 'App\Nova\OrderRefund'),
-                ],
-                'Logs' => [
-                    HasMany::make('Logs', 'logs', 'App\Nova\OrderLog'),
-                ],
+                // 'Charges' => [
+                //     HasMany::make('Charges', 'charges', 'App\Nova\OrderCharge'),
+                // ],
+                // 'Payments' => [
+                //     HasMany::make('Payments', 'payments', 'App\Nova\OrderPayment'),
+                //     HasMany::make('Refund', 'refunds', 'App\Nova\OrderRefund'),
+                // ],
+                // 'Logs' => [
+                //     HasMany::make('Logs', 'logs', 'App\Nova\OrderLog'),
+                // ],
             ]),
 
 

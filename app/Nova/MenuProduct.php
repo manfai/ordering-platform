@@ -81,9 +81,9 @@ class MenuProduct extends Resource
 
             Boolean::make('Sale','on_sale'),
 
-            Button::make('Enable')->visible($this->active == false),
+            // Button::make('Enable')->visible($this->active == false),
 
-            Button::make('Disable')->visible($this->active == true),
+            // Button::make('Disable')->visible($this->active == true),
 
         ];
     }
@@ -132,7 +132,6 @@ class MenuProduct extends Resource
     public function actions(Request $request)
     {
         return [
-            (new Actions\StockControl),
         ];
     }
 }
