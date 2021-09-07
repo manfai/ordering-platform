@@ -342,6 +342,10 @@ class CheckoutCard extends Component
             }
         } catch (\Throwable $th) {
             // dd($th);
+            \Log::debug('User Start of Create Order');
+            // \Log::debug(auth()->user());
+            \Log::debug($th->getMessage());
+            \Log::debug('User End of Create Order');
             session()->flash('message', $th->getMessage());
             $this->emit('$refresh');  
         }
