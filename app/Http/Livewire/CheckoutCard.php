@@ -195,6 +195,9 @@ class CheckoutCard extends Component
 
     public function submit(Request $request)
     {
+        if(!Auth::check()) {
+            return redirect(route('login'));
+        }
         $customerReference = null;
         $this->procced = 'Pending';
         $this->done = false;

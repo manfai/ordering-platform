@@ -14,7 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
-    'company' => env('COMPANY_NAME', 'EC Mart'),
+    'company' => env('COMPANY_NAME', 'ECBento Hong Kong Ltd'),
 
     /*
     |--------------------------------------------------------------------------

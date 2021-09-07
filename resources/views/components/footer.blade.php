@@ -14,7 +14,7 @@
         </span>
         <span class="ml-3 text-xl">{{config('app.name')}}</span>
       </a>
-      <p class="text-sm text-gray-500 sm:ml-6 sm:mt-0 mt-4">© {{date('Y')}} ECBento —
+      <p class="text-sm text-gray-500 sm:ml-6 sm:mt-0 mt-4">© {{date('Y')}} {{config('app.company')}} —
         <a href="https://ecbento.com" rel="noopener noreferrer" class="text-gray-600 ml-1" target="_blank">@ecbento</a>
       </p>
       <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
