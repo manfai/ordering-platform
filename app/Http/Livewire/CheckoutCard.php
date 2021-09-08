@@ -18,7 +18,7 @@ use Omnipay\Common\CreditCard;
 class CheckoutCard extends Component
 {
     public $cartItems;
-    public $checkingOut = false;
+    public $checkingOut,$loading = false;
     public $done = false;
     public $procced = 'Proceed to checkout';
     public $payments, $coupons, $selected_coupon_price = 0;
@@ -122,6 +122,9 @@ class CheckoutCard extends Component
     }
 
     public function createOrder($payment){
+        \Log::channel('order')->info('User Email: '.$this->cartItems->first()->user->email);
+        \Log::channel('order')->info('Total Order: '.$this->cartItems->count());
+        \Log::channel('order')->info('Student Info: '.$this->cartItems->first()->remark);
         $extraction_code = $this->genExctrationCode();
         $total_amount = ($this->cartItems->sum('amount') - $this->selected_coupon_price) <=0 ? 0 : $this->cartItems->sum('amount') - $this->selected_coupon_price;
         $order = Order::create([
@@ -189,6 +192,8 @@ class CheckoutCard extends Component
             'store_id' => $itemStore,
             'machine_id' => $itemMachine,
         ]);
+
+        \Log::channel('order')->debug($order);
         
         return $order;
     }
@@ -200,7 +205,9 @@ class CheckoutCard extends Component
         }
         $customerReference = null;
         $this->procced = 'Pending';
-        $this->done = false;
+        $this->loading = true;
+        // $this->done = false;
+        \Log::channel('order')->info('User Start of Create Order');
         try {
             if($this->cartItems->count()>0){
 
@@ -218,7 +225,12 @@ class CheckoutCard extends Component
                 $gateway = \Omnipay\Omnipay::create('Stripe');
                 // $gateway->setApiKey('sk_test_51JABlsBmpGYTwMtr7MtjIMpNFXXSkkbjjbfMuWECJ6IOHWOaSvXnptSQepBv38rJRxfrUaz03n8GUe7YqRpN5eK000vpVQghH0');
                 // $gateway->setApiKey('sk_test_UE3xmTh2owaSc94Adn91xJOx00ES1c7uqG');
-                $gateway->setApiKey('sk_live_DOnG2rKpmX3aipEdyCCWuaKC00gjeG2yB9');
+                // $gateway->setApiKey('sk_live_DOnG2rKpmX3aipEdyCCWuaKC00gjeG2yB9');
+                if(config('app.payment_test')){
+                    $gateway->setApiKey(config('app.payment_stripe_test_key'));
+                } else {
+                    $gateway->setApiKey(config('app.payment_stripe_key'));
+                }
                 $gateway->setTestMode(true);
                 
                 $token = $gateway->createToken([
@@ -256,6 +268,8 @@ class CheckoutCard extends Component
                 $payment = Payment::where('code', $this->selected_payment)->first();
             }
 
+            \Log::channel('order')->info('Payment: '.$this->selected_payment);
+
             $order = $this->createOrder($payment);
 
             switch ($payment->provider) {
@@ -292,7 +306,12 @@ class CheckoutCard extends Component
                     $gateway = \Omnipay\Omnipay::create('Stripe');
                     // $gateway->setApiKey('sk_test_51JABlsBmpGYTwMtr7MtjIMpNFXXSkkbjjbfMuWECJ6IOHWOaSvXnptSQepBv38rJRxfrUaz03n8GUe7YqRpN5eK000vpVQghH0');
                     // $gateway->setApiKey('sk_test_UE3xmTh2owaSc94Adn91xJOx00ES1c7uqG');
-                    $gateway->setApiKey('sk_live_DOnG2rKpmX3aipEdyCCWuaKC00gjeG2yB9');
+                    // $gateway->setApiKey('sk_live_DOnG2rKpmX3aipEdyCCWuaKC00gjeG2yB9');
+                    if(config('app.payment_test')){
+                        $gateway->setApiKey(config('app.payment_stripe_test_key'));
+                    } else {
+                        $gateway->setApiKey(config('app.payment_stripe_key'));
+                    }
                     $gateway->setTestMode(true);
                   
                     $amount = ($this->cartItems->sum('amount') - $this->selected_coupon_price) <=0 ? 0 : $this->cartItems->sum('amount') - $this->selected_coupon_price;
@@ -342,15 +361,14 @@ class CheckoutCard extends Component
             }
         } catch (\Throwable $th) {
             // dd($th);
-            \Log::debug('User Start of Create Order');
             // \Log::debug(auth()->user());
-            \Log::debug($th->getMessage());
-            \Log::debug('User End of Create Order');
+            \Log::channel('order')->debug($th->getMessage());
             session()->flash('message', $th->getMessage());
             $this->emit('$refresh');  
         }
+        \Log::channel('order')->info('User End of Create Order');
         $this->procced = 'Proceed to checkout';
-        $this->done = true;
+        // $this->done = true;
     }
 
 

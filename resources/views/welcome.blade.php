@@ -21,12 +21,12 @@
             </div>
         @endif
             <div class="left-side col-span-12 lg:col-span-3 hidden lg:block">
-                <div class="flex justify-center @if(!session('errors')) lg:mt-6 md:mt-0 @endif py-8">
+                <div class="flex justify-center @if(!session('errors')) lg:mt-0 md:mt-0 @endif py-8">
                     @livewire('sub-menu',['filter'=>isset($_GET['menu'])?$_GET['menu']:null])
                 </div>
             </div>
             <div class="right-side lg:col-span-9 col-span-12">
-                <div class="flex justify-center @if(!session('errors')) lg:mt-6 md:mt-0 @endif py-8">
+                <div class="flex justify-center @if(!session('errors')) lg:mt-0 md:mt-0 @endif py-8">
                     @livewire('product-list',['filter'=>isset($_GET['menu'])?$_GET['menu']:null])
                 </div>
             </div>

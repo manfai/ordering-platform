@@ -1,7 +1,9 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+        <div class="w-80">
+           <x-jet-authentication-card-logo />
+           </div>
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
@@ -10,22 +12,22 @@
         <form method="POST" action="{{ route('register') }}" class="mt-6">
             @csrf
             <div>
-                <label class="block text-gray-700">Name</label>
+                <label class="block text-gray-700">Name <span class="text-red-500">*</span></label>
                 <input type="text" name="name" id="" placeholder="" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primary-500 focus:bg-white focus:outline-none" autofocus autocomplete required>
             </div>
             
             <div class="mt-4">
-                <label class="block text-gray-700">Email Address</label>
+                <label class="block text-gray-700">Email Address <span class="text-red-500">*</span></label>
                 <input type="email" name="email" id="" placeholder="Enter Your Email Address" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primary-500 focus:bg-white focus:outline-none" autofocus autocomplete required>
             </div>
 
             <div class="mt-4">
-                <label class="block text-gray-700">Password</label>
+                <label class="block text-gray-700">Password <span class="text-red-500">*</span></label>
                 <input type="password" name="password" id="" placeholder="Enter Password" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primary-500
                   focus:bg-white focus:outline-none" required autocomplete="new-password">
             </div>
             <div class="mt-4">
-                <label class="block text-gray-700">Password Confirmation</label>
+                <label class="block text-gray-700">Password Confirmation <span class="text-red-500">*</span></label>
                 <input type="password" name="password_confirmation" id="" placeholder="Enter Password" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primary-500
                   focus:bg-white focus:outline-none" required autocomplete="new-password">
             </div>
@@ -41,8 +43,7 @@
 
             <div class="mt-4">
                 <label class="block text-gray-700">Phone</label>
-                <input type="phone" name="phone" id="" placeholder="Enter Your Phone" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primary-500
-                  focus:bg-white focus:outline-none" required>
+                <input type="text" name="phone" id="" placeholder="Enter Your Phone" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primary-500 focus:bg-white focus:outline-none" required>
             </div>
             <input type="hidden" name="merchant_id" value="34">
             @if(Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
@@ -65,7 +66,7 @@
                 <a href="#" class="text-sm font-semibold text-gray-700 hover:text-primary focus:text-primary-focus">Forgot Password?</a>
             </div> --}}
 
-            <button type="submit" class="w-full block bg-primary hover:bg-primary-focus focus:bg-primary-focus text-white font-semibold rounded-lg
+            <button type="submit" class="uppercase w-full block bg-primary hover:bg-primary-focus focus:bg-primary-focus text-white font-semibold rounded-lg
                 px-4 py-3 mt-6">Register</button>
         </form>
 

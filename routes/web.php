@@ -67,11 +67,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     
 
     Route::get('/profile', function () {
-        return view('orders');
+        return view('profile');
     })->name('profile');
 
 
     Route::get('/orders', function () {
+        return redirect()->route('profile');
         return view('orders');
     })->name('orders');
 

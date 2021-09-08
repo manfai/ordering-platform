@@ -1,7 +1,9 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+           <div class="w-80">
+           <x-jet-authentication-card-logo />
+           </div>
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
@@ -17,12 +19,12 @@
 
             <div>
                 <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+                <x-jet-input id="email" class="block mt-1 w-full input" type="email" name="email" :value="old('email')" required autofocus />
             </div>
 
             <div class="mt-4">
                 <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+                <x-jet-input id="password" class="block mt-1 w-full input" type="password" name="password" required autocomplete="current-password" />
             </div>
 
             <div class="block mt-4">
@@ -63,7 +65,7 @@
             <a href="{{route('password.email')}}" class="text-sm font-semibold text-gray-700 hover:text-primary focus:text-primary-focus">Forgot Password?</a>
           </div>
   
-          <button type="submit" class="w-full block bg-primary hover:bg-primary-focus focus:bg-primary-focus text-white font-semibold rounded-lg
+          <button type="submit" class="w-full block bg-primary uppercase hover:bg-primary-focus focus:bg-primary-focus text-white font-semibold rounded-lg
                 px-4 py-3 mt-6">Log In</button>
         </form>
   
@@ -79,7 +81,7 @@
               </div>
             </button>
    -->
-        <p class="mt-8">Need an account? <a href="{{route('register')}}" class="text-primary-500 hover:text-primary-700 font-semibold">Create an account</a></p>
+        <p class="mt-8">Need an account? <a href="{{route('register')}}" class="text-primary-500 hover:text-primary-700 font-semibold underline">Create an account</a></p>
   
     </x-jet-authentication-card>
 </x-guest-layout>

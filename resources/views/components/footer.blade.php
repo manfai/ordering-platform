@@ -1,4 +1,4 @@
-<footer class="text-gray-600 body-font hidden lg:block  bg-food-pattern bg-repeat bg-bottom">
+<!-- <footer class="text-gray-600 body-font hidden lg:block  bg-food-pattern bg-repeat bg-bottom">
   <div class="bg-base-200">
     <div class="container py-6 mx-auto flex items-center sm:flex-row flex-col">
       <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
@@ -19,13 +19,32 @@
       </p>
       <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
 
-        <!-- <a class="link mr-3 link-hover">Branding</a>  -->
         <a href="{{route('t&c')}}" class="link mr-3 link-hover">Terms And Conditions</a> 
         <a href="{{route('privacy-policy')}}" class="link mr-3 link-hover">Privacy Policy</a> 
-        <!-- <a class="link mr-3 link-hover">Marketing</a> 
-        <a class="link mr-3 link-hover">Advertisement</a> -->
+     
   
       </span>
     </div>
+  </div>
+</footer> -->
+
+
+
+
+<footer class="hidden lg:block p-10 bg-base-200 text-base-content ">
+  <div class="footer  w-full max-w-screen-2xl mx-auto  px-0 lg:px-12 ">
+  <div>
+  <div class="w-64 pt-0 mt-0">
+      <x-jet-authentication-card-logo />
+    </div>
+    <p>Copyright © {{date('Y')}} - All right reserved by {{config('app.company')}}</p>
+  </div> 
+  <div>
+    <span class="footer-title">Pages</span> 
+    <div class="grid grid-flow-col gap-4">
+    <a href="{{route('t&c')}}" class="link link-hover">Terms And Conditions</a>
+    <a href="{{route('privacy-policy')}}" class="link link-hover">Privacy Policy</a>
+    </div>
+  </div>
   </div>
 </footer>

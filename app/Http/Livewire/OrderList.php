@@ -4,10 +4,13 @@ namespace App\Http\Livewire;
 
 use App\Models\Order\Order;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class OrderList extends Component
 {
 
+    use WithPagination;
+    
     public function viewDetail($orderId)
     {
         $this->emitTo('order-detail-card','viewingDetail', $orderId);

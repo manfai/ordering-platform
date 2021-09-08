@@ -61,7 +61,7 @@
               Menu Date: <code style="color:red">{{$menu_product_date}}</code>
             </div>
             <p class="leading-relaxed">{{$description}}</p>
-            <div class="flex mt-6 items-center pb-5 border-b-2 border-base-300 mb-5">
+            <div class="flex mt-6 items-center">
               <div class="flex items-center">
                 <span class="mr-3">{{__('Quantity')}}</span>
                 <x-input.quantity wire:model="quantity" />
@@ -69,10 +69,10 @@
             </div>
             <div class="w-full flex mt-6 items-center pb-5 border-b-2 border-base-300 mb-5">
               <div class="flex items-center justify-start">
-                <span class="mr-3">{{__('Student')}}</span>
+                <span class="mr-4">{{__('Student')}}</span>
                 <div class="relative">
 
-                  <select wire:model="remark" required class="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10">
+                  <select wire:model="remark" required class="select pl-3 pr-10">
                     <option>---</option>
                     @foreach($students as $student)
 
@@ -99,10 +99,10 @@
           
             
              <div class="flex items-center justify-start">  
-              <span class="mr-3">{{__('Student Info')}}</span>
+              <span class="mr-10">{{__('New')}}</span>
               <div class="relative">
-                  <input type="text" id="new_student_class" wire:model.defer="student.class" placeholder="Class">
-                  <input type="text" id="new_student_name"  wire:model.defer="student.name" placeholder="Name">
+                  <input type="text" id="new_student_class" class="input mb-3" wire:model.defer="student.class" placeholder="Class">
+                  <input type="text" id="new_student_name"  class="input" wire:model.defer="student.name" placeholder="Name">
                  
               </div>
             </div>
@@ -117,8 +117,8 @@
   
 
           @if(session()->has('message'))
-          <div class="alert alert-error mt-6">
-            <div class="flex-1">
+          <div class="alert alert-error mt-6 mb-6">
+            <div class="flex">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-6 h-6 mx-2 stroke-current">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
               </svg>

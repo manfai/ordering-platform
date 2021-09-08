@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Http\Api\V1\User;
 use App\Models\Product\Product;
 use App\Models\Period;
 use App\MenuProduct;

@@ -287,8 +287,9 @@
 
           <button {{
                 $done==true ?'type="submit"':'disabled'
-              }} class="flex justify-center w-full px-10 py-3 mt-6 font-medium uppercase btn btn-primary rounded-lg shadow item-center focus:shadow-outline focus:outline-none">
-            <span class="ml-2 mt-5px text-xl">{{ $procced }}</span>
+              }} wire:loading.class="loading" class="flex justify-center w-full mt-6 font-medium uppercase btn btn-primary rounded-lg">
+            <span class="ml-2 mt-5px text-xl" wire:loading.remove>{{ $procced }}</span>
+            <span class="ml-2 mt-5px text-xl hidden" wire:loading.class.remove="hidden">Loading</span>
           </button>
 
         </div>

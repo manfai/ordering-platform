@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Admin;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Cards\Help;
 use Laravel\Nova\Nova;
@@ -42,10 +43,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function gate()
     {
         Gate::define('viewNova', function ($user) {
-            return true;
-            return in_array($user->email, [
-                //
-            ]);
+            return Admin::where('email',$user->email)->exists();
+            // return in_array($user->email, Admin::all()->plack('email'));
+            // return true;
         });
     }
 
@@ -79,7 +79,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function tools()
     {
         return [
-            new \PhpJunior\NovaLogViewer\Tool(),
+            // new \PhpJunior\NovaLogViewer\Tool(),
+            new \KABBOUCHI\LogsTool\LogsTool(),
         ];
     }
 
