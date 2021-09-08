@@ -13,7 +13,7 @@
                 @csrf
             </form>
             <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" class="btn btn-sm btn-accent">{{__('Log Out')}}</a>
-            <a class="btn btn-sm btn-accent">{{__('Edit')}}</a>
+            <a class="hidden btn btn-sm btn-accent">{{__('Edit')}}</a>
         </div>
     </div>
 </div>
