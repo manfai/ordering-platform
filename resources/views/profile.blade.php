@@ -7,7 +7,9 @@
             <div class="left-side col-span-12 lg:col-span-3">
                 @livewire('user-card')
 
-                @livewire('user-notify')
+                <!-- @livewire('user-notify') -->
+                
+                @livewire('order-calender')
 
 
 
@@ -15,6 +17,8 @@
             </div>
 
             <div class="right-side lg:col-span-9 col-span-12">
+                <!-- component -->
+                
                 <div class="flex justify-center mt-6 md:mt-0 pb-8">
                     <div class="mx-auto container">
                         @livewire('order-list')
