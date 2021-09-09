@@ -23,7 +23,7 @@
 
 <body data-theme="dsc" class="antialiased bg-base-100">
 
-    <div class="text-base-content relative flex justify-center min-h-screen sm:items-center pb-4 sm:pt-0 pb-6 px-4 lg:px-0">
+    <div class="text-base-content relative flex justify-center min-h-screen sm:items-center sm:pt-0 px-4 lg:px-0">
 
         <div class="w-full max-w-screen-2xl mx-auto px-0 lg:px-12">
             @if (Route::has('login'))

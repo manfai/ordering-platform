@@ -31,8 +31,8 @@
 
 
 
-<footer class="hidden lg:block p-10 bg-base-200 text-base-content ">
-  <div class="footer  w-full max-w-screen-2xl mx-auto  px-0 lg:px-12 ">
+<footer class="hidden lg:block p-10 pt-16 bg-base-200 text-base-content ">
+  <div class="footer  w-full max-w-screen-2xl mx-auto px-0 lg:px-12 ">
   <div>
   <div class="w-64 pt-0 mt-0">
       <x-jet-authentication-card-logo />
@@ -42,6 +42,7 @@
   <div>
     <span class="footer-title">Pages</span> 
     <div class="grid grid-flow-col gap-4">
+      <a href="{{route('about-us')}}" class="link link-hover">About Us</a>
     <a href="{{route('t&c')}}" class="link link-hover">Terms And Conditions</a>
     <a href="{{route('privacy-policy')}}" class="link link-hover">Privacy Policy</a>
     <!-- <a href="{{route('contact-us')}}" class="link link-hover">Contact Us</a> -->

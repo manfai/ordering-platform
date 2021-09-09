@@ -31,6 +31,10 @@ Route::get('/bentos', function () {
     return view('bentos');
 })->name('bentos');
 
+Route::get('/about-us', function () {
+    return view('pages.about');
+})->name('about-us');
+
 
 
 Route::get('/faqs', function () {

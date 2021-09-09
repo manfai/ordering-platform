@@ -1,7 +1,7 @@
 <x-app-layout>
     <main class="bg-base-100">
 
-        <div class="px-2 lg:px-6 mx-2 grid grid-cols-12 gap-4">
+        <div class="px-2 pb-16 lg:px-6 mx-2 grid grid-cols-12 gap-4">
 
             <div class="w-full col-span-12 mt-6">
                 <h1 class="text-2xl"> <strong>EC BENTO website Terms of Use</strong> </h1>
