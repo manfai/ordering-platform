@@ -20,7 +20,7 @@ class UserMerchant extends Model
     }
     
     public function getStudentsAttribute(){
-        return $this->remark;
+        return $this->remark?$this->remark:[];
     }
 
 }

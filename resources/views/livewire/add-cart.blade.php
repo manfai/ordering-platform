@@ -74,16 +74,19 @@
 
                   <select wire:model="remark" required class="select pl-3 pr-10">
                     <option>---</option>
+                    @if(count($students))
                     @foreach($students as $student)
 
-                    @php 
-                    $ordered = \App\Models\CartItem::where([
-                      'user_id'=> auth()->user()->id,
-                      'menu_date' => $menu_product_date,
-                      ])->where('remark','like','%'.$student.'%')->exists();
-                    @endphp
+                      @php 
+                      $ordered = \App\Models\CartItem::where([
+                        'user_id'=> auth()->user()->id,
+                        'menu_date' => $menu_product_date,
+                        ])->where('remark','like','%'.$student.'%')->exists();
+                      @endphp
                     <option {{$ordered?'disabled':''}}>{{$student. ($ordered?'  ***Added':'') }}</del></option>
+                    
                     @endforeach
+                    @endif
                     <option>New Student</option>
                   </select>
                   <span class=" right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">

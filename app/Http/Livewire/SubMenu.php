@@ -15,7 +15,6 @@ class SubMenu extends Component
     
     public function mount($type='normal',$filter = null)
     {
-        // dd($filter);
         $this->menu_date = date('Y-m-d');
         if($filter!==null){
             $filter = base64_decode($filter);
@@ -28,25 +27,9 @@ class SubMenu extends Component
                 $this->menu_date = $filter;
             }
         }
-
-
-        if($type == 'normal'){
-            $menu = Menu::with('products')->where('menu_date', '>=', date('Y-m-d'))->whereIn('period_id', [18])->active()
-            ->whereHas('locations', function ($query) {
-                $query->whereNotNull('stock')->where([
-                    'store_id' => 57
-                ]);
-            })->get();
-        } else {
-            $menu = Menu::with('products')->where('menu_date', '>=', date('Y-m-d'))->where('menu_date', '<=', date('Y-m-d',strtotime('last day of this month')))->whereIn('period_id', [18])
-            ->whereHas('locations', function ($query) {
-                $query->whereNotNull('stock')->where([
-                    'store_id' => 57
-                ]);
-            })->get();
-        }
        
-        $this->period = $menu->pluck('menu_date');
+        $this->period = config('menu.date');
+        // dd(config('menu.ordered'));
        
     }
 

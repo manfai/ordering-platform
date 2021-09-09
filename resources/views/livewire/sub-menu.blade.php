@@ -30,11 +30,11 @@
                             @php
                             if(Auth::user()){
                             $orders = auth()->user()->bentos()->where([
-                            'menu_date'=>$menuDate,
-                            'status' => 'paid'
+                                'menu_date'=>$menuDate,
+                                'status' => 'paid'
                             ])->exists();
                             } else {
-                            $orders = false;
+                                $orders = false;
                             }
 
                             @endphp

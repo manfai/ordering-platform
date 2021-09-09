@@ -47,7 +47,14 @@ class ProductList extends Component
     public function mount($type = 'normal', $filter = null)
     {
         // dd($filter);
-        $this->menu_date = date('Y-m-d');
+
+        $this->period = config('menu.date');
+        try {
+            $this->menu_date = current($this->period);
+        } catch (\Throwable $th) {
+            $this->menu_date = date('Y-m-d');
+        }
+
         if($filter!==null){
             $filter = base64_decode($filter);
             $filter = unserialize($filter);
@@ -74,56 +81,16 @@ class ProductList extends Component
 
     public function render()
     {
-        
-        if($this->filter !== null){
-            $perferences = [$this->filter];
-            $menu_date = $this->filter;
-        } else {
-            $menu_date = date('Y-m-d');
-            $perferences = [];
-        }
-        // $this->loadProduct($this->brand);
+        // dd($this->menu_date);
         $period_id = [18];
-        // if ($this->brand == 'ec_mart') {
-        //     $period_id = [8, 15];
-        // }
-        if($this->type == 'normal'){
-           
-            $menu = Menu::with('products')->where('menu_date', '>=', date('Y-m-d'))->whereIn('period_id', [18])->active()
-            ->whereHas('locations', function ($query) {
-                $query->whereNotNull('stock')->where([
-                    'store_id' => 57
-                ]);
-            })->get();
-        } else {
-            $menu = Menu::with('products')->where('menu_date', '>=', date('Y-m-d'))->where('menu_date', '<=', date('Y-m-d',strtotime('last day of this month')))->whereIn('period_id', [18])
-            ->whereHas('locations', function ($query) {
-                $query->whereNotNull('stock')->where([
-                    'store_id' => 57
-                ]);
-            })->get();
-        }
-       
-
-
-        $this->period = $menu->pluck('menu_date');
-        $menu = $menu->where('menu_date','>=',$menu_date)->first();
-        // dd($menu);
-        $this->menu_date = $menu->menu_date;
-
+        $menu = Menu::where([
+            'menu_date' => $this->menu_date,
+        ])->whereIn('period_id',$period_id)->active()->first();
         if ($menu) {
-            
-            // dd($perferences);
-            // dd($menu->products()->get()->pluck('id'));
-            // $filter = \DB::table('taggables')->whereIn('tag_id',$perferences)->get()->pluck('taggable_id');
-            
             $products = $menu->products();
-            // if($perferences){
-            //     $products = $products->whereIn("product_id",$filter);
-            // }
             $products = $products->paginate(12);
             $filter = $this->filter;
-            // dd();
+
         } else {
             $products = [];
             $filter = [];

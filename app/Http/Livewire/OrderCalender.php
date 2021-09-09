@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class OrderCalender extends Component
 {
-    public $period = [];
+    public $ordered, $period = [];
 
     public function mount()
     {
@@ -20,6 +20,21 @@ class OrderCalender extends Component
         $interval = DateInterval::createFromDateString('1 day');
         $period   = new DatePeriod($start, $interval, $end);
         $this->period[] = $period;
+
+
+        $ordered = \App\Models\Order\OrderItem::where([
+        'user_id'=>auth()->user()->id,
+        'status'=>'paid'
+        ])->whereIn('menu_date',config('menu.date'))->get();
+        try {
+            $this->ordered = $ordered->pluck('menu_date')->map(function ($value){
+                return date('Y-m-d',strtotime($value));
+            });
+            $this->ordered = $this->ordered->all();
+            // dd($this->ordered);
+        } catch (\Throwable $th) {
+            $this->ordered = [];
+        }
     }
 
     public function render()

@@ -15,55 +15,61 @@
                     <th class="py-3 px-2">S</th>
                 </tr>
                 <tr>
+
                     @foreach($period[0] as $index => $date)
-                    @php
-                    $d = $date->format('j');
-                    $payload = serialize(['menu_date'=>$date->format('Y-m-d')]);
-                    $ordered = \App\Models\Order\OrderItem::where([
-                    'user_id'=>auth()->user()->id,
-                    'menu_date'=>$date->format('Y-m-d'),
-                    'status'=>'paid'
-                    ])->exists();
-                    @endphp
+                        @php
+                        $d = $date->format('j');
+                        $menu_date = $date->format('Y-m-d');
+                        $payload = serialize(['menu_date'=>$menu_date]);
+
+                        $hasMenu = in_array($menu_date,config('menu.date'));
+                        $hasOrder = in_array($menu_date,$ordered);
+                        @endphp
 
                     @if($index==0)
-                    @for($s = 0; $s < $date->format('N'); $s++)
-                        <td></td>
+                            @for($s = 0; $s < $date->format('N'); $s++)
+                                <td></td>
 
-                        @endfor
+                            @endfor
 
-                        @if($date->format('N')==7)
-                </tr>
-                <tr>
-                    @else
-                    <td class="text-center cursor-pointer">
-                        <a class="{{$ordered?'font-bold rounded-full text-info underline indicator':'hover:text-primary'}}">{{$d}}
-                            {{-- @if($ordered)<div class="indicator-item badge badge-info badge-xs"></div>@endif --}}
-                        </a>
-                    </td>
-                    @endif
+                                @if($date->format('N')==7)
+                                </tr>
+                                <tr>
+                                @else
+                                    @if($hasMenu) 
+                                        <a href="/?menu={{base64_encode($payload)}}" class="{{$hasOrder?'font-bold rounded-full text-info underline':'hover:text-primary'}} indicator">{{$d}}
+                                            {{-- @if($ordered)<div class="indicator-item badge badge-info badge-xs"></div>@endif --}}
+                                        </a>
+                                        @else
+                                        <a class="text-gray-400">{{$d}}
+                                        </a>
+                                    @endif 
+                                @endif
 
                     @else
 
                     @if($date->format('N')==7)
-                </tr>
-                <tr>
-                    <td class="text-center">
-                        <a class="text-gray-400">{{$d}}
-                        </a>
-                    </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">
+                            <a class="text-gray-400">{{$d}}
+                            </a>
+                        </td>
                     @elseif($date->format('N')==6)
-                    <td class="text-center">
-                        <a class="text-gray-400">{{$d}}
-                        </a>
-                    </td>
+                        <td class="text-center">
+                            <a class="text-gray-400">{{$d}}
+                            </a>
+                        </td>
                     @else
-                    <td class="text-center cursor-pointer">
-                        <!-- {{-- href="/?menu={{base64_encode($payload)}}" --}} -->
-                        <a class="{{$ordered?'font-bold rounded-full text-info underline':'hover:text-primary'}} indicator">{{$d}}
-                            {{-- @if($ordered)<div class="indicator-item badge badge-info badge-xs"></div>@endif --}}
-                        </a>
-                    </td>
+                        <td class="text-center">
+                            @if($hasMenu) 
+                            <a href="/?menu={{base64_encode($payload)}}" class="{{$hasOrder?'font-bold rounded-full text-info underline':'hover:text-primary'}} indicator">{{$d}}
+                            </a>
+                            @else
+                            <a class="text-gray-400">{{$d}}
+                            </a>
+                            @endif 
+                        </td>
                     @endif
 
                     @endif
