@@ -25,7 +25,7 @@ class OrderCalender extends Component
         $ordered = \App\Models\Order\OrderItem::where([
         'user_id'=>auth()->user()->id,
         'status'=>'paid'
-        ])->whereIn('menu_date',config('menu.date'))->get();
+        ])->where('menu_date','LIKE',date('Y-m').'%')->get();
         try {
             $this->ordered = $ordered->pluck('menu_date')->map(function ($value){
                 return date('Y-m-d',strtotime($value));
@@ -35,6 +35,7 @@ class OrderCalender extends Component
         } catch (\Throwable $th) {
             $this->ordered = [];
         }
+        // dd( $this->ordered);
     }
 
     public function render()

@@ -165,7 +165,7 @@ class AddCart extends Component
                 }
             }
 
-            if (!$cart) {
+            // if (!$cart) {
                 $newCart = [
                     'store_id' => $location_id,
                     'menu_product_id' => $menu_product_id,
@@ -176,20 +176,20 @@ class AddCart extends Component
                     'remark' => $this->remark,
                     'amount' => $this->quantity * $this->price,
                     'menu_date' => $menu_product_date,
-                    'period_id' => 2
+                    'period_id' => 18
                 ];
                 $user->cartItem()->create($newCart);
                 $message = 'Added to cart';
                 $this->addingToCart = false;
-            } else {
-                $cart->update([
-                    'quantity' => ($cart->quantity + $this->quantity),
-                    'amount' => ($cart->quantity + $this->quantity) * $this->price,
-                    'remark' => ($cart->remark . ', ' . $this->remark),
-                ]);
-                $message = 'Cart is updated';
-                $this->addingToCart = false;
-            }
+            // } else {
+            //     $cart->update([
+            //         'quantity' => ($cart->quantity + $this->quantity),
+            //         'amount' => ($cart->quantity + $this->quantity) * $this->price,
+            //         'remark' => ($cart->remark . ', ' . $this->remark),
+            //     ]);
+            //     $message = 'Cart is updated';
+            //     $this->addingToCart = false;
+            // }
 
             $this->reset(['quantity', 'remark', 'student']);
             $this->disabledButton = true;

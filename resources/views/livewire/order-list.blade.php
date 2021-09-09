@@ -16,9 +16,10 @@
                             <th>Order</th>
                             <th>Payment</th>
                             <th>Bento / Product</th>
-                            <th>Code</th>
+                            <th>Total </th>
+                            <!-- <th>Code</th> -->
                             <th>Amount</th>
-                            <th>Discount</th>
+                            <!-- <th>Discount</th> -->
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -73,11 +74,10 @@
             </div>
 
             </td>
-            <td><code class="text-sm text-red-600">{{$order->extraction_code}}</code></td>
+            <td>{{$order->items->sum('quantity')}}</td>
+            <!-- <td><code class="text-sm text-red-600">{{$order->extraction_code}}</code></td> -->
             <td>${{$order->real_amount}}
-            <td>{{
-                                    $order->charges()->where('value','<=',0)->get()->sum('value')
-                                }}</td>
+            <!-- <td>{{ $order->charges()->where('value','<=',0)->get()->sum('value') }}</td> -->
             <th>
                 <button wire:click="viewDetail({{$order->id}})" class="btn btn-primary btn-sm btn-block">details</button>
                 <!-- <a href="#my-modal" class="btn btn-primary">open modal</a> -->

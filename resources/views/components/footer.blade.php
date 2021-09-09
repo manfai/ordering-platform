@@ -44,6 +44,7 @@
     <div class="grid grid-flow-col gap-4">
     <a href="{{route('t&c')}}" class="link link-hover">Terms And Conditions</a>
     <a href="{{route('privacy-policy')}}" class="link link-hover">Privacy Policy</a>
+    <!-- <a href="{{route('contact-us')}}" class="link link-hover">Contact Us</a> -->
     </div>
   </div>
   </div>

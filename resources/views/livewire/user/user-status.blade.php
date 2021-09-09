@@ -1,35 +1,33 @@
-
-<div class="w-full shadow stats">
-  <div class="stat">
+<div class="w-full bg-base-200 shadow stats mb-6">
+  <div class="stat bg-base-200 ">
     <div class="stat-figure text-primary">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current">              
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>            
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
       </svg>
-    </div> 
-    <div class="stat-title">Total Likes</div> 
-    <div class="stat-value text-primary">25.6K</div> 
-    <div class="stat-desc">21% more than last month</div>
-  </div> 
-  <div class="stat">
-    <div class="stat-figure text-info">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current">                     
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>     
-      </svg>
-    </div> 
-    <div class="stat-title">Page Views</div> 
-    <div class="stat-value text-info">2.6M</div> 
-    <div class="stat-desc">21% more than last month</div>
-  </div> 
-  <div class="stat">
-    <div class="stat-figure text-info">
-      <div class="avatar online">
-        <div class="w-16 h-16 p-1 mask mask-squircle bg-base-100">
-          <img src="/tailwind-css-component-profile-5@56w.png" alt="Avatar Tailwind CSS Component" class="mask mask-squircle">
-        </div>
-      </div>
-    </div> 
-    <div class="stat-value">86%</div> 
-    <div class="stat-title">Tasks done</div> 
-    <div class="stat-desc text-info">31 tasks remaining</div>
+    </div>
+    <div class="stat-title">Bentos ({{date('F')}})</div>
+    <div class="stat-value text-primary">{{auth()->user()->bentos()->where('menu_date','>=',date('Y-m-01'))->count()}}</div>
+    <div class="stat-desc">Thank you for your order.</div>
   </div>
+  <div class="stat bg-base-200 ">
+    <div class="stat-figure text-info">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+      </svg>
+    </div>
+    <div class="stat-title">Payment Card</div>
+    <div class="stat-value text-info">{{(auth()->user()->payments()->where('brand','STRIPE')->count())}}</div>
+    <!-- <div class="stat-desc">Click here to edit</div> -->
+  </div>
+  <div class="stat bg-base-200 ">
+    <div class="stat-figure text-info">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+      </svg>
+    </div>
+    <div class="stat-title">Students</div>
+    <div class="stat-value text-info">{{count(auth()->user()->merchant->students)}}</div>
+    <!-- <div class="stat-desc" wire:click="viewStudentDetail()">Click here to edit</div> -->
+  </div>
+@livewire('student-manage')
 </div>
