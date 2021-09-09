@@ -37,7 +37,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => ['daily','larabug'],
             'ignore_exceptions' => false,
         ],
 
@@ -113,6 +113,13 @@ return [
 
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
+        ],
+
+        'channels' => [
+            // ...
+            'larabug' => [
+                'driver' => 'larabug',
+            ],
         ],
     ],
 
