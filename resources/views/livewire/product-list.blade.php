@@ -84,9 +84,8 @@
         @endauth
 
         @if(count($products)>0)
-        @if(count($bentos)>0)
+ 
         <h3 class="col-span-12 font-semibold">Menu:</h3>
-        @endif
         @foreach ($products as $product)
         <div wire:loading.remove wire:loading.target="changeBrand" class="col-span-6 md:col-span-4 lg:col-span-4 xl:col-span-3 md:flex pb-8 w-full indicator">
             <div class="card bordered shadow-lg w-full rounded-box bg-base-200">
