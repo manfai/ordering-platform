@@ -50,11 +50,10 @@
                     <h3>Ordered:</h3>
                     <div class="grid grid-cols-12 gap-4 py-4">
                         @foreach ($bentos as $k => $bento)
-                        <div class="stat">
+                        <div class="stat col-span-4">
                             <div class="stat-figure text-info">
-                              <div class="avatar online">
+                              <div class="avatar">
                                 <div class="w-16 h-16 p-1 mask mask-squircle bg-base-100">
-                                  {{-- <img src="/tailwind-css-component-profile-5@56w.png" alt="Avatar Tailwind CSS Component" class="mask mask-squircle"> --}}
                                   <img class="mask mask-squircle" src="{{$bento->product->image_file? $bento->product->image_file : 'https://www.kenyons.com/wp-content/uploads/2017/04/default-image-620x600.jpg'}}">
                                 </div>
                               </div>
