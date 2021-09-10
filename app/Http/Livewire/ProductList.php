@@ -49,7 +49,7 @@ class ProductList extends Component
     {
         // dd($filter);
         if(Auth::check()){
-            if(Auth::user()->id == '32597'){
+            if(in_array(Auth::user()->id ,['32597'])){
                 $this->period = config('menu.date2');
             } else {
                 $this->period = config('menu.date');
