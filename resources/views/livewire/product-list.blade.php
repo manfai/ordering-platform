@@ -50,7 +50,7 @@
                     <h3>Ordered:</h3>
                     <div class="grid grid-cols-12 gap-4 py-4">
                         @foreach ($bentos as $k => $bento)
-                        <div class="stat col-span-4">
+                        <div class="stat shadow col-span-4">
                             <div class="stat-figure text-info">
                               <div class="avatar">
                                 <div class="w-16 h-16 p-1 mask mask-squircle bg-base-100">
@@ -59,7 +59,7 @@
                               </div>
                             </div> 
                             {{-- <div class="stat-value">{{$k}}</div>  --}}
-                            <div class="stat-value text-md">{{$bento->product->title}}</div> 
+                            <div class="text-md">{{$bento->product->title}}</div> 
                             <div class="stat-desc text-info">Student: {{$bento->remark}}</div>
                           </div>
 
