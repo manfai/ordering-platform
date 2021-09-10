@@ -52,7 +52,7 @@
                         @foreach ($bentos as $bento)
                         <div class="card lg:card-side bordered col-span-4">
                             <figure>
-                              <img class="w-40" src="{{$bento->product->image_file? $bento->product->image_file : 'https://www.kenyons.com/wp-content/uploads/2017/04/default-image-620x600.jpg'}}">
+                              <img class="h-20" src="{{$bento->product->image_file? $bento->product->image_file : 'https://www.kenyons.com/wp-content/uploads/2017/04/default-image-620x600.jpg'}}">
                             </figure> 
                             <div class="card-body">
                               <h2 class="card-title">{{$bento->product->title}}</h2> 
