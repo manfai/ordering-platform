@@ -38,7 +38,7 @@
 
             @auth
 
-            <div class="col-span-12 pb-8 w-full">
+            <div class="col-span-12 pt-8 w-full">
                 @php
                 $bentos = auth()->user()->bentos()->where([
                 'status' => 'paid',
@@ -47,8 +47,8 @@
                 @endphp
                 <div class="w-full overflow-hidden">
                     @if(count($bentos)>0)
-                    <h3>Ordered:</h3>
                     <div class="grid grid-cols-12 gap-4 py-4">
+                        <h3 class="col-span-12 font-semibold">Ordered:</h3>
                         @foreach ($bentos as $k => $bento)
                         <div class="stat shadow col-span-4">
                             <div class="stat-figure text-info">
