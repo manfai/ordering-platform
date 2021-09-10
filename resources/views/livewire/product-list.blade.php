@@ -49,20 +49,34 @@
                     @if(count($bentos)>0)
                     <h3>Ordered:</h3>
                     <div class="grid grid-cols-12 gap-4 py-4">
-                        @foreach ($bentos as $bento)
-                        <div class="card lg:card-side bordered col-span-4">
+                        @foreach ($bentos as $k => $bento)
+                        <div class="stat">
+                            <div class="stat-figure text-info">
+                              <div class="avatar online">
+                                <div class="w-16 h-16 p-1 mask mask-squircle bg-base-100">
+                                  {{-- <img src="/tailwind-css-component-profile-5@56w.png" alt="Avatar Tailwind CSS Component" class="mask mask-squircle"> --}}
+                                  <img class="mask mask-squircle" src="{{$bento->product->image_file? $bento->product->image_file : 'https://www.kenyons.com/wp-content/uploads/2017/04/default-image-620x600.jpg'}}">
+                                </div>
+                              </div>
+                            </div> 
+                            <div class="stat-value">{{$k}}</div> 
+                            <div class="stat-title">{{$bento->product->title}}</div> 
+                            <div class="stat-desc text-info">Student: {{$bento->remark}}</div>
+                          </div>
+
+                        {{-- <div class="card lg:card-side bordered col-span-4">
                             <figure>
                               <img class="h-20" src="{{$bento->product->image_file? $bento->product->image_file : 'https://www.kenyons.com/wp-content/uploads/2017/04/default-image-620x600.jpg'}}">
                             </figure> 
                             <div class="card-body">
                               <h2 class="card-title">{{$bento->product->title}}</h2> 
-                              <p>Student: {{$bento->remark}}</p>
+                              <p></p>
                               <div class="card-actions hidden">
                                 <button class="btn btn-primary">Get Started</button> 
                                 <button class="btn btn-ghost">More info</button>
                               </div>
                             </div>
-                          </div> 
+                          </div>  --}}
                     @endforeach
                 </div>
                 @endif
