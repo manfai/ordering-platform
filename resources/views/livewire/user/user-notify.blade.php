@@ -2,7 +2,7 @@
     <div class="shadow-md card bg-primary text-primary-content">
         <div class="card-body animate-pulse">
             <h2 class="card-title">Friendly Reminder</h2>
-            <p>The cuffoff time on Thursday.</p>
+            <p><blink>The cuffoff time on Thursday.</blink></p>
         </div>
     </div>
     <div class="shadow card bg-primary text-primary-content">
