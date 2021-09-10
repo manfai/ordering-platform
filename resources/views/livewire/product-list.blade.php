@@ -38,7 +38,7 @@
 
             @auth
 
-            <div class="hidden col-span-12 pb-8 w-full">
+            <div class="col-span-12 pb-8 w-full">
                 @php
                 $bentos = auth()->user()->bentos()->where([
                 'status' => 'paid',
@@ -56,13 +56,6 @@
                                 <p>Student: {{$bento->remark}}</p>
                             </div>
                         </div>
-
-
-
-                        {{-- <div class="bg-base-200 shadow-lg mr-3 p-3"> 
-                   <p>{{$bento->product->title}}</p>
-                        <p>{{$bento->remark}}</p>
-                    </div> --}}
                     @endforeach
                 </div>
                 @endif
