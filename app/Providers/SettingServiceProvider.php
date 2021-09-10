@@ -55,7 +55,7 @@ class SettingServiceProvider extends ServiceProvider
             // Laravel >= 5.2, use 'lists' instead of 'pluck' for Laravel <= 5.1
             return $menu->pluck('menu_date')->all();
         });
-        $menu_date2 = $cache->remember('menu_date', 60, function() use ($menu2){
+        $menu_date2 = $cache->remember('menu_date2', 60, function() use ($menu2){
             // Laravel >= 5.2, use 'lists' instead of 'pluck' for Laravel <= 5.1
             return $menu2->pluck('menu_date')->all();
         });
