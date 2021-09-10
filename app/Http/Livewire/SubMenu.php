@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Product\Menu;
 use App\Models\Product\Product;
 use DateTime;
+use Illuminate\Support\Facades\Auth;
 
 class SubMenu extends Component
 {
