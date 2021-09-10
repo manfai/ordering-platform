@@ -91,7 +91,7 @@ class ProductList extends Component
         $period_id = [18];
         $menu = Menu::where([
             'menu_date' => $this->menu_date,
-        ])->whereIn('period_id',$period_id)->active()->first();
+        ])->whereIn('period_id',$period_id)->first();
         if ($menu) {
             $products = $menu->products();
             $products = $products->paginate(12);
