@@ -46,7 +46,7 @@
                         <a href="/?menu={{base64_encode($payload)}}" class="{{$hasOrder?'font-bold rounded-full bg-info text-white underline':'hover:text-primary'}} indicator">{{$d}}
                         </a>
                         @else
-                        <a class="text-gray-400 {{$hasOrder?'font-bold rounded-full bg-info text-white underline':'hover:text-primary'}}">{{$d}}
+                        <a class="{{$hasOrder?'font-bold rounded-full bg-info text-white underline':'text-gray-400  hover:text-primary'}}">{{$d}}
                         </a>
                         @endif
                     </td>
@@ -71,7 +71,7 @@
                         @if($hasMenu)
                         <a href="/?menu={{base64_encode($payload)}}" class="{{$hasOrder?'font-bold rounded-full bg-info text-white underline':'hover:text-primary'}} indicator">
                         @else
-                        <a class="text-gray-400 {{$hasOrder?'font-bold rounded-full bg-info text-white underline':'hover:text-primary'}} indicator">
+                        <a class="{{$hasOrder?'font-bold rounded-full bg-info text-white underline':'text-gray-400 hover:text-primary'}} indicator">
                         @endif
 
                         {{$d}}
