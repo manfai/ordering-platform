@@ -32,7 +32,7 @@ class SubMenu extends Component
        
         $this->period = config('menu.date');
         if(Auth::check()){
-            if(in_array(Auth::user()->id ,['10207','32597'])){
+            if(in_array(Auth::user()->id ,['10207','32493'])){
                 $this->period = config('menu.date2');
             } else {
                 $this->period = config('menu.date');
