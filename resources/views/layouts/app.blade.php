@@ -18,7 +18,7 @@
     <script src="{{ mix('js/app.js') }}" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
-
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7410177851675505" crossorigin="anonymous"></script>
 </head>
 
 <body data-theme="dsc" class="antialiased bg-base-100">
