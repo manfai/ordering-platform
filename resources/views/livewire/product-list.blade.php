@@ -50,12 +50,19 @@
                     <h3>Ordered:</h3>
                     <div class="grid grid-cols-12 gap-4 py-4">
                         @foreach ($bentos as $bento)
-                        <div class="shadow card col-span-4">
-                            <div class="card-body p-3">
-                                <h5 class="text-md">{{$bento->product->title}}</h5>
-                                <p>Student: {{$bento->remark}}</p>
+                        <div class="card lg:card-side bordered col-span-4">
+                            <figure>
+                              <img src="{{$bento->product->image_file? $bento->product->image_file : 'https://www.kenyons.com/wp-content/uploads/2017/04/default-image-620x600.jpg'}}">
+                            </figure> 
+                            <div class="card-body">
+                              <h2 class="card-title">{{$bento->product->title}}</h2> 
+                              <p>Student: {{$bento->remark}}</p>
+                              <div class="card-actions hidden">
+                                <button class="btn btn-primary">Get Started</button> 
+                                <button class="btn btn-ghost">More info</button>
+                              </div>
                             </div>
-                        </div>
+                          </div> 
                     @endforeach
                 </div>
                 @endif
