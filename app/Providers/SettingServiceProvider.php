@@ -44,10 +44,22 @@ class SettingServiceProvider extends ServiceProvider
             })->get();
         }
 
+        $menu2 = Menu::with('products')->where('menu_date', '>=', date('Y-m-d'))->where('menu_date', '<=', date('Y-m-d',strtotime('last day of this month')))->whereIn('period_id', [18])
+            ->whereHas('locations', function ($query) {
+                $query->whereNotNull('stock')->where([
+                    'store_id' => 57
+                ]);
+        })->get();
+        
         $menu_date = $cache->remember('menu_date', 60, function() use ($menu){
             // Laravel >= 5.2, use 'lists' instead of 'pluck' for Laravel <= 5.1
             return $menu->pluck('menu_date')->all();
         });
+        $menu_date2 = $cache->remember('menu_date', 60, function() use ($menu2){
+            // Laravel >= 5.2, use 'lists' instead of 'pluck' for Laravel <= 5.1
+            return $menu2->pluck('menu_date')->all();
+        });
         config()->set('menu.date', $menu_date);
+        config()->set('menu.date2', $menu_date2);
     }
 }

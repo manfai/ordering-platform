@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Product\Menu;
 use App\Models\Product\Product;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -47,8 +48,13 @@ class ProductList extends Component
     public function mount($type = 'normal', $filter = null)
     {
         // dd($filter);
-
-        $this->period = config('menu.date');
+        if(Auth::check()){
+            if(Auth::user()->id == '32597'){
+                $this->period = config('menu.date2');
+            } else {
+                $this->period = config('menu.date');
+            }
+        }
         try {
             $this->menu_date = current($this->period);
         } catch (\Throwable $th) {
