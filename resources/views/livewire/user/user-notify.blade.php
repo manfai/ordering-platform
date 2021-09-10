@@ -1,7 +1,7 @@
-<div class="stack animate-pulse mb-8 w-full">
+<div class="stack animate-ping mb-8 w-full">
     <div class="shadow-md card bg-primary text-primary-content">
         <div class="card-body">
-            <h2 class="card-title">Friendly Reminder</h2>
+            <h2 class="card-title animate-pulse">Friendly Reminder</h2>
             <p>The cuffoff time on Thursday.</p>
         </div>
     </div>
