@@ -60,7 +60,7 @@
                             </div> 
                             {{-- <div class="stat-value">{{$k}}</div>  --}}
                             <div class="text-md">{{$bento->product->title}}</div> 
-                            <div class="stat-desc text-info">Student: {{$bento->remark}}</div>
+                            <div class="stat-desc font-bold text-info">Student: {{$bento->remark}}</div>
                           </div>
 
                         {{-- <div class="card lg:card-side bordered col-span-4">
