@@ -43,10 +43,10 @@
                     <td class="text-center">
 
                         @if($hasMenu)
-                        <a href="/?menu={{base64_encode($payload)}}" class="{{$hasOrder?'font-bold rounded-full text-info underline':'hover:text-primary'}} indicator">{{$d}}
+                        <a href="/?menu={{base64_encode($payload)}}" class="{{$hasOrder?'font-bold rounded-full text-success underline':'hover:text-primary'}} indicator">{{$d}}
                         </a>
                         @else
-                        <a class="text-gray-400 {{$hasOrder?'font-bold rounded-full text-info underline':'hover:text-primary'}}">{{$d}}
+                        <a class="text-gray-400 {{$hasOrder?'font-bold rounded-full text-success underline':'hover:text-primary'}}">{{$d}}
                         </a>
                         @endif
                     </td>
@@ -69,9 +69,9 @@
                     @else
                     <td class="text-center">
                         @if($hasMenu)
-                        <a href="/?menu={{base64_encode($payload)}}" class="{{$hasOrder?'font-bold rounded-full text-info underline':'hover:text-primary'}} indicator">
+                        <a href="/?menu={{base64_encode($payload)}}" class="{{$hasOrder?'font-bold rounded-full text-success underline':'hover:text-primary'}} indicator">
                         @else
-                        <a class="text-gray-400 {{$hasOrder?'font-bold rounded-full text-info underline':'hover:text-primary'}} indicator">
+                        <a class="text-gray-400 {{$hasOrder?'font-bold rounded-full text-success underline':'hover:text-primary'}} indicator">
                         @endif
 
                         {{$d}}
