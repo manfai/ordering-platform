@@ -3,7 +3,7 @@
     <div class="">
 
         <div class="grid grid-cols-12 gap-6">
-            <div class="col-span-12 pb-1 w-full">
+            <div class="col-span-12 w-full">
 
                 <!-- <h3 class="mb-6">Menu Date: <code>{{$menu_date}}</code></h3> -->
                 <div id="menu-date" class="w-full flex overflow-x-scroll pb-8 pl-2 -ml-2 lg:pl-0 lg:-ml-0 lg:pb-0 lg:overflow-x-visible">
@@ -38,7 +38,7 @@
 
             @auth
 
-            <div class="col-span-12 pt-8 w-full">
+            <div class="col-span-12 w-full">
                 @php
                 $bentos = auth()->user()->bentos()->where([
                 'status' => 'paid',
@@ -47,7 +47,7 @@
                 @endphp
                 <div class="w-full overflow-hidden">
                     @if(count($bentos)>0)
-                    <div class="grid grid-cols-12 gap-4 py-4">
+                    <div class="grid grid-cols-12 gap-4 pb-4">
                         <h3 class="col-span-12 font-semibold">Ordered:</h3>
                         @foreach ($bentos as $k => $bento)
                         <div class="stat shadow rounded-box bg-base-200 col-span-4">
