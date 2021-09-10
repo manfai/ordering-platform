@@ -50,7 +50,7 @@
                     <div class="grid grid-cols-12 gap-4 py-4">
                         <h3 class="col-span-12 font-semibold">Ordered:</h3>
                         @foreach ($bentos as $k => $bento)
-                        <div class="stat shadow col-span-4">
+                        <div class="stat shadow rounded-box bg-base-200 col-span-4">
                             <div class="stat-figure text-info">
                               <div class="avatar">
                                 <div class="w-16 h-16 p-1 mask mask-squircle bg-base-100">
