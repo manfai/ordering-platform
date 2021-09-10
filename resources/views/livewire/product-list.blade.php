@@ -58,8 +58,8 @@
                                 </div>
                               </div>
                             </div> 
-                            <div class="stat-value">{{$k}}</div> 
-                            <div class="stat-title">{{$bento->product->title}}</div> 
+                            {{-- <div class="stat-value">{{$k}}</div>  --}}
+                            <div class="stat-value text-md">{{$bento->product->title}}</div> 
                             <div class="stat-desc text-info">Student: {{$bento->remark}}</div>
                           </div>
 
