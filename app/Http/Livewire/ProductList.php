@@ -49,18 +49,22 @@ class ProductList extends Component
     {
         // dd($filter);
         if(Auth::check()){
-            if(in_array(Auth::user()->id ,['10207','32493'])){
+            if(in_array(Auth::user()->id ,['10207'])){
                 $this->period = config('menu.date2');
             } else {
                 $this->period = config('menu.date');
             }
+        } else {
+            $this->period = config('menu.date');
         }
+
         try {
             $this->menu_date = current($this->period);
         } catch (\Throwable $th) {
             $this->menu_date = date('Y-m-d');
         }
-
+        $this->menu_date = current($this->period);
+        // dd($this->period);
         if($filter!==null){
             $filter = base64_decode($filter);
             $filter = unserialize($filter);
