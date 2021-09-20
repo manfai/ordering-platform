@@ -48,7 +48,8 @@ class ProductList extends Component
     public function mount($type = 'normal', $filter = null)
     {
         if(Auth::check()){
-            if(in_array(Auth::user()->id ,['10207','32434'])){
+            // if(in_array(Auth::user()->id ,['10207','32434'])){
+            if(Auth::user()->buffur){
                 $this->period = config('menu.date2');
             } else {
                 $this->period = config('menu.date');
