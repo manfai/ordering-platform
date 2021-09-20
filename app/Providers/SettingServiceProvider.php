@@ -36,7 +36,9 @@ class SettingServiceProvider extends ServiceProvider
                 ]);
             })->get();
         } else {
-            $menu = Menu::with('products')->where('menu_date', '>=', date('Y-m-d'))->where('menu_date', '<=', date('Y-m-d',strtotime('last day of this month')))->whereIn('period_id', [18])
+            $menu = Menu::with('products')->where('menu_date', '>=', date('Y-m-d'))
+            // ->where('menu_date', '<=', date('Y-m-d',strtotime('last day of this month')))
+            ->whereIn('period_id', [18])
             ->whereHas('locations', function ($query) {
                 $query->whereNotNull('stock')->where([
                     'store_id' => 57
@@ -44,7 +46,9 @@ class SettingServiceProvider extends ServiceProvider
             })->get();
         }
 
-        $menu2 = Menu::with('products')->where('menu_date', '>=', date('Y-m-d'))->where('menu_date', '<=', date('Y-m-d',strtotime('last day of this month')))->whereIn('period_id', [18])
+        $menu2 = Menu::with('products')->where('menu_date', '>=', date('Y-m-d'))
+        // ->where('menu_date', '<=', date('Y-m-d',strtotime('last day of this month')))
+        ->whereIn('period_id', [18])
             ->whereHas('locations', function ($query) {
                 $query->whereNotNull('stock')->where([
                     'store_id' => 57
