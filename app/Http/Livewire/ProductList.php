@@ -47,9 +47,8 @@ class ProductList extends Component
 
     public function mount($type = 'normal', $filter = null)
     {
-        // dd($filter);
         if(Auth::check()){
-            if(in_array(Auth::user()->id ,['10207'])){
+            if(in_array(Auth::user()->id ,['10207','32434'])){
                 $this->period = config('menu.date2');
             } else {
                 $this->period = config('menu.date');
@@ -77,7 +76,6 @@ class ProductList extends Component
             }
         }
         $this->filter = $filter;
-        // dd($this->menu_date);
         $this->type = $type;
         $this->tags = \DB::table('taggables')->get();
         $this->loadProduct($this->brand);
@@ -85,13 +83,11 @@ class ProductList extends Component
 
     public function addToCart($productId,$menuDate)
     {
-        // dd($menuDate);
         $this->emitTo('add-cart', 'addToCart', $productId, $menuDate);
     }
 
     public function render()
     {
-        // dd($this->menu_date);
         $period_id = [18];
         $menu = Menu::where([
             'menu_date' => $this->menu_date,
