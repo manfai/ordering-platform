@@ -88,29 +88,7 @@
         </div>
         @endif
 
-        <!-- <div class="p-4 mt-6 bg-base-300 rounded-lg">
-          <h1 class="ml-2 font-bold uppercase">Shipping Option</h1>
-        </div>
-        <div class="p-4">
-          <p class="mb-4 italic">If you have a coupon code, please enter it in the box below</p>
-          <div class="grid grid-cols-2 gap-4">
-            <div wire:click="$emit('shipping_choosed','{{$coupon->id}}')" class="{{ ($selected_coupon==$coupon->id)?'bg-primary text-white':'bg-gray-300 text-gray-400' }} text-center text-md cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
-              Self Pick-Up
-            </div>
-            <div wire:click="$emit('shipping_choosed','{{$coupon->id}}')" class="{{ ($selected_coupon==$coupon->id)?'bg-primary text-white':'bg-gray-300 text-gray-400' }} text-center text-md cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
-              Delivery
-            </div>
-          </div>
-        </div> -->
-<!-- 
-        <div class="p-4 mt-6 bg-base-300 rounded-lg">
-          <h1 class="ml-2 font-bold uppercase">Instruction for seller</h1>
-        </div>
-
-        <div class="p-4">
-          <p class="mb-4 italic">If you have some information for the seller you can leave them in the box below</p>
-          <textarea class="w-full h-24 p-2 bg-base-100 rounded"></textarea>
-        </div> -->
+        
       </div>
       <div class="lg:px-2 lg:w-1/2">
         <div class="p-4 bg-base-300 rounded-lg">
