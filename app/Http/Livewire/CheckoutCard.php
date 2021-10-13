@@ -120,7 +120,7 @@ class CheckoutCard extends Component
         $this->cartItems = Auth::user()->cartItem()->get();
         $this->payments  = Payment::whereIn('id', [5])->get();
         // $this->coupons   = Coupon::where('active', 1)->where('value', '>', 0)->inRandomOrder()->limit(10)->get();
-        $this->coupons   = Auth::user()->coupons()->where('coupon_id', 68)->get();
+        $this->coupons   = Auth::user()->coupons()->where('coupon_id', 68)->where('status','<>','used')->get();
     }
 
     public function createOrder($payment){
@@ -279,7 +279,7 @@ class CheckoutCard extends Component
                         'status' => 'used',
                         'use_count' => 1
                     ]);
-                    dd($t);
+                    // dd($t);
                 }
                 if($order->total_amount<=0){
                     $order->payment_status = 'paid';
