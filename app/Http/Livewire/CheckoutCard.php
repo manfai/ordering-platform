@@ -212,98 +212,17 @@ class CheckoutCard extends Component
         try {
             if($this->cartItems->count()>0){
 
-            if($this->selected_payment=='new'){
-                $t = [
-                    str_replace(' ','',$this->number),
-                    $this->exp_month,
-                    $this->exp_year,
-                    $this->cvc
-                ];
-                // dd($t);
-                $this->validate();
-                $payment = Payment::find(5);
-    
-                $gateway = \Omnipay\Omnipay::create('Stripe');
-                // $gateway->setApiKey('sk_test_51JABlsBmpGYTwMtr7MtjIMpNFXXSkkbjjbfMuWECJ6IOHWOaSvXnptSQepBv38rJRxfrUaz03n8GUe7YqRpN5eK000vpVQghH0');
-                // $gateway->setApiKey('sk_test_UE3xmTh2owaSc94Adn91xJOx00ES1c7uqG');
-                // $gateway->setApiKey('sk_live_DOnG2rKpmX3aipEdyCCWuaKC00gjeG2yB9');
-                if(config('app.payment_test')){
-                    $gateway->setApiKey(config('app.payment_stripe_test_key'));
-                } else {
-                    $gateway->setApiKey(config('app.payment_stripe_key'));
-                }
-                $gateway->setTestMode(true);
-                
-                $token = $gateway->createToken([
-                    'card' => [
-                        'number' => str_replace('-','',$this->number),
-                        'expiryMonth' => $this->exp_month,
-                        'expiryYear' => $this->exp_year,
-                        'cvc' => $this->cvc,
-                    ],
-                ])->send();
-                $token = $token->getData();
-
-                $customers = $gateway->createCustomer([
-                    'description' => 'My First Test Customer (created for API docs)',
-                    'email' => auth()->user()->email,
-                    'name' => auth()->user()->name,
-                    'token' =>$token['id'],
-                    'metadata' => auth()->user()->toArray()
-                ])->send();
-                $customer = $customers->getData();
-                // dd($customer);
-
-                auth()->user()->payments()->create([
-                    'payment_id' => '5',
-                    'brand'  => 'STRIPE',
-                    'name'   => substr($this->number, 0, 6).'xxxxxx'.substr($this->number, -4),
-                    'key'    => 'customer',
-                    'value'  => $customer['id'],
-                    'remark' => $customer
-                ]);
-                $customerReference = $customer['id'];
-
-            } else
-            {
-                $payment = Payment::where('code', $this->selected_payment)->first();
-            }
-
-            \Log::channel('order')->info('Payment: '.$this->selected_payment);
-
-            $order = $this->createOrder($payment);
-
-            switch ($payment->provider) {
-                case 'paypal':
-                    $client = new \GuzzleHttp\Client();
-                    $res = $client->get('https://air.ecbneto.com/api/checkout/pay', [
-                        'payment_id'     =>  '',
-                        'coupon_id'      =>  '',
-                        'language'       =>  '',
-                        'card_id'        =>  '',
-                        'card_cvc'       =>  '',
-                        'remark'         =>  '',
-                        'full_address'   =>  '',
-                    ]);
-                    $result = $res->getBody();
-                    break;
-    
-                case 'stripe':
-                    
-                    // dd($this->selected_card);
-
-                    if(!$customerReference){
-                       if($this->selected_card){
-                            $customerReference = UserPayment::find($this->selected_card)->value;
-                       } else {
-                            $userpayment = auth()->user()->payments()->where('brand','STRIPE')->orderBy('created_at','desc')->first();
-                            if($userpayment){
-                                $customerReference = $userpayment->value;
-                            }
-                       }
-                        // dd($customerReference);
-                    }
-                    
+                if($this->selected_payment=='new'){
+                    $t = [
+                        str_replace(' ','',$this->number),
+                        $this->exp_month,
+                        $this->exp_year,
+                        $this->cvc
+                    ];
+                    // dd($t);
+                    $this->validate();
+                    $payment = Payment::find(5);
+        
                     $gateway = \Omnipay\Omnipay::create('Stripe');
                     // $gateway->setApiKey('sk_test_51JABlsBmpGYTwMtr7MtjIMpNFXXSkkbjjbfMuWECJ6IOHWOaSvXnptSQepBv38rJRxfrUaz03n8GUe7YqRpN5eK000vpVQghH0');
                     // $gateway->setApiKey('sk_test_UE3xmTh2owaSc94Adn91xJOx00ES1c7uqG');
@@ -314,50 +233,145 @@ class CheckoutCard extends Component
                         $gateway->setApiKey(config('app.payment_stripe_key'));
                     }
                     $gateway->setTestMode(true);
-                  
-                    $amount = ($this->cartItems->sum('amount') - $this->selected_coupon_price) <=0 ? 0 : $this->cartItems->sum('amount') - $this->selected_coupon_price;
-                    $response = $gateway->purchase(array(
-                        'amount' => $amount, 'currency' => 'HKD',
-                        'customerReference' => $customerReference,
-                        'receipt_email' => auth()->user()->email,
-                        'description' => 'SCH-DSC-'.$order->no,
-                        'metadata' => auth()->user()->cartItem->map(function($product){
-                            return $product->title;
-                        })
-                    ))->send();
-    
-                    if ($response->isRedirect()) {
-                        // redirect to offsite payment gateway
-                        $response->redirect();
-                    } elseif ($response->isSuccessful()) {
-                        // payment was successful: update database
-                        // dd($response);
-                        $order->payment_status = 'paid';
-                        $order->paid_at = now();
-                        $order->closed = 1;
-                        $order->save();
-                        auth()->user()->cartItem()->delete();
-                        $this->checkingOut = false;
-                        session()->flash('message', 'Order successfully created.');
-                        // $this->emit('$refresh');
-                        return redirect('orders');
-                    } else {
-                        // payment failed: display message to customer
-                        session()->flash('message', $response->getMessage());
-                    }
-    
                     
-                    $this->emit('$refresh');
-                    // dd('redirect to mpgs');
-                    break;
+                    $token = $gateway->createToken([
+                        'card' => [
+                            'number' => str_replace('-','',$this->number),
+                            'expiryMonth' => $this->exp_month,
+                            'expiryYear' => $this->exp_year,
+                            'cvc' => $this->cvc,
+                        ],
+                    ])->send();
+                    $token = $token->getData();
+
+                    $customers = $gateway->createCustomer([
+                        'description' => 'My First Test Customer (created for API docs)',
+                        'email' => auth()->user()->email,
+                        'name' => auth()->user()->name,
+                        'token' =>$token['id'],
+                        'metadata' => auth()->user()->toArray()
+                    ])->send();
+                    $customer = $customers->getData();
+                    // dd($customer);
+
+                    auth()->user()->payments()->create([
+                        'payment_id' => '5',
+                        'brand'  => 'STRIPE',
+                        'name'   => substr($this->number, 0, 6).'xxxxxx'.substr($this->number, -4),
+                        'key'    => 'customer',
+                        'value'  => $customer['id'],
+                        'remark' => $customer
+                    ]);
+                    $customerReference = $customer['id'];
+
+                } else
+                {
+                    $payment = Payment::where('code', $this->selected_payment)->first();
+                }
+
+                \Log::channel('order')->info('Payment: '.$this->selected_payment);
+
+                $order = $this->createOrder($payment);
+
+                if($order->total_amount<=0){
+                    $order->payment_status = 'paid';
+                    $order->real_amount = 0;
+                    $order->payment_method = 'free';
+                    $order->paid_at = now();
+                    $order->closed = 1;
+                    $order->save();
+                    auth()->user()->cartItem()->delete();
+                    $this->checkingOut = false;
+                    session()->flash('message', 'Order successfully created.');
+                    // $this->emit('$refresh');
+                    return redirect('orders');
+                else {
+                    switch ($payment->provider) {
+                        case 'paypal':
+                            $client = new \GuzzleHttp\Client();
+                            $res = $client->get('https://air.ecbneto.com/api/checkout/pay', [
+                                'payment_id'     =>  '',
+                                'coupon_id'      =>  '',
+                                'language'       =>  '',
+                                'card_id'        =>  '',
+                                'card_cvc'       =>  '',
+                                'remark'         =>  '',
+                                'full_address'   =>  '',
+                            ]);
+                            $result = $res->getBody();
+                            break;
+            
+                        case 'stripe':
+                            
+                            // dd($this->selected_card);
     
-                case 'paydollar':
-                    dd('redirect to asiapay');
-                    break;
-                case 'mpgs':
-                    dd('redirect to asiapay');
-                    break;
-            }
+                            if(!$customerReference){
+                            if($this->selected_card){
+                                    $customerReference = UserPayment::find($this->selected_card)->value;
+                            } else {
+                                    $userpayment = auth()->user()->payments()->where('brand','STRIPE')->orderBy('created_at','desc')->first();
+                                    if($userpayment){
+                                        $customerReference = $userpayment->value;
+                                    }
+                            }
+                                // dd($customerReference);
+                            }
+                            
+                            $gateway = \Omnipay\Omnipay::create('Stripe');
+                            // $gateway->setApiKey('sk_test_51JABlsBmpGYTwMtr7MtjIMpNFXXSkkbjjbfMuWECJ6IOHWOaSvXnptSQepBv38rJRxfrUaz03n8GUe7YqRpN5eK000vpVQghH0');
+                            // $gateway->setApiKey('sk_test_UE3xmTh2owaSc94Adn91xJOx00ES1c7uqG');
+                            // $gateway->setApiKey('sk_live_DOnG2rKpmX3aipEdyCCWuaKC00gjeG2yB9');
+                            if(config('app.payment_test')){
+                                $gateway->setApiKey(config('app.payment_stripe_test_key'));
+                            } else {
+                                $gateway->setApiKey(config('app.payment_stripe_key'));
+                            }
+                            $gateway->setTestMode(true);
+                        
+                            $amount = ($this->cartItems->sum('amount') - $this->selected_coupon_price) <=0 ? 0 : $this->cartItems->sum('amount') - $this->selected_coupon_price;
+                            $response = $gateway->purchase(array(
+                                'amount' => $amount, 'currency' => 'HKD',
+                                'customerReference' => $customerReference,
+                                'receipt_email' => auth()->user()->email,
+                                'description' => 'SCH-DSC-'.$order->no,
+                                'metadata' => auth()->user()->cartItem->map(function($product){
+                                    return $product->title;
+                                })
+                            ))->send();
+            
+                            if ($response->isRedirect()) {
+                                // redirect to offsite payment gateway
+                                $response->redirect();
+                            } elseif ($response->isSuccessful()) {
+                                // payment was successful: update database
+                                // dd($response);
+                                $order->payment_status = 'paid';
+                                $order->paid_at = now();
+                                $order->closed = 1;
+                                $order->save();
+                                auth()->user()->cartItem()->delete();
+                                $this->checkingOut = false;
+                                session()->flash('message', 'Order successfully created.');
+                                // $this->emit('$refresh');
+                                return redirect('orders');
+                            } else {
+                                // payment failed: display message to customer
+                                session()->flash('message', $response->getMessage());
+                            }
+            
+                            
+                            $this->emit('$refresh');
+                            // dd('redirect to mpgs');
+                            break;
+            
+                        case 'paydollar':
+                            dd('redirect to asiapay');
+                            break;
+                        case 'mpgs':
+                            dd('redirect to asiapay');
+                            break;
+                    }
+                }
 
             }
         } catch (\Throwable $th) {
