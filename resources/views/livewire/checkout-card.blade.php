@@ -71,8 +71,11 @@
   <h3 class="text-2xl">Checkout Now</h3>
   <form wire:submit.prevent="submit">
     <div class="my-4 mt-6 -mx-2 lg:flex text-sm">
-      @if(count($coupons))
+      
       <div class="lg:px-2 lg:w-1/2">
+
+      @if(count($coupons))
+      <!-- <div class="lg:px-2 lg:w-1/2"> -->
         <div class="p-4 bg-base-300 rounded-lg">
           <h1 class="ml-2 font-bold uppercase">Coupon Code</h1>
         </div>
@@ -88,9 +91,9 @@
         </div>
 
         
-      </div>
+      <!-- </div> -->
       @endif
-      <div class="lg:px-2 lg:w-1/2">
+
         <div class="p-4 bg-base-300 rounded-lg">
           <h1 class="ml-2 font-bold uppercase">Payment Method</h1>
         </div>
