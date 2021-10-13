@@ -285,7 +285,7 @@ class CheckoutCard extends Component
                     session()->flash('message', 'Order successfully created.');
                     // $this->emit('$refresh');
                     return redirect('orders');
-                else {
+                } else {
                     switch ($payment->provider) {
                         case 'paypal':
                             $client = new \GuzzleHttp\Client();
