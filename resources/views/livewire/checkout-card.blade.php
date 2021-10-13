@@ -86,7 +86,7 @@
           </div>
         </div>
 
-        <div class="p-4 mt-6 bg-base-300 rounded-lg">
+        <!-- <div class="p-4 mt-6 bg-base-300 rounded-lg">
           <h1 class="ml-2 font-bold uppercase">Shipping Option</h1>
         </div>
         <div class="p-4">
@@ -99,8 +99,8 @@
               Delivery
             </div>
           </div>
-        </div>
-
+        </div> -->
+<!-- 
         <div class="p-4 mt-6 bg-base-300 rounded-lg">
           <h1 class="ml-2 font-bold uppercase">Instruction for seller</h1>
         </div>
@@ -108,7 +108,7 @@
         <div class="p-4">
           <p class="mb-4 italic">If you have some information for the seller you can leave them in the box below</p>
           <textarea class="w-full h-24 p-2 bg-base-100 rounded"></textarea>
-        </div>
+        </div> -->
       </div>
       <div class="lg:px-2 lg:w-1/2">
         <div class="p-4 bg-base-300 rounded-lg">
