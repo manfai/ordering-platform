@@ -86,10 +86,10 @@
             @endforeach
           </div>
         </div>
-        @endif
 
         
       </div>
+      @endif
       <div class="lg:px-2 lg:w-1/2">
         <div class="p-4 bg-base-300 rounded-lg">
           <h1 class="ml-2 font-bold uppercase">Payment Method</h1>
