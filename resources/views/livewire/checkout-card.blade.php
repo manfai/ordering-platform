@@ -71,7 +71,7 @@
   <h3 class="text-2xl">Checkout Now</h3>
   <form wire:submit.prevent="submit">
     <div class="my-4 mt-6 -mx-2 lg:flex text-sm">
-      <div class="hidden lg:px-2 lg:w-1/2">
+      <div class="lg:px-2 lg:w-1/2">
         <div class="p-4 bg-base-300 rounded-lg">
           <h1 class="ml-2 font-bold uppercase">Coupon Code</h1>
         </div>
@@ -79,8 +79,8 @@
           <p class="mb-4 italic">If you have a coupon code, please enter it in the box below</p>
           <div class="grid grid-cols-4 gap-4">
             @foreach ($coupons as $coupon)
-            <div wire:click="$emit('coupon_choosed','{{$coupon->id}}')" class="{{ ($selected_coupon==$coupon->id)?'bg-primary text-white':'bg-gray-300 text-gray-400' }} text-center text-md cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
-              ${{$coupon->value}}
+            <div wire:click="$emit('coupon_choosed','{{$coupon->coupon->id}}')" class="{{ ($selected_coupon==$coupon->coupon->id)?'bg-primary text-white':'bg-gray-300 text-gray-400' }} text-center text-md cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
+              ${{$coupon->coupon->value}}
             </div>
             @endforeach
           </div>
