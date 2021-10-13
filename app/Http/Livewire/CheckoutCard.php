@@ -9,6 +9,7 @@ use App\Models\Order\Order;
 use App\Models\Payment;
 use App\Models\Period;
 use App\Models\StoreMachine;
+use App\Models\UserCoupon;
 use App\Models\UserPayment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -94,10 +95,10 @@ class CheckoutCard extends Component
         $this->selected_payment = $payment;
     }
 
-    public function couponChoosed(Coupon $coupon)
+    public function couponChoosed(UserCoupon $coupon)
     {
         $this->selected_coupon = $coupon->id;
-        $this->selected_coupon_price = $coupon->value;
+        $this->selected_coupon_price = $coupon->coupon->value;
     }
     
     public function shippingChoosed($method)
@@ -371,6 +372,10 @@ class CheckoutCard extends Component
                             dd('redirect to asiapay');
                             break;
                     }
+                }
+
+                if($this->selected_coupon_price>0){
+
                 }
 
             }
