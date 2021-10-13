@@ -375,7 +375,10 @@ class CheckoutCard extends Component
                 }
 
                 if($this->selected_coupon_price>0){
-
+                    UserCoupon::find($this->selected_coupon)->update([
+                        'status' => 'used',
+                        'use_count' => 1
+                    ]);
                 }
 
             }
