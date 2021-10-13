@@ -274,6 +274,13 @@ class CheckoutCard extends Component
 
                 $order = $this->createOrder($payment);
 
+                if($this->selected_coupon_price>0){
+                    UserCoupon::find($this->selected_coupon)->update([
+                        'status' => 'used',
+                        'use_count' => 1
+                    ]);
+                }
+                
                 if($order->total_amount<=0){
                     $order->payment_status = 'paid';
                     $order->real_amount = 0;
@@ -374,12 +381,7 @@ class CheckoutCard extends Component
                     }
                 }
 
-                if($this->selected_coupon_price>0){
-                    UserCoupon::find($this->selected_coupon)->update([
-                        'status' => 'used',
-                        'use_count' => 1
-                    ]);
-                }
+               
 
             }
         } catch (\Throwable $th) {
