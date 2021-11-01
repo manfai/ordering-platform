@@ -209,7 +209,7 @@
         <div class="p-4 bg-base-300 rounded-lg">
           <h1 class="ml-2 font-bold uppercase">Order Details</h1>
         </div>
-        <div class="p-4">
+        <div class="p-4 mb-16">
           <p class="mb-6 italic">Shipping and additionnal costs are calculated based on values you have entered</p>
           <div class="flex justify-between border-b">
             <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-800">
