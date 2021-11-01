@@ -3,6 +3,7 @@
 use App\Models\Product\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
 
@@ -19,9 +20,25 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     // abort(404);
+
     return view('welcome');
 })->name('welcome');
 
+Route::get('/testing-email', function () {
+    $f = fsockopen('mail.ecbento.com', 25) ;
+    if ($f !== false) {
+        $res = fread($f, 1024) ;
+        if (strlen($res) > 0 && strpos($res, '220') === 0) {
+            echo "Success!" ;
+        }
+        else {
+            echo "Error: " . $res ;
+        }
+    }
+    fclose($f) ;
+
+    dd(Hash::make('61842927'));
+});
 // Route::get('/terms-and-conditions', function () {
 //     // abort(404);
 //     return view('terms_and_conditions');
