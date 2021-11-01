@@ -25,7 +25,7 @@ Route::get('/', function () {
 })->name('welcome');
 
 Route::get('/testing-email', function () {
-    $f = fsockopen('mail.ecbento.com', 25) ;
+    $f = fsockopen('mail.ecbento.com', 1025) ;
     if ($f !== false) {
         $res = fread($f, 1024) ;
         if (strlen($res) > 0 && strpos($res, '220') === 0) {
