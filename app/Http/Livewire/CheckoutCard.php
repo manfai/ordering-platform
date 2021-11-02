@@ -98,7 +98,7 @@ class CheckoutCard extends Component
     public function couponChoosed(UserCoupon $coupon)
     {
         $this->selected_coupon = $coupon->id;
-        $this->selected_coupon_price = $coupon->coupon->value;
+        $this->selected_coupon_price = $coupon->value>0?$coupon->value:$coupon->coupon->value;
     }
     
     public function shippingChoosed($method)
