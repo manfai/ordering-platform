@@ -120,7 +120,7 @@ class CheckoutCard extends Component
         $this->cartItems = Auth::user()->cartItem()->get();
         $this->payments  = Payment::whereIn('id', [5])->get();
         // $this->coupons   = Coupon::where('active', 1)->where('value', '>', 0)->inRandomOrder()->limit(10)->get();
-        $this->coupons   = Auth::user()->coupons()->where('coupon_id', 68)->where('status','<>','used')->get();
+        $this->coupons   = Auth::user()->coupons()->whereIn('coupon_id', [68,1])->where('status','available')->get();
     }
 
     public function createOrder($payment){
