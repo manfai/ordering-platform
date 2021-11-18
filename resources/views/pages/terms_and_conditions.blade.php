@@ -71,6 +71,7 @@
                 <p>
                 - In case of outbreak affecting lunch arrangement or last-minute school closure, refunds will be given. Provider reserves the right to make the final decisions regarding any refunds.
                 </p>
+                <br>
                 <p>
                     <strong>Special Arrangements Under Inclement Weather Conditions </strong>
                     <strong></strong>
