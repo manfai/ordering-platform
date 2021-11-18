@@ -61,11 +61,16 @@
                     - No cancellation will be accepted for the confirmed order unless the user has given certificate of sickness,
                         and shall be made before 8:30AM directly to EC Bento at 96689069 on the day of absence.
                 </p>
-                <!-- <p>
-                    - The cancellation shall be made before 9AM directly to EC Bento at
+                <p>
+                    <!-- - The cancellation shall be made before 9AM directly to EC Bento at
                     96689069 on the day of absence. No cancellation will be accepted after 9AM
-                    on the day.
-                </p> -->
+                    on the day. -->
+                    - No cancellation will be accepted for the confirmed order unless the user has given certificate of sickness,
+                    and shall be made before 8:30AM directly to EC Bento at 96689069 on the day of absence.
+                </p>
+                <p>
+                - In case of outbreak affecting lunch arrangement or last-minute school closure, refunds will be given. Provider reserves the right to make the final decisions regarding any refunds.
+                </p>
                 <p>
                     <strong>Special Arrangements Under Inclement Weather Conditions </strong>
                     <strong></strong>
