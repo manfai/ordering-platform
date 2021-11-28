@@ -104,7 +104,62 @@
              <div class="flex items-center justify-start">  
               <span class="mr-10">{{__('New')}}</span>
               <div class="relative">
-                  <input type="text" id="new_student_class" class="input mb-3" wire:model.defer="student.class" placeholder="Class">
+                  <select id="new_student_class" class="select mb-3" wire:model.defer="student.class" placeholder="Class">
+                    <option value="PGB">PGB</option>
+                    <option value="PGA1">PGA1</option>
+                    <option value="PGA2">PGA2</option>
+                    <option value="1-1">1-1</option>
+                    <option value="1-2">1-2</option>
+                    <option value="1-3">1-3</option>
+                    <option value="2-1">2-1</option>
+                    <option value="2-2">2-2</option>
+                    <option value="2-3">2-3</option>
+                    <option value="3-1">3-1</option>
+                    <option value="3-2">3-2</option>
+                    <option value="3-3">3-3</option>
+                    <option value="3-4">3-4</option>
+                    <option value="4-1">4-1</option>
+                    <option value="4-2">4-2</option>
+                    <option value="4-3">4-3</option>
+                    <option value="4-4">4-4</option>
+                    <option value="5-1">5-1</option>
+                    <option value="5-2">5-2</option>
+                    <option value="5-3">5-3</option>
+                    <option value="5-4">5-4</option>
+                    <option value="6-1">6-1</option>
+                    <option value="6-2">6-2</option>
+                    <option value="6-3">6-3</option>
+                    <option value="6-4">6-4</option>
+                    <option value="7-1">7-1</option>
+                    <option value="7-2">7-2</option>
+                    <option value="7-3">7-3</option>
+                    <option value="7-4">7-4</option>
+                    <option value="8-1">8-1</option>
+                    <option value="8-2">8-2</option>
+                    <option value="8-3">8-3</option>
+                    <option value="8-4">8-4</option>
+                    <option value="9-2">9-2</option>
+                    <option value="9-3">9-3</option>
+                    <option value="9-4">9-4</option>
+                    <option value="10-1">10-1</option>
+                    <option value="10-2">10-2</option>
+                    <option value="10-3">10-3</option>
+                    <option value="10-4">10-4</option>
+                    <option value="11-1">11-1</option>
+                    <option value="11-2">11-2</option>
+                    <option value="11-3">11-3</option>
+                    <option value="11-4">11-4</option>
+                    <option value="12-1">12-1</option>
+                    <option value="12-2">12-2</option>
+                    <option value="12-3">12-3</option>
+                    <option value="12-4">12-4</option>
+                    <option value="12-5">12-5</option>
+                    <option value="Staff Grade 4-6">Staff Grade 4-6</option>
+                    <option value="Staff Grade 7-8">Staff Grade 7-8</option>
+                    <option value="Staff Grade 9 -12">Staff Grade 9 -12</option>
+                    <option value="Head Office Staff Front Desk">Head Office Staff Front Desk</option>
+                  </select>
+                  {{-- <input type="text" id="new_student_class" class="input mb-3" wire:model.defer="student.class" placeholder="Class"> --}}
                   <input type="text" id="new_student_name"  class="input" wire:model.defer="student.name" placeholder="Name">
                  
               </div>
