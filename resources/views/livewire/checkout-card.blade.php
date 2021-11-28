@@ -84,7 +84,7 @@
           <div class="grid grid-cols-4 gap-4">
             @foreach ($coupons as $coupon)
             <div wire:click="$emit('coupon_choosed','{{$coupon->id}}')" class="{{ ($selected_coupon==$coupon->id)?'bg-primary text-white':'bg-gray-300 text-gray-400' }} text-center text-md cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
-              ${{$coupon->coupon->value}}
+              ${{$coupon->value > 0 ? $coupon->value :$coupon->coupon->value}}
             </div>
             @endforeach
           </div>
@@ -209,7 +209,7 @@
         <div class="p-4 bg-base-300 rounded-lg">
           <h1 class="ml-2 font-bold uppercase">Order Details</h1>
         </div>
-        <div class="p-4">
+        <div class="p-4 mb-64">
           <p class="mb-6 italic">Shipping and additionnal costs are calculated based on values you have entered</p>
           <div class="flex justify-between border-b">
             <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-800">
